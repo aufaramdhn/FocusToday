@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title }}</title>
+    @vite('resources/css/app.css')
+</head>
+
+<body class="bg-gray-100">
+    <header
+        class="fixed top-0 left-0 right-0 h-20
+               bg-white shadow-md shadow-gray-200
+               z-30 flex items-center px-6">
+        <div class="flex justify-between items-center w-full">
+            <h1 class="text-2xl font-bold text-blue-600">
+                FocusToday
+            </h1>
+            <div class="flex items-center gap-4">
+                <span class="text-gray-700 font-medium">
+                    Selamat datang, <strong>Aufa Ramadhan</strong>
+                </span>
+
+                <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+                    <span class="text-sm font-bold">AR</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex pt-20 h-screen overflow-hidden">
+        <aside
+            class="fixed left-0 top-20
+                   w-60 h-[calc(100vh-80px)]
+                   bg-white shadow-md shadow-gray-200
+                   flex flex-col justify-between z-20">
+            <nav class="mt-6">
+                <ul>
+                    <li class="mb-2 mr-8">
+                        <a href="#"
+                            class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                                   hover:bg-blue-500 hover:text-white transition">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="mb-2 mr-8">
+                        <a href="#"
+                            class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                                   hover:bg-blue-500 hover:text-white transition">
+                            Artikel
+                        </a>
+                    </li>
+                    <li class="mb-2 mr-8">
+                        <a href="#"
+                            class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                                   hover:bg-blue-500 hover:text-white transition">
+                            Kategori
+                        </a>
+                    </li>
+                    <li class="mb-2 mr-8">
+                        <a href="#"
+                            class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                                   hover:bg-blue-500 hover:text-white transition">
+                            Pengguna
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mb-6 mr-8">
+                <a href="#"
+                    class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                           hover:bg-red-500 hover:text-white transition">
+                    Keluar
+                </a>
+            </div>
+        </aside>
+
+        <section class="ml-60 w-full p-6 bg-[#f9fbfc]
+                   overflow-y-auto">
+
+            {{ $slot }}
+
+        </section>
+    </main>
+
+</body>
+
+</html>
