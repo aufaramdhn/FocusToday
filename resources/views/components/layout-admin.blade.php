@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
     @vite('resources/css/app.css')
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 admin">
     <header
         class="fixed top-0 left-0 right-0 h-20
                bg-white shadow-md shadow-gray-200
@@ -38,46 +41,45 @@
             <nav class="mt-6">
                 <ul>
                     <li class="mb-2 mr-8">
-                        <a href="#"
-                            class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
-                                   hover:bg-blue-500 hover:text-white transition">
+                        <a href="/dashboard"
+                            class="{{ request()->is('dashboard') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                                   hover:bg-blue-500/75 hover:text-white transition">
                             Dashboard
                         </a>
                     </li>
                     <li class="mb-2 mr-8">
-                        <a href="#"
-                            class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
-                                   hover:bg-blue-500 hover:text-white transition">
+                        <a href="/dashboard/artikel"
+                            class="{{ request()->is('dashboard/artikel') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                                   hover:bg-blue-500/75 hover:text-white transition">
                             Artikel
                         </a>
                     </li>
                     <li class="mb-2 mr-8">
                         <a href="#"
                             class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
-                                   hover:bg-blue-500 hover:text-white transition">
+                                   hover:bg-blue-500/75 hover:text-white transition">
                             Kategori
                         </a>
                     </li>
                     <li class="mb-2 mr-8">
-                        <a href="#"
-                            class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
-                                   hover:bg-blue-500 hover:text-white transition">
+                        <a href="/dashboard/user"
+                            class="{{ request()->is('dashboard/user') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                                   hover:bg-blue-500/75 hover:text-white transition">
                             Pengguna
                         </a>
                     </li>
                 </ul>
             </nav>
-            <div class="mb-6 mr-8">
-                <a href="#"
-                    class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
-                           hover:bg-red-500 hover:text-white transition">
-                    Keluar
-                </a>
-            </div>
+            <a href="#"
+                class="flex pl-6 py-3 items-center rounded-xl mb-6 mx-3
+                           bg-red-500 hover:bg-red-500/85 text-white transition text-xl">
+                <x-ri-logout-box-line class="w-6 h-6 inline-block mr-2" />
+                Keluar
+            </a>
         </aside>
 
         <section class="ml-60 w-full p-6 bg-[#f9fbfc]
-                   overflow-y-auto">
+                   overflow-y-auto overflow-x-hidden">
 
             {{ $slot }}
 
