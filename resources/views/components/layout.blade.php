@@ -10,25 +10,25 @@
 </head>
 
 <body>
-    <header class="bg-gray-300">
+    <header class="bg-white-300">
         <div class="px-46 py-6 flex justify-between items-center">
             <div class="">
-                <h1 class="text-4xl font-bold">FocusToday</h1>
+                <h1 class="text-4xl font-bold to-blue-950 ">FocusToday</h1>
             </div>
             <div class="flex items-center gap-4">
                 <div class="">
-                    <input type="text" class="bg-blue-300 rounded-md px-2 py-1" placeholder="Search...">
+                    <input type="text" class="bg-gray-200  rounded-md px-3 py-1 border border-slate-" placeholder="Search...">
                     <button class="bg-blue-500 text-white rounded-md px-3 py-1">Search</button>
                 </div>
                 <div class="">
-                    <button class="">Masuk</button>
+                    <button class= "bg-white hover:bg-gray-200 text-slate-900 font-medium rounded-md px-3 py-1 border border-slate-900">Masuk</button>
                 </div>
                 <div class="">
-                    <button class="">Daftar</button>
+                    <button class="bg-white hover:bg-gray-200 text-slate-900 font-medium rounded-md px-3 py-1 border border-slate-900">Daftar</button>
                 </div>
             </div>
         </div>
-        <nav class="px-44 flex justify-between bg-gray-400 py-3 gap-7">
+        <nav class="px-44 flex justify-between bg-gray-900 py-3 gap-7 text-white">
             <a href="">Home</a>
             <a href="">Terbaru</a>
             <a href="">Bisnis</a>
@@ -45,15 +45,15 @@
         {{ $slot }}
     </main>
 
-    <footer class="bg-gray-900 text-white">
+    <footer class="px-44 bg-gray-900 text-white">
         <div class="flex flex-col items-center px-44 py-10 gap-6">
             <h1 class="text-4xl font-bold">FocusToday</h1>
             <div class=" flex gap-4">
                 <div class="bg-amber-50 px-4 py-3 rounded-full text-black text">
-                    <a href="" class="">IG</a>
+                    <a href="" class=><x-ri-Instagram-line /></a>
                 </div>
                 <div class="bg-amber-50 px-4 py-3 rounded-full text-black text">
-                    <a href="" class="">FB</a>
+                    <a href="" class=""><ri-facebook-circle-fill"></a> 
                 </div>
                 <div class="bg-amber-50 px-4 py-3 rounded-full text-black text">
                     <a href="" class="">X</a>
