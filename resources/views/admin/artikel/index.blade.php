@@ -13,12 +13,12 @@
                 ]" />
             </div>
             <a href="/dashboard/artikel/tambah"
-                class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300">Tambah
+                class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300 text-sm">Tambah
                 Artikel</a>
         </div>
 
         <div class="bg-white rounded-lg shadow-md w-full">
-            <div class="grid grid-cols-3 gap-4 p-6">
+            <div class="flex flex-wrap md:grid md:grid-cols-3 gap-4 p-6">
                 <div
                     class="rounded-lg border border-gray-300 p-4 flex flex-col gap-4 hover:shadow-md transition duration-300">
                     <div class="relative">
@@ -50,13 +50,14 @@
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-300 mt-6 flex justify-between items-center px-6 py-4 text-sm">
+            <div
+                class="border-t border-gray-300 mt-6 flex flex-col md:flex-row justify-between items-center px-6 py-4 text-sm gap-4">
                 <div class="">
                     <p class="">Showing 1 to 10 of 50 results</p>
                 </div>
                 <div class="">
                     <nav>
-                        <ul class="inline-flex items-center gap-2">
+                        <ul class="inline-flex flex-wrap items-center gap-2">
                             <li>
                                 <button
                                     class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">Previous</button>
