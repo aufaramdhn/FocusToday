@@ -44,4 +44,9 @@ Route::get('/dashboard/user/tambah', function () {
 
 Route::get('/register', function () {
     return view('auth.register');
+    return view('admin.user.tambah-pengguna');
+});
+
+Route::get('/', function () {
+    return view('auth.register');
 });
