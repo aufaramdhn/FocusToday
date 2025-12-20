@@ -13,11 +13,11 @@
                 ]" />
             </div>
             <a href="/dashboard/user/tambah"
-                class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300">Tambah
+                class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300 text-sm">Tambah
                 User</a>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md w-full">
+        <div class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
             <form action="" class="p-4 border-b-2 border-gray-300">
                 <div class="flex items-center justify-between gap-4 flex-wrap">
                     <div class="flex flex-row-reverse items-center gap-2 md:w-[500px] w-full">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </form>
-            <table class="w-full table-auto">
+            <table class="w-full table-auto table-responsive overflow-x-scroll">
                 <thead class="bg-slate-200">
                     <tr class="text-left border-b-2 border-gray-300 ">
                         <th class="py-2 px-6">ID</th>
@@ -101,13 +101,14 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="border-gray-300 flex justify-between items-center px-6 py-4 text-sm">
+            <div
+                class="border-gray-300 flex justify-between items-center px-6 py-4 text-sm flex-col md:flex-row gap-4 md:gap-0">
                 <div class="">
                     <p class="">Showing 1 to 10 of 50 results</p>
                 </div>
                 <div class="">
                     <nav>
-                        <ul class="inline-flex items-center gap-2">
+                        <ul class="inline-flex flex-wrap items-center gap-2">
                             <li>
                                 <button
                                     class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">Previous</button>

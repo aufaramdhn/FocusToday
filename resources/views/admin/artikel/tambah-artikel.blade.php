@@ -15,14 +15,12 @@
         <div class="bg-white rounded-lg shadow-md w-full p-6 mt-6">
             <form class="flex flex-col gap-4" x-data="articleBlocks()">
 
-                <!-- Judul -->
                 <div class="flex flex-col gap-2">
                     <label class="font-medium">Judul Artikel</label>
                     <input type="text" name="title" class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2"
                         placeholder="Masukkan judul artikel">
                 </div>
 
-                <!-- Kategori -->
                 <div class="flex flex-col gap-2">
                     <label class="font-medium">Kategori</label>
                     <select class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2">
@@ -32,19 +30,17 @@
                     </select>
                 </div>
 
-                <!-- BLOCK EDITOR -->
                 <div class="flex flex-col gap-2">
                     <label class="font-medium">Konten Artikel</label>
 
                     <template x-for="(block, index) in blocks" :key="index">
                         <div class="border rounded-md border-gray-300/90 shadow-xs p-3 bg-white">
 
-                            <!-- PARAGRAPH -->
                             <div x-show="block.type === 'text'">
                                 <div :id="'editor-' + index" class="bg-white"></div>
                             </div>
 
-                            <!-- IMAGE -->
+
                             <div x-show="block.type === 'image'" class="flex flex-col gap-2">
                                 <input type="file"
                                     class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2 cursor-pointer">
@@ -56,24 +52,26 @@
                         </div>
                     </template>
 
-                    <!-- ADD BLOCK BUTTON -->
                     <div class="flex gap-2">
-                        <button type="button" class="bg-gray-200 rounded-md px-4 py-2 hover:bg-gray-300"
+                        <button type="button"
+                            class="bg-gray-200 rounded-md px-4 py-2 hover:bg-gray-300 text-sm md:text-md cursor-pointer"
                             @click="addText">
                             + Paragraf
                         </button>
 
-                        <button type="button" class="bg-gray-200 rounded-md px-4 py-2 hover:bg-gray-300"
+                        <button type="button"
+                            class="bg-gray-200 rounded-md px-4 py-2 hover:bg-gray-300 text-sm md:text-md cursor-pointer"
                             @click="addImage">
                             + Gambar
                         </button>
                     </div>
                 </div>
 
-                <!-- ACTION -->
                 <div class="flex justify-end mt-4">
+                    <a href="/dashboard/artikel"
+                        class="mr-4 bg-red-500 text-white rounded-md px-6 py-2 hover:bg-red-600 transition duration-300 text-sm md:text-lg">Batal</a>
                     <button type="submit"
-                        class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition">
+                        class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300 text-sm md:text-lg cursor-pointer">
                         Simpan Artikel
                     </button>
                 </div>
