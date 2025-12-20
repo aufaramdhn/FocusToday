@@ -56,9 +56,9 @@
                 </div>
                 <div class="flex justify-end mt-4">
                     <a href="/dashboard/kategori"
-                        class="mr-4 bg-red-500 text-white rounded-md px-6 py-2 hover:bg-red-600 transition duration-300">Batal</a>
+                        class="mr-4 bg-red-500 text-white rounded-md px-6 py-2 hover:bg-red-600 transition duration-300 text-sm md:text-lg">Batal</a>
                     <button type="submit"
-                        class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300">Simpan</button>
+                        class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300 text-sm md:text-lg">Simpan</button>
                 </div>
             </form>
         </div>
