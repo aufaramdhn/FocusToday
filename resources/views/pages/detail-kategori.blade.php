@@ -1,22 +1,18 @@
 <x-layout>
   <div class=" -mt-6">
 
-    <!-- JUDUL KATEGORI -->
     <h2 class="text-lg font-bold mb-3">Travel</h2>
 
-    <!-- HERO BESAR -->
     <img
       src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
       class="w-full h-[350px] object-cover mb-4"
     >
 
-    <!-- BAR PANJANG (TEKS) -->
     <div class="w-full h-[100px] bg-gray-400 mb-4 flex flex-col justify-center px-6 text-white">
       <h3 class="font-semibold text-lg">Eksplor Destinasi Dunia</h3>
       <p class="text-sm">Inspirasi perjalanan dan liburan terbaik</p>
     </div>
 
-    <!-- DUA KOLOM --> 
     <div class="grid grid-cols-2 gap-4 mb-10"> 
 
       <div>
@@ -41,10 +37,8 @@
 
     </div>
 
-    <!-- LIST ARTIKEL -->
     <div class="flex flex-col gap-6">
 
-      <!-- ITEM -->
       <div class="flex gap-3">
         <img
           src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
@@ -60,7 +54,6 @@
         </div>
       </div>
 
-      <!-- ITEM -->
       <div class="flex gap-3">
         <img
           src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429"
@@ -76,7 +69,6 @@
         </div>
       </div>
 
-      <!-- ITEM -->
       <div class="flex gap-3">
         <img
           src="https://images.unsplash.com/photo-1501785888041-af3ef285b470"
