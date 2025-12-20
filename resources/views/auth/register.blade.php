@@ -8,25 +8,20 @@
 
 <body class="min-h-screen flex items-center justify-center bg-gray-100">
 
-  <!-- Card -->
   <div class="bg-white w-[360px] rounded-xl shadow-lg px-8 py-7 text-center">
 
-    <!-- Logo -->
     <h1 class="text-2xl font-bold mb-2 text-gray-900">
       FokusToday
     </h1>
 
-    <!-- Title -->
     <h2 class="text-sm font-semibold mb-1  text-gray-900">
       Buat akun Anda
     </h2>
 
-    <!-- Subtitle -->
     <p class="text-[11px] text-gray-600 mb-5 leading-snug text-black">
       Daftar ke FokusToday untuk melihat berita yang menarik
     </p>
 
-    <!-- Form -->
     <form class="space-y-3">
       <input
         type="text"
@@ -50,7 +45,7 @@
           onclick="togglePassword()"
           class="absolute inset-y-0 right-4 flex items-center text-gray-600"
         >
-          <!-- EYE ICON -->
+
           <svg xmlns="http://www.w3.org/2000/svg"
             class="w-5 h-5" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -75,14 +70,12 @@
       </button>
     </form>
 
-    <!-- OR Divider -->
     <div class="flex items-center my-4">
       <div class="flex-1 h-px bg-gray-400"></div>
       <span class="px-3 text-[10px] text-black">OR</span>
       <div class="flex-1 h-px bg-gray-400"></div>
     </div>
 
-    <!-- Google Button -->
     <button
       class="w-full h-11 rounded-xl border border-gray-400 bg-white flex items-center justify-center gap-2 text-sm text-black hover:bg-gray-50
          focus:outline-none focus:border-gray-600"
@@ -96,7 +89,6 @@
       Daftar dengan Google
     </button>
 
-    <!-- Login -->
     <p class="text-[10px] mt-4 text-black">
       Belum punya akun?
       <a href="#" class="text-blue-500">Login Disini</a>
