@@ -14,7 +14,6 @@ Route::get('/dashboard/artikel', function () {
     return view('admin.artikel.index');
 });
 
-<<<<<<< Updated upstream
 Route::get('/dashboard/artikel/tambah', function () {
     return view('admin.artikel.tambah-artikel');
 });
@@ -41,8 +40,8 @@ Route::get('/dashboard/user', function () {
 
 Route::get('/dashboard/user/tambah', function () {
     return view('admin.user.tambah-pengguna');
-=======
-Route::get('/', function () {
+});
+
+Route::get('/register', function () {
     return view('auth.register');
->>>>>>> Stashed changes
 });
