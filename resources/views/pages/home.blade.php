@@ -1,35 +1,29 @@
 <x-layout>
 <div class="">
 
-  <!-- ================= CONTAINER ATAS ================= -->
   <div class="max-w-full mx-auto grid grid-cols-[2fr_1fr] gap-5">
 
-    <!-- ================= KIRI ================= -->
     <div class="flex flex-col gap-5">
 
-      <!-- HERO -->
       <div class="">
         <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
              class="w-full h-full object-cover">
       </div>
 
-      <!-- SUB HERO -->
       <div class="bg-gray-400 px-6 py-4">
         <h1 class="font-semibold text-lg">
           Transformasi Digital Indonesia
-        </h1>
+        </h1> 
         <p class="text-sm">
           Perkembangan teknologi mendorong inovasi industri nasional
         </p>
       </div>
 
-      <!-- ================= LATEST ================= -->
       <div>
         <h3 class="mb-3 font-bold text-lg">Latest</h3>
 
         <div class="grid grid-cols-[1.2fr_1.8fr] gap-4">
 
-          <!-- KIRI -->
           <div class="flex flex-col gap-3">
             <div class="bg-gray-400 p-3 h-[80px]">
               <h4 class="font-semibold text-sm">Global Economy</h4>
@@ -49,7 +43,6 @@
             </div>
           </div>
 
-          <!-- KANAN -->
           <div class="flex flex-col gap-3">
             <div class="flex">
               <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
@@ -83,10 +76,8 @@
       </div>
     </div>
 
-    <!-- ================= KANAN ================= -->
     <div class="flex flex-col gap-5">
 
-    <!-- FEATURED -->
     <div class="flex flex-col gap-2">
       <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9"
           class="h-[180px] w-full object-cover rounded">
@@ -97,7 +88,6 @@
       </div>
     </div>
 
-    <!-- GRID 2x2 -->
     <div class="grid grid-cols-2 gap-3">
 
       <div class="flex flex-col gap-2">
@@ -142,19 +132,18 @@
 
     </div>   
 
-      <!-- ================= WATCH ================= -->
       <div>
         <h3 class="mb-3 font-bold text-lg">Watch</h3>
 
-        <img src="https://picsum.photos/400/170?random=20"
-             class="h-[170px] w-full object-cover mb-3">
+        <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0"
+          class="h-[170px] w-full object-cover mb-3">
 
         <div class="bg-gray-400 p-3 mb-3">
           <h4 class="font-semibold text-sm">
             Inovasi Digital Nasional
           </h4>
           <p class="text-xs">
-            Video transformasi industri Indonesia
+            Video transformasi industri Indonesia 
           </p>
         </div>
 
@@ -182,7 +171,6 @@
     </div>
   </div>
 
-  <!-- ================= BAGIAN BAWAH ================= -->
   <div class="max-w-full mx-auto pt-5 grid grid-cols-4 gap-3">
 
     <div>
