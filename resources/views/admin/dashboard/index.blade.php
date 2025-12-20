@@ -7,9 +7,13 @@
 
     <div class="">
         <div class="">
-            <h1 class="text-3xl font-bold mb-6">Statistik</h1>
 
-            <div class="flex flex-wrap gap-6 justify-around">
+            <h1 class="text-3xl font-bold mb-3">Dashboard Statistik </h1>
+
+
+            <x-breadcrumb :items="[['label' => 'Dashboard', 'url' => '/dashboard']]" />
+
+            <div class="flex flex-wrap gap-6 justify-between mt-4">
                 <div class="bg-white p-6 rounded-lg shadow-md w-64 flex items-center gap-4">
                     <x-ri-file-list-3-line class="w-14 h-14 mb-4 text-white bg-gray-400 p-2 rounded-full" />
                     <div class="">
@@ -43,8 +47,8 @@
         <div class="mt-8">
             <h1 class="text-3xl font-bold mb-6">Berita Populer</h1>
 
-            <div class="grid grid-cols-2 gap-3">
-                <div class="">
+            <div class="grid lg:grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-md">
+                <div class="mb-6 lg:mb-0">
                     <div class="">
                         <img src="https://images.unsplash.com/photo-1761839257789-20147513121a?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                             alt="">

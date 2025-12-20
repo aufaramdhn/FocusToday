@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title }}</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 </head>
 
 <body class="bg-gray-100 admin">
@@ -49,21 +54,21 @@
                     </li>
                     <li class="mb-2 mr-8">
                         <a href="/dashboard/artikel"
-                            class="{{ request()->is('dashboard/artikel') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                            class="{{ request()->is('dashboard/artikel') || request()->is('dashboard/artikel/*') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
                                    hover:bg-blue-500/75 hover:text-white transition">
                             Artikel
                         </a>
                     </li>
                     <li class="mb-2 mr-8">
-                        <a href="#"
-                            class="block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                        <a href="/dashboard/kategori"
+                            class="{{ request()->is('dashboard/kategori') || request()->is('dashboard/kategori/*') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
                                    hover:bg-blue-500/75 hover:text-white transition">
                             Kategori
                         </a>
                     </li>
                     <li class="mb-2 mr-8">
                         <a href="/dashboard/user"
-                            class="{{ request()->is('dashboard/user') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
+                            class="{{ request()->is('dashboard/user') || request()->is('dashboard/user/*') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
                                    hover:bg-blue-500/75 hover:text-white transition">
                             Pengguna
                         </a>
@@ -72,14 +77,30 @@
             </nav>
             <a href="#"
                 class="flex pl-6 py-3 items-center rounded-xl mb-6 mx-3
-                           bg-red-500 hover:bg-red-500/85 text-white transition text-xl">
-                <x-ri-logout-box-line class="w-6 h-6 inline-block mr-2" />
+                           bg-red-500 hover:bg-red-500/85 text-white transition text-sm">
+                <x-ri-logout-box-line class="w-4 h-4 inline-block mr-2" />
                 Keluar
             </a>
         </aside>
 
         <section class="ml-60 w-full p-6 bg-[#f9fbfc]
                    overflow-y-auto overflow-x-hidden">
+
+            @if (isset($errorStatus))
+                @if ($errorStatus === 'success')
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6"
+                        role="alert">
+                        <strong class="font-bold">Success!</strong>
+                        <span class="block sm:inline"></span>
+                    </div>
+                @else
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6"
+                        role="alert">
+                        <strong class="font-bold">Error!</strong>
+                        <span class="block sm:inline"></span>
+                    </div>
+                @endif
+            @endif
 
             {{ $slot }}
 

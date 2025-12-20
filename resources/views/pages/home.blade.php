@@ -1,239 +1,239 @@
 <x-layout>
-<div class="">
+    <div class="">
 
-  <div class="max-w-full mx-auto grid grid-cols-[2fr_1fr] gap-5">
+        <div class="max-w-full mx-auto grid grid-cols-[2fr_1fr] gap-5">
 
-    <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-5">
 
-      <div class="">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-             class="w-full h-full object-cover">
-      </div>
+                <div class="">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+                        class="w-full h-full object-cover">
+                </div>
 
-      <div class="bg-gray-400 px-6 py-4">
-        <h1 class="font-semibold text-lg">
-          Transformasi Digital Indonesia
-        </h1> 
-        <p class="text-sm">
-          Perkembangan teknologi mendorong inovasi industri nasional
-        </p>
-      </div>
+                <div class="bg-gray-400 px-6 py-4">
+                    <h1 class="font-semibold text-lg">
+                        Transformasi Digital Indonesia
+                    </h1>
+                    <p class="text-sm">
+                        Perkembangan teknologi mendorong inovasi industri nasional
+                    </p>
+                </div>
 
-      <div>
-        <h3 class="mb-3 font-bold text-lg">Latest</h3>
+                <div>
+                    <h3 class="mb-3 font-bold text-lg">Latest</h3>
 
-        <div class="grid grid-cols-[1.2fr_1.8fr] gap-4">
+                    <div class="grid grid-cols-[1.2fr_1.8fr] gap-4">
 
-          <div class="flex flex-col gap-3">
-            <div class="bg-gray-400 p-3 h-[80px]">
-              <h4 class="font-semibold text-sm">Global Economy</h4>
-              <p class="text-xs">Update ekonomi dunia</p>
+                        <div class="flex flex-col gap-3">
+                            <div class="bg-gray-400 p-3 h-[80px]">
+                                <h4 class="font-semibold text-sm">Global Economy</h4>
+                                <p class="text-xs">Update ekonomi dunia</p>
+                            </div>
+                            <div class="bg-gray-400 p-3 h-[80px]">
+                                <h4 class="font-semibold text-sm">AI Innovation</h4>
+                                <p class="text-xs">Teknologi kecerdasan buatan</p>
+                            </div>
+                            <div class="bg-gray-400 p-3 h-[80px]">
+                                <h4 class="font-semibold text-sm">Travel Policy</h4>
+                                <p class="text-xs">Aturan perjalanan terbaru</p>
+                            </div>
+                            <div class="bg-gray-400 p-3 h-[80px]">
+                                <h4 class="font-semibold text-sm">Stock Market</h4>
+                                <p class="text-xs">Tren saham global</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            <div class="flex">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+                                    class="h-[110px] object-cover">
+                                <div class="bg-gray-400 p-3">
+                                    <h4 class="font-semibold text-sm">Tech Merger</h4>
+                                    <p class="text-xs">Akuisisi perusahaan teknologi</p>
+                                </div>
+                            </div>
+
+                            <div class="flex">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+                                    class="h-[110px] object-cover">
+                                <div class="bg-gray-400 p-3">
+                                    <h4 class="font-semibold text-sm">Tech Merger</h4>
+                                    <p class="text-xs">Akuisisi perusahaan teknologi</p>
+                                </div>
+                            </div>
+
+                            <div class="flex">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+                                    class="h-[110px] object-cover">
+                                <div class="bg-gray-400 p-3">
+                                    <h4 class="font-semibold text-sm">Tech Merger</h4>
+                                    <p class="text-xs">Akuisisi perusahaan teknologi</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div class="bg-gray-400 p-3 h-[80px]">
-              <h4 class="font-semibold text-sm">AI Innovation</h4>
-              <p class="text-xs">Teknologi kecerdasan buatan</p>
-            </div>
-            <div class="bg-gray-400 p-3 h-[80px]">
-              <h4 class="font-semibold text-sm">Travel Policy</h4>
-              <p class="text-xs">Aturan perjalanan terbaru</p>
-            </div>
-            <div class="bg-gray-400 p-3 h-[80px]">
-              <h4 class="font-semibold text-sm">Stock Market</h4>
-              <p class="text-xs">Tren saham global</p>
-            </div>
-          </div>
 
-          <div class="flex flex-col gap-3">
-            <div class="flex">
-              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
-                 class="h-[110px] object-cover">
-              <div class="bg-gray-400 p-3">
-                <h4 class="font-semibold text-sm">Tech Merger</h4>
-                <p class="text-xs">Akuisisi perusahaan teknologi</p>
-              </div>
+            <div class="flex flex-col gap-5">
+
+                <div class="flex flex-col gap-2">
+                    <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9"
+                        class="h-[180px] w-full object-cover rounded">
+
+                    <div class="bg-gray-400 p-3">
+                        <h4 class="font-semibold text-sm">Read More</h4>
+                        <p class="text-xs">Berita pilihan hari ini</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+
+                    <div class="flex flex-col gap-2">
+                        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
+                            class="h-[90px] w-full object-cover rounded">
+
+                        <div class="bg-gray-400 p-2">
+                            <h4 class="text-sm font-semibold">Startup</h4>
+                            <p class="text-xs">Bisnis rintisan</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3"
+                            class="h-[90px] w-full object-cover rounded">
+
+                        <div class="bg-gray-400 p-2">
+                            <h4 class="text-sm font-semibold">Market</h4>
+                            <p class="text-xs">Analisis pasar</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+                            class="h-[90px] w-full object-cover rounded">
+
+                        <div class="bg-gray-400 p-2">
+                            <h4 class="text-sm font-semibold">Tech</h4>
+                            <p class="text-xs">Ulasan teknologi</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+                            class="h-[90px] w-full object-cover rounded">
+
+                        <div class="bg-gray-400 p-2">
+                            <h4 class="text-sm font-semibold">Travel</h4>
+                            <p class="text-xs">Cerita perjalanan</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div>
+                    <h3 class="mb-3 font-bold text-lg">Watch</h3>
+
+                    <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0"
+                        class="h-[170px] w-full object-cover mb-3">
+
+                    <div class="bg-gray-400 p-3 mb-3">
+                        <h4 class="font-semibold text-sm">
+                            Inovasi Digital Nasional
+                        </h4>
+                        <p class="text-xs">
+                            Video transformasi industri Indonesia
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-[0.8fr_1.2fr] gap-3">
+                        <div class="flex flex-col gap-3">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+                                class="h-[70px] object-cover">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+                                class="h-[70px] object-cover">
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            <div class="bg-gray-400 p-3 h-[70px]">
+                                <h4 class="font-semibold text-sm">Trending Now</h4>
+                                <p class="text-xs">Video populer</p>
+                            </div>
+                            <div class="bg-gray-400 p-3 h-[70px]">
+                                <h4 class="font-semibold text-sm">Editor's Pick</h4>
+                                <p class="text-xs">Pilihan editor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="max-w-full mx-auto pt-5 grid grid-cols-4 gap-3">
+
+            <div>
+                <h4 class="mb-2 font-semibold">Money & Markets</h4>
+
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1544378730-8b5104b18790"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1559526324-593bc073d938"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3"
+                    class="h-[120px] w-full object-cover rounded">
             </div>
 
-            <div class="flex">
-              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
-                 class="h-[110px] object-cover">
-              <div class="bg-gray-400 p-3">
-                <h4 class="font-semibold text-sm">Tech Merger</h4>
-                <p class="text-xs">Akuisisi perusahaan teknologi</p>
-              </div>
+            <div>
+                <h4 class="mb-2 font-semibold">Tech & Innovation</h4>
+
+                <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
             </div>
 
-            <div class="flex">
-              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
-                 class="h-[110px] object-cover">
-              <div class="bg-gray-400 p-3">
-                <h4 class="font-semibold text-sm">Tech Merger</h4>
-                <p class="text-xs">Akuisisi perusahaan teknologi</p>
-              </div>
+            <div>
+                <h4 class="mb-2 font-semibold">Business News</h4>
+
+                <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df"
+                    class="h-[120px] w-full object-cover rounded">
             </div>
-          </div>
+
+            <div>
+                <h4 class="mb-2 font-semibold">Travel</h4>
+
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+                    class="h-[120px] w-full object-cover mb-3 rounded">
+                <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429"
+                    class="h-[120px] w-full object-cover rounded">
+            </div>
 
         </div>
-      </div>
-    </div>
-
-    <div class="flex flex-col gap-5">
-
-    <div class="flex flex-col gap-2">
-      <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9"
-          class="h-[180px] w-full object-cover rounded">
-
-      <div class="bg-gray-400 p-3">
-        <h4 class="font-semibold text-sm">Read More</h4>
-        <p class="text-xs">Berita pilihan hari ini</p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-2 gap-3">
-
-      <div class="flex flex-col gap-2">
-        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
-            class="h-[90px] w-full object-cover rounded">
-
-        <div class="bg-gray-400 p-2">
-          <h4 class="text-sm font-semibold">Startup</h4>
-          <p class="text-xs">Bisnis rintisan</p>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-2">
-        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3"
-            class="h-[90px] w-full object-cover rounded">
-
-        <div class="bg-gray-400 p-2">
-          <h4 class="text-sm font-semibold">Market</h4>
-          <p class="text-xs">Analisis pasar</p>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-2">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
-            class="h-[90px] w-full object-cover rounded">
-
-        <div class="bg-gray-400 p-2">
-          <h4 class="text-sm font-semibold">Tech</h4>
-          <p class="text-xs">Ulasan teknologi</p>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-2">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
-            class="h-[90px] w-full object-cover rounded">
-
-        <div class="bg-gray-400 p-2">
-          <h4 class="text-sm font-semibold">Travel</h4>
-          <p class="text-xs">Cerita perjalanan</p>
-        </div>
-      </div>
-
-    </div>   
-
-      <div>
-        <h3 class="mb-3 font-bold text-lg">Watch</h3>
-
-        <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0"
-          class="h-[170px] w-full object-cover mb-3">
-
-        <div class="bg-gray-400 p-3 mb-3">
-          <h4 class="font-semibold text-sm">
-            Inovasi Digital Nasional
-          </h4>
-          <p class="text-xs">
-            Video transformasi industri Indonesia 
-          </p>
-        </div>
-
-        <div class="grid grid-cols-[0.8fr_1.2fr] gap-3">
-          <div class="flex flex-col gap-3">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
-                 class="h-[70px] object-cover">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
-                 class="h-[70px] object-cover">
-          </div>
-
-          <div class="flex flex-col gap-3">
-            <div class="bg-gray-400 p-3 h-[70px]">
-              <h4 class="font-semibold text-sm">Trending Now</h4>
-              <p class="text-xs">Video populer</p>
-            </div>
-            <div class="bg-gray-400 p-3 h-[70px]">
-              <h4 class="font-semibold text-sm">Editor's Pick</h4>
-              <p class="text-xs">Pilihan editor</p>
-            </div>
-          </div>
-        </div>
-      </div>
 
     </div>
-  </div>
-
-  <div class="max-w-full mx-auto pt-5 grid grid-cols-4 gap-3">
-
-    <div>
-      <h4 class="mb-2 font-semibold">Money & Markets</h4>
-
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1544378730-8b5104b18790"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1559526324-593bc073d938"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3"
-          class="h-[120px] w-full object-cover rounded">
-    </div>
-
-    <div>
-      <h4 class="mb-2 font-semibold">Tech & Innovation</h4> 
-
-      <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-       <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-    </div>
-
-    <div>
-      <h4 class="mb-2 font-semibold">Business News</h4>
-
-      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df"
-          class="h-[120px] w-full object-cover rounded">
-    </div>
-
-    <div>
-      <h4 class="mb-2 font-semibold">Travel</h4>
-
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
-          class="h-[120px] w-full object-cover mb-3 rounded">
-      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429"
-          class="h-[120px] w-full object-cover rounded">
-    </div>
-
-  </div>
-
-</div>
 </x-layout>
