@@ -144,6 +144,13 @@
                     </p>
                 </article>
 
+                 <div class="flex flex-wrap gap-2 py-4">
+                    <span class="text-sm font-semibold text-gray-700">Tags:</span>
+                    <a href="#" class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200">Teknologi</a>
+                    <a href="#" class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200">Indonesia</a>
+                    <a href="#" class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200">Berita Terkini</a>
+                </div>
+
 
             </div>
         </div>
