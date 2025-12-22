@@ -33,6 +33,9 @@
                     </p>
                 </div>
 
+                 <div class="flex items-center gap-4 py-4 border-y border-gray-200">
+                    <span class="text-sm font-semibold text-gray-700">Bagikan:</span>
+                </div>
 
                 </div>
             </div>
