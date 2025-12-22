@@ -151,6 +151,53 @@
                     <a href="#" class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200">Berita Terkini</a>
                 </div>
 
+                <div class="border-t border-gray-200 pt-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Rekomendasi untuk Anda</h3>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <a href="#" class="group">
+                            <div class="bg-gray-200 h-[100px] rounded-lg mb-2 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h4 class="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600">
+                                AI dan Machine Learning
+                            </h4>
+                        </a>
+
+                        <a href="#" class="group">
+                            <div class="bg-gray-200 h-[100px] rounded-lg mb-2 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h4 class="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600">
+                                Pasar Saham Asia
+                            </h4>
+                        </a>
+
+                        <a href="#" class="group">
+                            <div class="bg-gray-200 h-[100px] rounded-lg mb-2 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h4 class="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600">
+                                Startup Lokal
+                            </h4>
+                        </a>
+
+                        <a href="#" class="group">
+                            <div class="bg-gray-200 h-[100px] rounded-lg mb-2 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h4 class="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600">
+                                Destinasi Wisata
+                            </h4>
+                        </a>
+                    </div>
+                </div>
+
+
 
             </div>
         </div>
