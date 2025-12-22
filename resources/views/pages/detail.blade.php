@@ -25,6 +25,15 @@
                     </div>
                     </div>
 
+                     <div>
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+                        class="w-full h-[400px] object-cover rounded-lg">
+                    <p class="text-sm text-gray-500 mt-2 italic">
+                        Ilustrasi: Transformasi Digital Indonesia. (Sumber: Unsplash)
+                    </p>
+                </div>
+
+
                 </div>
             </div>
         </div>
