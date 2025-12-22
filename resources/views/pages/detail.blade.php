@@ -62,6 +62,89 @@
                         Menurut data terbaru, berbagai sektor industri mulai dari perbankan, kesehatan, pendidikan, hingga pertanian telah mengadopsi pendekatan baru untuk meningkatkan efisiensi dan produktivitas mereka.
                     </p>
 
+                    <div class="my-8">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692"
+                            class="w-full h-[300px] object-cover rounded-lg">
+                        <p class="text-sm text-gray-500 mt-2 italic text-center">
+                            Ilustrasi: Tim bekerja sama dalam proyek digital. (Foto: Dokumentasi)
+                        </p>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Tantangan dan Peluang</h2>
+
+                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                        Meskipun perkembangan sangat pesat, masih terdapat beberapa tantangan yang perlu dihadapi. Infrastruktur yang belum merata di seluruh wilayah Indonesia menjadi salah satu hambatan utama. Selain itu, literasi digital masyarakat juga perlu ditingkatkan.
+                    </p>
+
+                    <div class="my-8">
+                        <div class="relative bg-gray-900 rounded-lg overflow-hidden aspect-video">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+                                class="w-full h-full object-cover opacity-70">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <button class="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+                                    <svg class="w-10 h-10 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2 italic text-center">
+                            Video: Wawancara eksklusif tentang transformasi digital Indonesia
+                        </p>
+                    </div>
+
+                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                        Para ahli menyatakan bahwa Indonesia memiliki potensi besar untuk menjadi pemimpin ekonomi digital di Asia Tenggara. Dengan populasi yang besar dan penetrasi internet yang terus meningkat, peluang pertumbuhan sangat terbuka lebar.
+                    </p>
+
+                    <blockquote class="border-l-4 border-blue-500 pl-6 py-4 my-8 bg-blue-50 rounded-r-lg">
+                        <p class="text-xl italic text-gray-700">
+                            "Perubahan bukan hanya tentang teknologi, tetapi juga tentang mengubah mindset dan budaya kerja."
+                        </p>
+                        <cite class="text-sm text-gray-600 mt-2 block">— Pakar Teknologi</cite>
+                    </blockquote>
+
+                    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Langkah Strategis ke Depan</h2>
+
+                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                        Pemerintah telah menyiapkan berbagai program untuk mendukung perkembangan di sektor ini. Berbagai inisiatif telah diluncurkan untuk meningkatkan kemampuan masyarakat Indonesia.
+                    </p>
+
+                     <div class="my-8">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758"
+                            class="w-full h-[300px] object-cover rounded-lg">
+                        <p class="text-sm text-gray-500 mt-2 italic text-center">
+                            Ilustrasi: Perkembangan teknologi di Indonesia. (Foto: Dokumentasi)
+                        </p>
+                    </div>
+
+                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                        Kolaborasi antara pemerintah, sektor swasta, dan akademisi menjadi kunci keberhasilan transformasi digital. Program pelatihan dan pendidikan terus digalakkan untuk mempersiapkan tenaga kerja yang siap menghadapi era industri 4.0.
+                    </p>
+
+                    <div class="my-8">
+                        <div class="relative bg-gray-900 rounded-lg overflow-hidden aspect-video">
+                            <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0"
+                                class="w-full h-full object-cover opacity-70">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <button class="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+                                    <svg class="w-10 h-10 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2 italic text-center">
+                            Video: Inovasi digital nasional dan dampaknya bagi industri
+                        </p>
+                    </div>
+
+                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                        Dengan langkah-langkah strategis yang tepat, Indonesia diproyeksikan akan menjadi salah satu ekonomi digital terbesar di dunia pada tahun 2030. Transformasi ini tidak hanya berdampak pada sektor bisnis, tetapi juga meningkatkan kualitas hidup masyarakat secara keseluruhan.
+                    </p>
+                </article>
+
+
             </div>
         </div>
     </div>
