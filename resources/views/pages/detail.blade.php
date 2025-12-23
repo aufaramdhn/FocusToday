@@ -234,6 +234,7 @@
                         <p class="text-sm text-gray-500">Jadilah yang pertama berkomentar di sini</p>
                     </div>
                 </div>
+            </div>
 
                 <div class="flex flex-col gap-6">
 
@@ -286,6 +287,18 @@
                         </a>
                     </div>
                 
+                    <div class="mt-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">Topik Populer</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="#" class="px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg hover:bg-gray-200">#TransformasiDigital</a>
+                            <a href="#" class="px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg hover:bg-gray-200">#Ekonomi2024</a>
+                            <a href="#" class="px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg hover:bg-gray-200">#Startup</a>
+                            <a href="#" class="px-3 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg hover:bg-gray-200">#AI</a>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
