@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class CommentController extends Controller
         $comment->delete();
         return back()->with('success', 'Komentar dihapus.');
     }
-    
+
     public function updateStatus(Request $request, Comment $comment)
     {
         $comment->update(['status' => $request->status]);
