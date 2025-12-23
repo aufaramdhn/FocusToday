@@ -237,7 +237,55 @@
 
                 <div class="flex flex-col gap-6">
 
+                 <div class="sticky top-4">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">Berita Terkait</h3>
 
+                    <div class="flex flex-col gap-4">
+                        <a href="#" class="group flex gap-3">
+                            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758"
+                                class="w-24 h-20 object-cover rounded-lg flex-shrink-0">
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-blue-600">
+                                    Program 1000 Startup Digital
+                                </h4>
+                                <span class="text-xs text-gray-500 mt-1 block">2 jam lalu</span>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group flex gap-3">
+                            <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e"
+                                class="w-24 h-20 object-cover rounded-lg flex-shrink-0">
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-blue-600">
+                                    Investasi Teknologi Q4 2024
+                                </h4>
+                                <span class="text-xs text-gray-500 mt-1 block">5 jam lalu</span>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group flex gap-3">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+                                class="w-24 h-20 object-cover rounded-lg flex-shrink-0">
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-blue-600">
+                                    5G di 10 Kota Besar
+                                </h4>
+                                <span class="text-xs text-gray-500 mt-1 block">8 jam lalu</span>
+                            </div>
+                        </a>
+
+                        <a href="#" class="group flex gap-3">
+                            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786"
+                                class="w-24 h-20 object-cover rounded-lg flex-shrink-0">
+                            <div>
+                                <h4 class="font-semibold text-sm text-gray-900 line-clamp-2 group-hover:text-blue-600">
+                                    E-Commerce Tumbuh 40%
+                                </h4>
+                                <span class="text-xs text-gray-500 mt-1 block">12 jam lalu</span>
+                            </div>
+                        </a>
+                    </div>
+                
             </div>
         </div>
     </div>
