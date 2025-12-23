@@ -197,6 +197,34 @@
                     </div>
                 </div>
 
+                        <div class="border-t border-gray-200 pt-8 mt-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Komentar</h3>
+
+                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                        <textarea
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                            rows="3"
+                            placeholder="Tulis Komentar"></textarea>
+                        <div class="flex justify-end mt-3">
+                            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                                Kirim
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mb-6 flex-wrap">
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium">
+                            Terbaru
+                        </button>
+                        <button class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-50">
+                            Terpilih
+                        </button>
+                        <button class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-50">
+                            Terpopuler
+                        </button>
+                    </div>
+
+                    
 
 
             </div>
