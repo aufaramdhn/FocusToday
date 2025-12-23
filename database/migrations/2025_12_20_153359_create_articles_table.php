@@ -14,7 +14,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('status')->default('draft');
+            $table->string('status')->default('published');
+            $table->string('thumbnail')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->integer('views')->default(0);
             $table->timestamps();
