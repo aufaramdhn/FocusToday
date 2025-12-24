@@ -59,7 +59,8 @@
                     <li class="mb-2 mr-8">
                         <a href="/dashboard"
                             class="{{ request()->is('dashboard') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
-                                   hover:bg-blue-500/75 hover:text-white transition">
+                                   hover:bg-blue-500/75 hover:text-white transition items-center">
+                            <x-ri-dashboard-line class="w-5 h-5 inline-block mr-2" />
                             Dashboard
                         </a>
                     </li>
@@ -71,7 +72,10 @@
                             class="{{ $isActiveArtikel ? 'bg-blue-500 text-white' : '' }}
                                 flex w-full items-center justify-between py-2 pl-6 pr-4 rounded-tr-xl rounded-br-xl
                                 hover:bg-blue-500/75 hover:text-white transition cursor-pointer">
-                            <span class="font-medium">Articles</span>
+                            <span class="font-medium">
+                                <x-ri-file-list-3-line class="w-5 h-5 inline-block mr-2" />
+                                Articles
+                            </span>
                             <x-ri-arrow-up-wide-line class="w-4 h-4 transition-transform duration-200"
                                 x-bind:class="!open ? 'rotate-180' : ''" />
                         </button>
@@ -108,6 +112,7 @@
                         <a href="/dashboard/kategori"
                             class="{{ request()->is('dashboard/kategori') || request()->is('dashboard/kategori/*') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
                                    hover:bg-blue-500/75 hover:text-white transition">
+                            <x-ri-bookmark-line class="w-5 h-5 inline-block mr-2" />
                             Categories
                         </a>
                     </li>
@@ -115,6 +120,7 @@
                         <a href="/dashboard/tag"
                             class="{{ request()->is('dashboard/tag') || request()->is('dashboard/tag/*') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
                                    hover:bg-blue-500/75 hover:text-white transition">
+                            <x-ri-price-tag-3-line class="w-5 h-5 inline-block mr-2" />
                             Tags
                         </a>
                     </li>
@@ -122,6 +128,7 @@
                         <a href="/dashboard/user"
                             class="{{ request()->is('dashboard/user') || request()->is('dashboard/user/*') ? 'bg-blue-500 text-white' : '' }} block py-2 pl-6 rounded-tr-xl rounded-br-xl
                                    hover:bg-blue-500/75 hover:text-white transition">
+                            <x-ri-user-line class="w-5 h-5 inline-block mr-2" />
                             Users
                         </a>
                     </li>
