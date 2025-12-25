@@ -3,13 +3,10 @@
         Admin Dashboard
     </x-slot:title>
 
-
-
     <div class="">
         <div class="">
 
-            <h1 class="text-3xl font-bold mb-3">Dashboard Statistik </h1>
-
+            <h1 class="text-3xl font-bold mb-3">Dashboard Statistics</h1>
 
             <x-breadcrumb :items="[['label' => 'Dashboard', 'url' => '/dashboard']]" />
 
@@ -17,35 +14,35 @@
                 <div class="bg-white p-6 rounded-lg shadow-md w-64 flex items-center gap-4">
                     <x-ri-file-list-3-line class="w-14 h-14 mb-4 text-white bg-gray-400 p-2 rounded-full" />
                     <div class="">
-                        <h2 class="text-xl font-semibold mb-4">Total Artikel</h2>
-                        <p class="text-3xl font-bold">150</p>
+                        <h2 class="text-xl font-semibold mb-4">Total Articles</h2>
+                        <p class="text-3xl font-bold">{{ $totalArticles }}</p>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md w-64 flex items-center gap-4">
                     <x-ri-file-list-3-line class="w-14 h-14 mb-4 text-white bg-gray-400 p-2 rounded-full" />
                     <div class="">
-                        <h2 class="text-xl font-semibold mb-4">Total Artikel</h2>
-                        <p class="text-3xl font-bold">150</p>
+                        <h2 class="text-xl font-semibold mb-4">Total Views</h2>
+                        <p class="text-3xl font-bold">{{ $totalViews }}</p>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md w-64 flex items-center gap-4">
                     <x-ri-file-list-3-line class="w-14 h-14 mb-4 text-white bg-gray-400 p-2 rounded-full" />
                     <div class="">
-                        <h2 class="text-xl font-semibold mb-4">Total Artikel</h2>
-                        <p class="text-3xl font-bold">150</p>
+                        <h2 class="text-xl font-semibold mb-4">Total Users</h2>
+                        <p class="text-3xl font-bold">{{ $totalUsers }}</p>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md w-64 flex items-center gap-4">
                     <x-ri-file-list-3-line class="w-14 h-14 mb-4 text-white bg-gray-400 p-2 rounded-full" />
                     <div class="">
-                        <h2 class="text-xl font-semibold mb-4">Total Artikel</h2>
+                        <h2 class="text-xl font-semibold mb-4">Total Articles</h2>
                         <p class="text-3xl font-bold">150</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="mt-8">
-            <h1 class="text-3xl font-bold mb-6">Berita Populer</h1>
+            <h1 class="text-3xl font-bold mb-6">Popular News</h1>
 
             <div class="grid lg:grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-md">
                 <div class="mb-6 lg:mb-0">
@@ -54,7 +51,7 @@
                             alt="">
                     </div>
                     <div class="mt-2">
-                        <h2 class="font-bold text-xl">Judul</h2>
+                        <h2 class="font-bold text-xl">Title</h2>
                         <p class="text-gray-700 line-clamp-3">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe voluptatum, quos quas
                             recusandae ipsa alias. Odit est assumenda non voluptatibus unde aspernatur vitae, omnis quos
@@ -74,7 +71,7 @@
                             alt="">
                     </div>
                     <div class="mt-2">
-                        <h2 class="font-bold text-xl">Judul</h2>
+                        <h2 class="font-bold text-xl">Title</h2>
                         <p class="text-gray-700 line-clamp-3">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe voluptatum, quos quas
                             recusandae ipsa alias. Odit est assumenda non voluptatibus unde aspernatur vitae, omnis quos

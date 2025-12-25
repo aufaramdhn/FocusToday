@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -10,15 +11,15 @@ use Illuminate\Validation\Rule;
 
 class TagController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tags = Tag::latest()->paginate(20);
-        return view('admin.tags.index', compact('tags'));
+        $tags = Tag::filter($request->all())->paginate(10);
+        return view('admin.tag.index', compact('tags'));
     }
 
     public function create()
     {
-        return view('admin.tags.create');
+        return view('admin.tag.tambah-tag');
     }
 
     public function store(Request $request)
@@ -39,12 +40,12 @@ class TagController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        return redirect()->route('tags.index')->with('success', 'Tag berhasil dibuat!');
+        return redirect()->route('admin.tag.index')->with('success', 'Tag berhasil dibuat!');
     }
 
     public function edit(Tag $tag)
     {
-        return view('admin.tags.edit', compact('tag'));
+        return view('admin.tag.edit-tag', compact('tag'));
     }
 
     public function update(Request $request, Tag $tag)
@@ -64,7 +65,7 @@ class TagController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        return redirect()->route('tags.index')->with('success', 'Tag diperbarui!');
+        return redirect()->route('admin.tag.index')->with('success', 'Tag diperbarui!');
     }
 
     public function destroy(Tag $tag)

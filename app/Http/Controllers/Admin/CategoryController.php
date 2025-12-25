@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -10,21 +11,24 @@ use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::latest()->paginate(10);
-        return view('admin.categories.index', compact('categories'));
+        $categories = Category::filter($request->all())->paginate(10);
+        return view('admin.kategori.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.kategori.tambah-kategori');
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:50|unique:categories,name',
+        ], [
+            'name.unique' => 'Kategori ini sudah ada.',
+            'name.required' => 'Nama kategori wajib diisi.',
         ]);
 
         if ($validator->fails()) {
@@ -36,12 +40,12 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Kategori dibuat!');
+        return redirect()->route('admin.categories.index')->with('success', 'Kategori dibuat!');
     }
 
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.kategori.edit-kategori', compact('category'));
     }
 
     public function update(Request $request, Category $category)
@@ -59,7 +63,7 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        return redirect()->route('categories.index')->with('success', 'Kategori diperbarui!');
+        return redirect()->route('admin.categories.index')->with('success', 'Kategori diperbarui!');
     }
 
     public function destroy(Category $category)

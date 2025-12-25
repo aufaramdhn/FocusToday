@@ -8,15 +8,22 @@ use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        $categories = ['Nasional', 'Internasional', 'Teknologi', 'Olahraga', 'Hiburan', 'Otomotif'];
+        $categories = [
+            'Teknologi',
+            'Politik',
+            'Olahraga',
+            'Ekonomi',
+            'Hiburan',
+            'Pendidikan',
+        ];
 
-        foreach ($categories as $cat) {
-            Category::create([
-                'name' => $cat,
-                'slug' => Str::slug($cat),
-            ]);
+        foreach ($categories as $name) {
+            Category::firstOrCreate(
+                ['name' => $name],
+                ['slug' => Str::slug($name)]
+            );
         }
     }
 }
