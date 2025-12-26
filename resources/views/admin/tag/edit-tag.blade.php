@@ -12,10 +12,13 @@
         ]" />
 
         <div class="bg-white rounded-lg shadow-md w-full p-6 mt-6">
-            <form action="" class="flex flex-col gap-4">
+            <form action="{{ route('admin.tag.update', $tag->id) }}" method="POST" enctype="multipart/form-data"
+                class="flex flex-col gap-4">
+                @csrf
+                @method('PUT')
                 <div class="flex flex-col gap-2">
-                    <label for="nama" class="font-medium">Tag Name</label>
-                    <input type="text" id="nama" name="nama"
+                    <label for="name" class="font-medium">Tag Name</label>
+                    <input type="text" id="name" name="name"
                         class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2" placeholder="Enter tag name"
                         value="{{ $tag->name }}">
                 </div>

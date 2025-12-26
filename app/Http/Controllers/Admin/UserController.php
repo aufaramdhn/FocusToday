@@ -52,39 +52,6 @@ class UserController extends Controller
         return redirect()->route('admin.user.index')->with('success', 'User baru berhasil ditambahkan.');
     }
 
-    // public function edit(User $user)
-    // {
-    //     return view('admin.user.edit', compact('user'));
-    // }
-
-    // public function update(Request $request, User $user)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name'  => 'required|string|max:255',
-    //         'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-    //         'role'  => 'required|in:admin,user',
-    //         'password' => 'nullable|min:8|confirmed',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return back()->withErrors($validator)->withInput();
-    //     }
-
-    //     $dataUpdate = [
-    //         'name'  => $request->name,
-    //         'email' => $request->email,
-    //         'role'  => $request->role,
-    //     ];
-
-    //     if ($request->filled('password')) {
-    //         $dataUpdate['password'] = Hash::make($request->password);
-    //     }
-
-    //     $user->update($dataUpdate);
-
-    //     return redirect()->route('users.index')->with('success', 'Data user berhasil diperbarui.');
-    // }
-
     public function destroy(User $user)
     {
         if (Auth::id() == $user->id) {
@@ -93,5 +60,11 @@ class UserController extends Controller
 
         $user->delete();
         return back()->with('success', 'User berhasil dihapus.');
+    }
+
+    public function pdfReporting(Request $request)
+    {
+        $users = User::filter($request->all())->get();
+        return view('admin.user.pdf-reporting', compact('users'));
     }
 }

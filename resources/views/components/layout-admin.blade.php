@@ -23,7 +23,7 @@
     <header
         class="fixed top-0 left-0 right-0 h-20
                bg-white shadow-md shadow-gray-200
-               z-30 flex items-center px-6">
+               z-30 flex items-center px-6 print:hidden">
         <div class="flex justify-between items-center w-full">
             <h1 class="text-lg md:text-2xl font-bold text-black">
                 FocusToday
@@ -53,7 +53,7 @@
             class="fixed left-0 top-20
             w-60 h-[calc(100vh-80px)]
             bg-white shadow-md shadow-gray-200
-            flex flex-col z-20">
+            flex flex-col z-20 print:hidden">
             <nav class="mt-6">
                 <ul>
                     <li class="mb-2 mr-8">

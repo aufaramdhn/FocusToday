@@ -3,6 +3,16 @@
         Admin Edit Artikel
     </x-slot:title>
 
+    @if ($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            <strong class="font-bold">Ada masalah!</strong>
+            <ul class="mt-2 list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="">
         <h1 class="text-3xl font-bold mb-3">Edit Article</h1>
         <x-breadcrumb :items="[
@@ -10,7 +20,6 @@
             ['label' => 'Articles', 'url' => '/dashboard/artikel'],
             ['label' => 'Edit Article', 'url' => '/dashboard/artikel/edit'],
         ]" />
-
         <div class="bg-white rounded-lg shadow-md w-full p-6 mt-6">
             <form class="flex flex-col gap-4" method="POST" action="{{ route('admin.artikel.update', $article->id) }}"
                 enctype="multipart/form-data" x-data="articleBlocks({{ $article->blocks->map(function ($block) {
@@ -64,10 +73,11 @@
                             </div>
                         @endforeach
                     </div>
-                    @error('tags')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
                 </div>
+                @error('tags')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+                <input type="hidden" name="status" value="{{ $article->status }}">
                 <div class="flex flex-col gap-2" x-data="thumbnailPreview('{{ $article->thumbnail ? asset('storage/' . $article->thumbnail) : '' }}')">
                     <label class="font-medium">Cover Image (Thumbnail)</label>
                     <div x-show="previewUrl" class="relative w-fit group">
