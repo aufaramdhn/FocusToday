@@ -58,5 +58,7 @@ Route::get('/dashboard/user/tambah', [UserController::class, 'create'])->name('a
 Route::post('/dashboard/user/tambah', [UserController::class, 'store'])->name('admin.user.store');
 Route::delete('/dashboard/user/hapus/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
 
+Route::get('/dashboard/user/pdf-report', [UserController::class, 'pdfReporting'])->name('admin.user.pdf-report');
+
 Route::get('/auth/google', [RegisterController::class, 'google_redirect'])->name('auth.google');
 Route::get('/auth/google/callback', [RegisterController::class, 'google_callback']);
