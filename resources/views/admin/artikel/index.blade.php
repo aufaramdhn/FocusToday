@@ -17,7 +17,25 @@
                 Article</a>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
+        <div x-data="{
+            showModal: false,
+            modalUrl: '',
+            modalMethod: 'DELETE',
+            modalTitle: '',
+            modalMessage: '',
+            modalType: 'danger',
+            modalButtonText: 'Ya, Lanjutkan',
+        
+            confirmAction(url, method, title, message, type, btnText) {
+                this.modalUrl = url;
+                this.modalMethod = method;
+                this.modalTitle = title;
+                this.modalMessage = message;
+                this.modalType = type;
+                this.modalButtonText = btnText;
+                this.showModal = true;
+            }
+        }" class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
             <form action="{{ route('admin.artikel.index') }}" method="GET" class="p-4 border-b border-gray-300">
                 <div class="flex items-center justify-between gap-4 flex-wrap">
                     <div class="flex flex-row-reverse items-center gap-2 md:w-[300px] w-full">
@@ -66,8 +84,8 @@
                 @foreach ($articles as $article)
                     <div
                         class="rounded-lg border border-gray-300 p-4 flex flex-col gap-4 hover:shadow-md transition duration-300">
-                        <div class="relative">
-                            <img class="rounded-md shadow-xs w-200 h-60 object-cover"
+                        <div class="relative overflow-hidden rounded-md">
+                            <img class="rounded-md shadow-xs w-200 h-60 object-cover hover:scale-110 transition-transform duration-300"
                                 src="{{ $article->thumbnail ? asset('storage/' . $article->thumbnail) : 'https://via.placeholder.com/400x200?text=No+Image' }}"
                                 alt="Article Image" />
                             <div class="">
@@ -96,50 +114,66 @@
                                 <p class="text-sm text-gray-500 mb-2">Tidak ada ringkasan.</p>
                             @endif
                             <ul class="flex flex-wrap gap-2 mt-2">
-                                @foreach ($article->tags as $tag)
+                                @foreach ($article->tags->take(3) as $tag)
                                     <li class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-md inline-block">
-                                        {{ $tag->name }}</li>
+                                        {{ $tag->name }}
+                                    </li>
                                 @endforeach
-                            </ul>
-                            <div class="flex justify-end mt-4">
-                                <a href="/dashboard/artikel/{{ $article->slug }}"
-                                    class="bg-yellow-500 text-xs text-white rounded-md px-2 py-1 hover:bg-yellow-600 transition duration-300">Preview</a>
-                                @if ($article->status !== 'archived')
-                                    <form action="{{ route('admin.artikel.archive', $article->id) }}" method="POST"
-                                        class="inline-block"
-                                        onsubmit="return confirm('Arsipkan artikel ini? Artikel akan disembunyikan dari publik.');">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit"
-                                            class="bg-green-500 text-xs text-white rounded-md px-2 py-1 hover:bg-green-600 transition duration-300 ml-2 cursor-pointer">
-                                            Archive
-                                        </button>
-                                    </form>
-                                @else
-                                    <form action="{{ route('admin.artikel.restore', $article->id) }}" method="POST"
-                                        class="inline-block" onsubmit="return confirm('Publish ulang artikel ini?');">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit"
-                                            class="bg-green-500 text-xs text-white rounded-md px-2 py-1 hover:bg-green-600 transition duration-300 ml-2 cursor-pointer">
-                                            Publish
-                                        </button>
-                                    </form>
+
+                                @if ($article->tags->count() > 3)
+                                    <li class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-md inline-block">
+                                        ... (+{{ $article->tags->count() - 3 }})
+                                    </li>
                                 @endif
-                                <a href="/dashboard/artikel/edit/{{ $article->id }}"
-                                    class="bg-blue-500 text-xs text-white rounded-md px-2 py-1 hover:bg-blue-600 transition duration-300 ml-2 cursor-pointer">Edit</a>
-                                <form action="{{ route('admin.artikel.destroy', $article->id) }}" method="POST"
-                                    class="inline-block"
-                                    onsubmit="return confirm('Yakin ingin menghapus artikel ini? Data yang dihapus tidak bisa dikembalikan.');">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit"
-                                        class="bg-red-500 text-xs text-white rounded-md px-2 py-1 hover:bg-red-600 transition duration-300 ml-2 cursor-pointer">
-                                        Delete
+                            </ul>
+                            <div class="flex justify-end mt-4 gap-1 flex-wrap">
+                                <a href="/dashboard/artikel/{{ $article->slug }}"
+                                    class="bg-gray-500 text-xs text-white rounded-md px-2 py-1 hover:bg-gray-600 transition duration-300 flex items-center">
+                                    Preview
+                                </a>
+                                @if ($article->status !== 'archived')
+                                    <button
+                                        @click="confirmAction(
+                                            '{{ route('admin.artikel.archive', $article->id) }}', 
+                                            'PATCH', 
+                                            'Arsipkan Artikel?', 
+                                            'Artikel ini akan disembunyikan dari publik.', 
+                                            'warning', 
+                                            'Ya, Arsipkan'
+                                        )"
+                                        class="bg-yellow-500 text-xs text-white rounded-md px-2 py-1 hover:bg-yellow-600 transition cursor-pointer">
+                                        Archive
                                     </button>
-                                </form>
+                                @else
+                                    <button
+                                        @click="confirmAction(
+                                            '{{ route('admin.artikel.restore', $article->id) }}', 
+                                            'PATCH', 
+                                            'Publish Kembali?', 
+                                            'Artikel akan muncul kembali di halaman publik.', 
+                                            'success', 
+                                            'Ya, Publish'
+                                        )"
+                                        class="bg-green-500 text-xs text-white rounded-md px-2 py-1 hover:bg-green-600 transition cursor-pointer">
+                                        Publish
+                                    </button>
+                                @endif
+                                <a href="{{ route('admin.artikel.edit', $article->id) }}"
+                                    class="bg-blue-500 text-xs text-white rounded-md px-2 py-1 hover:bg-blue-600 transition duration-300 flex items-center">
+                                    Edit
+                                </a>
+                                <button
+                                    @click="confirmAction(
+                                        '{{ route('admin.artikel.destroy', $article->id) }}', 
+                                        'DELETE', 
+                                        'Hapus Permanen?', 
+                                        'Data yang dihapus tidak bisa dikembalikan lagi!', 
+                                        'danger', 
+                                        'Ya, Hapus'
+                                    )"
+                                    class="bg-red-500 text-xs text-white rounded-md px-2 py-1 hover:bg-red-600 transition cursor-pointer">
+                                    Delete
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -196,5 +230,6 @@
                     @endif
                 </div>
             </div>
+            <x-confirm-modal />
         </div>
 </x-layout-admin>

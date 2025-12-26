@@ -12,7 +12,10 @@
         ]" />
 
         <div class="bg-white rounded-lg shadow-md w-full p-6 mt-6">
-            <form action="" class="flex flex-col gap-4">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST"
+                class="flex flex-col gap-4">
+                @csrf
+                @method('PUT')
                 <div class="flex flex-col gap-2">
                     <label for="name" class="font-medium">Category Name</label>
                     <input type="text" id="name" name="name"

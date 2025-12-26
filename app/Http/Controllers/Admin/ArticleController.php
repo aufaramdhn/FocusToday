@@ -112,29 +112,78 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         $request->validate([
-            'title'       => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'status'      => 'required|in:published,archived',
+            'title'                 => 'required|string|max:255',
+            'category_id'           => 'required|exists:categories,id',
+            'status'                => 'required|in:published,archived,draft',
+            'thumbnail'             => 'nullable|image|max:2048',
+            'tags'                  => 'nullable|array',
+            'tags.*'                => 'exists:tags,id',
+            'blocks'                => 'required|array',
+            'blocks.*.type'         => 'required|string',
+            'blocks.*.content'      => 'nullable|string',
+            'blocks.*.image'        => 'nullable|image|max:2048',
+            'blocks.*.existing_media_path' => 'nullable|string',
+        ], [
+            'title.required' => 'Judul artikel wajib diisi.',
+            'blocks.required' => 'Artikel harus memiliki konten.',
         ]);
 
-        $newSlug = Str::slug($request->title);
+        DB::transaction(function () use ($request, $article) {
+            $thumbnailPath = $article->thumbnail;
 
-        $publishedAt = $article->published_at;
-        if ($request->status == 'published' && $article->status != 'published') {
-            $publishedAt = now();
-        } elseif ($request->status == 'draft') {
-            $publishedAt = null;
-        }
+            if ($request->hasFile('thumbnail')) {
+                if ($article->thumbnail && Storage::disk('public')->exists($article->thumbnail)) {
+                    Storage::disk('public')->delete($article->thumbnail);
+                }
+                $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+            }
 
-        $article->update([
-            'category_id' => $request->category_id,
-            'title'       => $request->title,
-            'slug'        => $newSlug != $article->slug ? $newSlug . '-' . Str::random(5) : $article->slug,
-            'status'      => $request->status,
-            'published_at' => $publishedAt,
-        ]);
+            $newSlug = Str::slug($request->title);
+            $publishedAt = $article->published_at;
 
-        return redirect()->route('admin.artikel.index')->with('success', 'Artikel diperbarui!');
+            if ($request->status == 'published' && $article->status != 'published') {
+                $publishedAt = now();
+            } elseif ($request->status == 'draft') {
+                $publishedAt = null;
+            }
+
+            $article->update([
+                'category_id'  => $request->category_id,
+                'user_id'      =>  1,
+                'title'        => $request->title,
+                'slug'         => $newSlug != $article->slug ? $newSlug . '-' . Str::random(5) : $article->slug,
+                'thumbnail'    => $thumbnailPath,
+                'status'       => $request->status,
+                'published_at' => $publishedAt,
+            ]);
+
+            if ($request->has('tags')) {
+                $article->tags()->sync($request->tags);
+            } else {
+                $article->tags()->detach();
+            }
+
+            $article->blocks()->delete();
+
+            foreach ($request->blocks as $index => $blockData) {
+                $mediaPath = null;
+
+                if ($request->hasFile("blocks.$index.image")) {
+                    $mediaPath = $request->file("blocks.$index.image")->store('article-media', 'public');
+                } elseif (isset($blockData['existing_media_path'])) {
+                    $mediaPath = $blockData['existing_media_path'];
+                }
+
+                $article->blocks()->create([
+                    'type'       => $blockData['type'],
+                    'content'    => $blockData['content'] ?? null,
+                    'media_path' => $mediaPath,
+                    'position'   => $index + 1,
+                ]);
+            }
+        });
+
+        return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil diperbarui!');
     }
 
     public function destroy(Article $article)

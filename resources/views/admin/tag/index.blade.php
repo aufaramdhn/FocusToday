@@ -17,7 +17,25 @@
                 Tag</a>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
+        <div x-data="{
+            showModal: false,
+            modalUrl: '',
+            modalMethod: 'DELETE',
+            modalTitle: '',
+            modalMessage: '',
+            modalType: 'danger',
+            modalButtonText: 'Ya, Lanjutkan',
+        
+            confirmAction(url, method, title, message, type, btnText) {
+                this.modalUrl = url;
+                this.modalMethod = method;
+                this.modalTitle = title;
+                this.modalMessage = message;
+                this.modalType = type;
+                this.modalButtonText = btnText;
+                this.showModal = true;
+            }
+        }" class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
             <form action="{{ route('admin.tag.index') }}" method="GET" class="p-4 border-b-2 border-gray-300">
                 <div class="flex items-center justify-between gap-4 flex-wrap">
                     <div class="flex flex-row-reverse items-center gap-2 md:w-[300px] w-full">
@@ -77,19 +95,23 @@
                             class="border-b-2 hover:bg-gray-200/40 hover:shadow-xs border-gray-300 transition duration-500 text-sm">
                             <td class="py-2 px-6">{{ $tag->id }}</td>
                             <td class="py-2 px-6">{{ $tag->name }}</td>
-                            <td class="py-2 px-6">
-                                <a href="{{ route('admin.tag.edit', $tag->id) }}" class="mr-4">Edit</a>
-                                <form action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST"
-                                    class="inline-block"
-                                    onsubmit="return confirm('Yakin ingin menghapus tag ini? Data yang dihapus tidak bisa dikembalikan.');">
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" class="cursor-pointer">
+                            <td class="py-2 px-6 whitespace-nowrap items-center">
+                                <x-table-action>
+                                    <a href="{{ route('admin.tag.edit', $tag->id) }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-left">Edit</a>
+                                    <button
+                                        @click="open = false; confirmAction(
+                                            '{{ route('admin.tag.destroy', $tag->id) }}',
+                                            'DELETE',
+                                            'Delete Tag',
+                                            'Are you sure you want to delete the tag \'{{ $tag->name }}\'? This action cannot be undone.',
+                                            'danger',
+                                            'Yes, Delete'
+                                        )"
+                                        class="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 hover:text-red-700 transition cursor-pointer">
                                         Delete
                                     </button>
-                                </form>
+                                </x-table-action>
                             </td>
                         </tr>
                     @endforeach
@@ -146,6 +168,7 @@
                     @endif
                 </div>
             </div>
+            <x-confirm-modal />
         </div>
     </div>
 </x-layout-admin>
