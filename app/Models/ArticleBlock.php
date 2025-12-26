@@ -11,7 +11,6 @@ class ArticleBlock extends Model
 
     protected $fillable = ['article_id', 'type', 'content', 'media_path', 'position'];
 
-    // Blok ini milik artikel mana?
     public function article()
     {
         return $this->belongsTo(Article::class);

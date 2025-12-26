@@ -82,15 +82,22 @@
       <div class="flex-1 h-px bg-gray-400"></div>
     </div>
 
+    <a href="{{ route('auth.google') }}">
     <button
-      class="w-full h-11 rounded-xl border border-gray-400 bg-white flex items-center justify-center gap-2
-        text-sm hover:bg-gray-50 transition">
-      <img
-        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-        class="w-4 h-4"
-        alt="Google">
+      class="w-full h-11 rounded-xl border border-gray-400 bg-white flex items-center justify-center gap-2 text-sm text-black hover:bg-gray-50
+         focus:outline-none focus:border-gray-600"
+      >
+      
+        <img
+          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+          class="w-4 h-4"
+          alt="Google"
+        >
+      
+
       Daftar dengan Google
     </button>
+    </a>
 
     <p class="text-[10px] md:text-xs mt-4 text-gray-700">
       Sudah punya akun?

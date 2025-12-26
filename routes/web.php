@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\RegisterController;
+
 
 Route::get('/', function () {
     return view('pages.home');
@@ -55,4 +57,8 @@ Route::get('/dashboard/user', [UserController::class, 'index'])->name('admin.use
 Route::get('/dashboard/user/tambah', [UserController::class, 'create'])->name('admin.user.create');
 Route::post('/dashboard/user/tambah', [UserController::class, 'store'])->name('admin.user.store');
 Route::delete('/dashboard/user/hapus/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+
 Route::get('/dashboard/user/pdf-report', [UserController::class, 'pdfReporting'])->name('admin.user.pdf-report');
+
+Route::get('/auth/google', [RegisterController::class, 'google_redirect'])->name('auth.google');
+Route::get('/auth/google/callback', [RegisterController::class, 'google_callback']);
