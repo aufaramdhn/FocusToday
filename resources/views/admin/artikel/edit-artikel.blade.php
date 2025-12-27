@@ -78,7 +78,7 @@
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
                 <input type="hidden" name="status" value="{{ $article->status }}">
-                <div class="flex flex-col gap-2" x-data="thumbnailPreview('{{ $article->thumbnail ? asset('storage/' . $article->thumbnail) : '' }}')">
+                <div class="flex flex-col gap-2" x-data="thumbnailPreview('{{ $article->thumbnail_url }}')">
                     <label class="font-medium">Cover Image (Thumbnail)</label>
                     <div x-show="previewUrl" class="relative w-fit group">
                         <img :src="previewUrl"
@@ -107,34 +107,35 @@
                         <div class="border rounded-md border-gray-300/90 shadow-xs p-3 bg-white mb-4">
                             <input type="hidden" x-bind:name="'blocks[' + index + '][type]'"
                                 x-bind:value="block.type">
+
                             <div x-show="block.type === 'text'">
                                 <input type="hidden" x-bind:name="'blocks[' + index + '][content]'"
                                     x-bind:value="block.content">
                                 <div :id="'editor-' + index" class="bg-white h-40" x-init="initEditor(index)"></div>
                             </div>
+
                             <div x-show="block.type === 'image'" class="flex flex-col gap-2">
                                 <div x-show="!block.previewUrl && !block.media_path">
                                     <label class="block mb-1 text-sm font-medium text-gray-700">Upload Gambar</label>
                                     <input type="file" x-bind:name="'blocks[' + index + '][image]'" accept="image/*"
-                                        class="block w-full text-sm text-gray-500
-                                        file:mr-4 file:py-2 file:px-4
-                                        file:rounded-md file:border-0
-                                        file:text-sm file:font-semibold
-                                        file:bg-blue-50 file:text-blue-700
-                                        hover:file:bg-blue-100 cursor-pointer border rounded-md border-gray-300"
+                                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer border rounded-md border-gray-300"
                                         @change="handleImageUpload($event, index)">
                                 </div>
+
                                 <div x-show="block.previewUrl || block.media_path" class="relative group w-fit">
-                                    <img :src="block.previewUrl || '/storage/' + block.media_path"
+                                    <img :src="block.previewUrl || getImageUrl(block.media_path)"
                                         class="h-48 w-auto object-cover rounded-md border shadow-sm">
+
                                     <button type="button" @click="removeImage(index)"
                                         class="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition">
                                         <x-ri-close-line class="w-4 h-4" />
                                     </button>
                                 </div>
+
                                 <input type="hidden" x-bind:name="'blocks[' + index + '][existing_media_path]'"
                                     :value="block.media_path">
                             </div>
+
                             <button type="button" class="text-red-500 text-sm mt-2" @click="removeBlock(index)">
                                 Delete Block
                             </button>
@@ -193,6 +194,14 @@
             function articleBlocks(initialBlocks = []) {
                 return {
                     blocks: initialBlocks.length > 0 ? initialBlocks : [],
+
+                    getImageUrl(path) {
+                        if (!path) return '';
+                        if (path.startsWith('http')) {
+                            return path;
+                        }
+                        return '/storage/' + path;
+                    },
 
                     addText() {
                         this.blocks.push({

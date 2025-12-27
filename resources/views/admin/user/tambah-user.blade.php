@@ -34,7 +34,7 @@
                         <option value="">Select Role</option>
                         <option value="admin">Admin</option>
                         <option value="editor">Editor</option>
-                        <option value="penonton">Viewer</option>
+                        <option value="user">Viewer</option>
                     </select>
                 </div>
                 @error('role')
