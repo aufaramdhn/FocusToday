@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Auth\RegisterController;
 
 
 Route::get('/', function () {
@@ -38,6 +39,9 @@ Route::get('/dashboard/artikel/{article:slug}', [ArticleController::class, 'show
 Route::patch('/dashboard/artikel/{article}/archive', [ArticleController::class, 'archive'])->name('admin.artikel.archive');
 Route::patch('/dashboard/artikel/{article}/restore', [ArticleController::class, 'restore'])->name('admin.artikel.restore');
 
+Route::post('/comments', [CommentController::class, 'store'])->name('admin.comments.store');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('admin.comments.update');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('admin.comments.destroy');
 
 Route::get('/dashboard/kategori', [CategoryController::class, 'index'])->name('admin.categories.index');
 Route::get('/dashboard/kategori/tambah', [CategoryController::class, 'create'])->name('admin.categories.create');

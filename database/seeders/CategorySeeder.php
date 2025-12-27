@@ -12,11 +12,25 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             'Teknologi',
+            'Bisnis & Keuangan',
+            'Kesehatan',
+            'Gaya Hidup',
+            'Kuliner',
+            'Travel',
+            'Otomotif',
             'Politik',
             'Olahraga',
-            'Ekonomi',
             'Hiburan',
-            'Pendidikan',
+            'Sains',
+            'Edukasi',
+            'Fashion',
+            'Kecantikan',
+            'Properti',
+            'Gaming',
+            'Parenting',
+            'Hukum & Kriminal',
+            'Opini',
+            'Internasional'
         ];
 
         foreach ($categories as $name) {
