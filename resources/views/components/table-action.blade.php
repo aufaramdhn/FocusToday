@@ -30,7 +30,7 @@
     <button @click="toggle()" type="button"
         class="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
         <span>Aksi</span>
-        <x-ri-arrow-down-s-line class="w-5 h-5 text-gray-700 ml-1 transition-transform duration-200"
+        <x-ri-arrow-up-s-line class="w-5 h-5 text-gray-700 ml-1 transition-transform duration-200"
             x-bind:class="open ? 'rotate-180' : ''" />
     </button>
 

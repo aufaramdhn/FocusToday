@@ -17,66 +17,18 @@
                 Article</a>
         </div>
 
-        <div x-data="{
-            showModal: false,
-            modalUrl: '',
-            modalMethod: 'DELETE',
-            modalTitle: '',
-            modalMessage: '',
-            modalType: 'danger',
-            modalButtonText: 'Ya, Lanjutkan',
-        
-            confirmAction(url, method, title, message, type, btnText) {
-                this.modalUrl = url;
-                this.modalMethod = method;
-                this.modalTitle = title;
-                this.modalMessage = message;
-                this.modalType = type;
-                this.modalButtonText = btnText;
-                this.showModal = true;
-            }
-        }" class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
-            <form action="{{ route('admin.artikel.index') }}" method="GET" class="p-4 border-b border-gray-300">
-                <div class="flex items-center justify-between gap-4 flex-wrap">
-                    <div class="flex flex-row-reverse items-center gap-2 md:w-[300px] w-full">
-                        <input type="text" name="search" value="{{ request('search') }}"
-                            placeholder="Search articles..." class="w-full focus:outline-none rounded-md px-3">
-
-                        <button type="submit" class="">
-                            <x-ri-search-line class="w-6 h-6 cursor-pointer" />
-                        </button>
-                    </div>
-                    <div class="flex items-center gap-4 flex-wrap">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <input type="date" name="start_date" value="{{ request('start_date') }}"
-                                onchange="this.form.submit()"
-                                class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1">
-                            <span>—</span>
-                            <input type="date" name="end_date" value="{{ request('end_date') }}"
-                                onchange="this.form.submit()"
-                                class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1">
-                        </div>
-                        <select name="sort" onchange="this.form.submit()"
-                            class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1">
-                            <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Sort
-                                By</option>
-                            <option value="nama_asc" {{ request('sort') == 'nama_asc' ? 'selected' : '' }}>Name (A-Z)
-                            </option>
-                            <option value="nama_desc" {{ request('sort') == 'nama_desc' ? 'selected' : '' }}>Name (Z-A)
-                            </option>
-                            <option value="tanggal_asc" {{ request('sort') == 'tanggal_asc' ? 'selected' : '' }}>
-                                Create Date (Oldest)</option>
-                            <option value="tanggal_desc" {{ request('sort') == 'tanggal_desc' ? 'selected' : '' }}>
-                                Create Date (Newest)</option>
-                        </select>
-                        @if (request()->hasAny(['search', 'role', 'start_date', 'end_date', 'sort']))
-                            <a href="{{ route('admin.artikel.index') }}" class="text-red-500 text-sm hover:underline">
-                                Reset Filter
-                            </a>
-                        @endif
-                    </div>
-                </div>
-            </form>
+        <div class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
+            <x-filter-bar :action="route('admin.artikel.index')" :showSearch="true" :showDate="true" :showSort="true">
+                <select name="category" onchange="this.form.submit()"
+                    class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1">
+                    <option value="">All Category</option>
+                    @foreach ($categories as $cat)
+                        <option value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'selected' : '' }}>
+                            {{ $cat->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </x-filter-bar>
             @if ($articles->isEmpty())
                 <p class="text-center pt-10">No articles found.</p>
             @endif
@@ -86,8 +38,7 @@
                         class="rounded-lg border border-gray-300 p-4 flex flex-col gap-4 hover:shadow-md transition duration-300">
                         <div class="relative overflow-hidden rounded-md">
                             <img class="rounded-md shadow-xs w-200 h-60 object-cover hover:scale-110 transition-transform duration-300"
-                                src="{{ $article->thumbnail ? asset('storage/' . $article->thumbnail) : 'https://via.placeholder.com/400x200?text=No+Image' }}"
-                                alt="Article Image" />
+                                src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}" />
                             <div class="">
                                 @if ($article->status == 'published')
                                     <span
@@ -103,6 +54,7 @@
                         </div>
                         <div class="">
                             <h2 class="font-bold text-lg">{{ $article->title }}</h2>
+                            <span class="text-md text-gray-600 italic">Category: {{ $article->category->name }}</span>
                             @php
                                 $firstTextBlock = $article->blocks->firstWhere('type', 'text');
                             @endphp
@@ -179,57 +131,6 @@
                     </div>
                 @endforeach
             </div>
-            <div
-                class="border-gray-300 border-t flex justify-between items-center px-6 py-4 text-sm flex-col md:flex-row gap-4 md:gap-0">
-                <div class="">
-                    <p class="">
-                        Showing
-                        <span class="font-bold">{{ $articles->firstItem() }}</span>
-                        to
-                        <span class="font-bold">{{ $articles->lastItem() }}</span>
-                        of
-                        <span class="font-bold">{{ $articles->total() }}</span>
-                        results
-                    </p>
-                </div>
-                <div class="">
-                    @if ($articles->hasPages())
-                        <nav>
-                            <ul class="inline-flex flex-wrap items-center gap-2">
-                                <li>
-                                    @if ($articles->onFirstPage())
-                                        <button disabled
-                                            class="px-3 py-1 bg-gray-200 text-gray-400 rounded-md cursor-not-allowed">Previous</button>
-                                    @else
-                                        <a href="{{ $articles->previousPageUrl() }}"
-                                            class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">Previous</a>
-                                    @endif
-                                </li>
-                                @foreach (range(1, $articles->lastPage()) as $page)
-                                    <li>
-                                        @if ($page == $articles->currentPage())
-                                            <span
-                                                class="px-3 py-1 bg-blue-500 text-white rounded-md">{{ $page }}</span>
-                                        @else
-                                            <a href="{{ $articles->url($page) }}"
-                                                class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">{{ $page }}</a>
-                                        @endif
-                                    </li>
-                                @endforeach
-                                <li>
-                                    @if ($articles->hasMorePages())
-                                        <a href="{{ $articles->nextPageUrl() }}"
-                                            class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">Next</a>
-                                    @else
-                                        <button disabled
-                                            class="px-3 py-1 bg-gray-200 text-gray-400 rounded-md cursor-not-allowed">Next</button>
-                                    @endif
-                                </li>
-                            </ul>
-                        </nav>
-                    @endif
-                </div>
-            </div>
-            <x-confirm-modal />
+            <x-pagination :paginator="$articles" />
         </div>
 </x-layout-admin>

@@ -18,7 +18,17 @@
 
 <body class="bg-gray-100 admin" x-data="{
     sidebarOpen: false,
-    isDesktop: window.innerWidth >= 768
+    isDesktop: window.innerWidth >= 768,
+    showModal: false,
+    confirmAction(url, method, title, message, type, btnText) {
+        this.modalUrl = url;
+        this.modalMethod = method;
+        this.modalTitle = title;
+        this.modalMessage = message;
+        this.modalType = type;
+        this.modalButtonText = btnText;
+        this.showModal = true;
+    }
 }" @resize.window="isDesktop = window.innerWidth >= 768">
     <header
         class="fixed top-0 left-0 right-0 h-20
@@ -166,6 +176,7 @@
             {{ $slot }}
 
         </section>
+        <x-confirm-modal />
     </main>
 
     <script></script>
