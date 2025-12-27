@@ -30,7 +30,7 @@ class UserController extends Controller
             'email'     => 'required|email|unique:users,email',
             'password'  => 'required|min:8|confirmed|',
             'password_confirmation' => 'required|min:8|same:password',
-            'role'      => 'required|in:admin,editor,penonton',
+            'role'      => 'required|in:admin,editor,user',
         ], [
             'email.unique' => 'Email ini sudah dipakai user lain.',
             'role.in'      => 'Pilihan role tidak valid.',

@@ -10,8 +10,10 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
+        User::factory(5)->admin()->create();
         User::factory(5)->create([
-            'role' => 'admin'
+            'role' => 'editor'
         ]);
+        User::factory(10)->create();
     }
 }

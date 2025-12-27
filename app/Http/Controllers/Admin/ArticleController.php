@@ -24,17 +24,25 @@ class ArticleController extends Controller
             $query->where('status', $status);
         }
 
-        $articles = $query->filter($request->all())->paginate(9);
+        $articles = $query
+            ->filter($request->all())
+            ->paginate(9)
+            ->withQueryString();
+
         $tags = Tag::all();
+
         $articles_blocks = Article::with('blocks')->get();
 
-        return view('admin.artikel.index', compact('articles', 'status', 'tags', 'articles_blocks'));
+        $categories = Category::all();
+
+        return view('admin.artikel.index', compact('articles', 'status', 'tags', 'articles_blocks', 'categories'));
     }
 
     public function show(Article $article)
     {
-        $article->load(['category', 'author', 'blocks', 'tags']);
-
+        $article->load(['category', 'author', 'blocks', 'tags', 'comments'])
+            ->where('id', $article->id)
+            ->firstOrFail();
         return view('admin.artikel.detail-artikel', compact('article'));
     }
 

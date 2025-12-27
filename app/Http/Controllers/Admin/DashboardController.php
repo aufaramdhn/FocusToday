@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -19,6 +20,10 @@ class DashboardController extends Controller
 
         $totalUsers = User::count();
 
-        return view('admin.dashboard.index', compact('recentArticles', 'totalArticles', 'totalViews', 'totalUsers'));
+        $totalComments = Comment::count();
+
+        $popularArticles = Article::orderBy('views', 'desc')->take(4)->get();
+
+        return view('admin.dashboard.index', compact('recentArticles', 'totalArticles', 'totalViews', 'totalUsers', 'totalComments', 'popularArticles'));
     }
 }
