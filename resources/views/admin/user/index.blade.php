@@ -22,8 +22,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
-            <x-filter-bar :action="route('admin.user.index')" :showSearch="true" :showDate="true" :showSort="true" :showRole="true" />
+        <x-card :action="route('admin.user.index')" :data="$users" :paginator="$users->appends(request()->query())" :showRole="true">
             <table class="w-full table-auto table-responsive overflow-x-scroll">
                 <thead class="bg-slate-200">
                     <tr class="text-left border-b-2 border-gray-300 ">
@@ -85,7 +84,6 @@
                     @endforeach
                 </tbody>
             </table>
-            <x-pagination :paginator="$users" />
-        </div>
+        </x-card>
     </div>
 </x-layout-admin>

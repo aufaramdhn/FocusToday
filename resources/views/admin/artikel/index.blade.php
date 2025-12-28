@@ -17,10 +17,10 @@
                 Article</a>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
-            <x-filter-bar :action="route('admin.artikel.index')" :showSearch="true" :showDate="true" :showSort="true">
+        <x-card :action="route('admin.artikel.index')" :data="$articles" :paginator="$articles->appends(request()->query())">
+            <x-slot:filters>
                 <select name="category" onchange="this.form.submit()"
-                    class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1">
+                    class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1 text-sm">
                     <option value="">All Category</option>
                     @foreach ($categories as $cat)
                         <option value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'selected' : '' }}>
@@ -28,11 +28,8 @@
                         </option>
                     @endforeach
                 </select>
-            </x-filter-bar>
-            @if ($articles->isEmpty())
-                <p class="text-center pt-10">No articles found.</p>
-            @endif
-            <div class="flex flex-wrap md:grid md:grid-cols-3 gap-4 p-6">
+            </x-slot:filters>
+            <div class="flex flex-wrap md:grid md:grid-cols-3 gap-4 p-6 border-b-2 border-gray-300">
                 @foreach ($articles as $article)
                     <div
                         class="rounded-lg border border-gray-300 p-4 flex flex-col gap-4 hover:shadow-md transition duration-300">
@@ -131,6 +128,5 @@
                     </div>
                 @endforeach
             </div>
-            <x-pagination :paginator="$articles" />
-        </div>
+        </x-card>
 </x-layout-admin>

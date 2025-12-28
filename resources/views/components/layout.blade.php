@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+<x-layout-base :title="$title">
     <header class="bg-white shadow-md shadow-gray-200 fixed top-0 left-0 right-0 z-30" x-data="{ open: false }"
         @click.outside="open = false" @scroll.window="open = false">
 
@@ -133,5 +122,4 @@
             <p class="">© FokusToday Media Network. All Right Reserved.</p>
         </div>
     </footer>
-</body>
-</html>
+</x-layout-base>

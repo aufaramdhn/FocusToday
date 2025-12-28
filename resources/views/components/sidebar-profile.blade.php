@@ -1,0 +1,41 @@
+@props([
+    'headerProfile' => 'Profil Saya',
+    'headerProfileButton' => null,
+])
+
+<x-layout>
+    <x-slot:title>
+        Profil Saya - FocusToday
+    </x-slot:title>
+
+    <div
+        class="container mx-auto px-4 md:grid md:grid-cols-[1.2fr_1.8fr] lg:grid-cols-[0.8fr_2.2fr] gap-8 md:gap-12 bg-white p-6 rounded-lg shadow-md">
+        <div class="w-fullmb-8 md:mb-0 h-full ">
+            <div class="flex flex-col">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"
+                    class="object-cover border-4 border-white shadow-md w-full h-[320px] md:h-[280px]" />
+                <div class="flex flex-col md:gap-2 mt-2">
+                    <a href="/profile"
+                        class="md:text-base text-gray-600 text-lg hover:text-white transition text-center hover:bg-blue-700 rounded-md py-2 {{ request()->is('profile') ? 'bg-blue-600 text-white' : '' }}">Profil</a>
+
+                    <a href="/profile/artikel"
+                        class="md:text-base text-gray-600 text-lg hover:text-white transition text-center hover:bg-blue-700 rounded-md py-2 {{ request()->is('profile/artikel') ? 'bg-blue-600 text-white' : '' }}">Artikel</a>
+
+                    <a href="/profile/security"
+                        class="md:text-base text-gray-600 text-lg hover:text-white transition text-center hover:bg-blue-700 rounded-md py-2 {{ request()->is('profile/security') ? 'bg-blue-600 text-white' : '' }}">Keamanan</a>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold mb-4 text-black">
+                    {{ $headerProfile }}
+                </h1>
+                {{ $headerProfileButton }}
+            </div>
+
+            {{ $slot }}
+
+        </div>
+    </div>
+</x-layout>

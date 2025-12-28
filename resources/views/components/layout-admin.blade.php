@@ -1,35 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title }}</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Quill CSS -->
-    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
-
-    <!-- Quill JS -->
-    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
-</head>
-
-<body class="bg-gray-100 admin" x-data="{
-    sidebarOpen: false,
-    isDesktop: window.innerWidth >= 768,
-    showModal: false,
-    confirmAction(url, method, title, message, type, btnText) {
-        this.modalUrl = url;
-        this.modalMethod = method;
-        this.modalTitle = title;
-        this.modalMessage = message;
-        this.modalType = type;
-        this.modalButtonText = btnText;
-        this.showModal = true;
-    }
-}" @resize.window="isDesktop = window.innerWidth >= 768">
+<x-layout-base :title="$title">
     <header
         class="fixed top-0 left-0 right-0 h-20
                bg-white shadow-md shadow-gray-200
@@ -176,10 +145,5 @@
             {{ $slot }}
 
         </section>
-        <x-confirm-modal />
     </main>
-
-    <script></script>
-</body>
-
-</html>
+</x-layout-base>

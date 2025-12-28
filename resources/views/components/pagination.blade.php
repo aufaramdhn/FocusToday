@@ -1,7 +1,6 @@
 @props(['paginator'])
 
-<div
-    class="border-gray-300 border-t flex justify-between items-center px-6 py-4 text-sm flex-col md:flex-row gap-4 md:gap-0">
+<div class="flex justify-between items-center px-6 py-4 text-sm flex-col md:flex-row gap-4 md:gap-0">
 
     <div class="">
         <p class="">
