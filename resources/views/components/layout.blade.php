@@ -49,22 +49,19 @@
                             </p>
                         </div>
 
-                        <a href="#"
+                        <a href="/profile"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition">
                             Profile
                         </a>
-                        <a href=""
+                        <a href="/admin/dashboard"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition">
                             Dashboard Admin
                         </a>
                         <div class="border-t border-gray-100 my-1"></div>
-                        <form method="POST" action="">
-                            @csrf
-                            <button type="submit"
+                            <a type="submit" href="/logout"
                                 class="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 hover:text-red-700 transition cursor-pointer">
                                 Logout
-                            </button>
-                        </form>
+                            </a>
                     </div>
                 </div>
 
@@ -83,14 +80,14 @@
                 <button class="bg-blue-500 text-white rounded-md px-3 py-1 cursor-pointer">Search</button>
             </div>
 
-            <a href="">Home</a>
-            <a href="">Terbaru</a>
-            <a href="">Bisnis</a>
-            <a href="">Keuangan</a>
-            <a href="">Teknologi</a>
-            <a href="">Olahraga</a>
-            <a href="">Hiburan</a>
-            <a href="">Gaya Hidup</a>
+            <a href="/">Home</a>
+            <a href="{{ route('articles.latest') }}">Terbaru</a>
+            <a href="{{ route('categories.show', 'bisnis-keuangan') }}">Bisnis</a>
+            <a href="{{ route('categories.show', 'otomotif') }}">Otomotif</a>
+            <a href="{{ route('categories.show', 'teknologi') }}">Teknologi</a>
+            <a href="{{ route('categories.show', 'olahraga') }}">Olahraga</a>
+            <a href="{{ route('categories.show', 'hiburan') }}">Hiburan</a>
+            <a href="{{ route('categories.show', 'gaya-hidup') }}">Gaya Hidup</a>
         </nav>
     </header>
 

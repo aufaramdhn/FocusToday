@@ -10,23 +10,18 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
-
+use App\Http\Controllers\Landing\HomeController;
 use App\Http\Controllers\Landing\UserArticleController;
 use App\Http\Controllers\Landing\ProfileController;
+use App\Http\Controllers\Landing\DetailKategoriController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\OnboardingController;
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/baca/{article:slug}', [HomeController::class, 'show'])->name('articles.show');
 
-Route::get('/detail-kategori', function () {
-    return view('pages.detail-kategori');
-});
-
-Route::get('/detail-artikel', function () {
-    return view('pages.detail-artikel');
-});
+Route::get('/terbaru', [DetailKategoriController::class, 'terbaru'])->name('articles.latest');
+Route::get('/kategori/{category:slug}', [DetailKategoriController::class, 'show'])->name('categories.show');
 
 Route::get('/profile', function () {
     return view('pages.profile._profile');
@@ -58,14 +53,14 @@ Route::middleware('guest')->group(function () {
     Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 });
 
-// Route::middleware(['auth', 'banned'])->group(function () {
+Route::middleware(['auth', 'banned'])->group(function () {
 
-//     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile/avatar', [ProfileController::class, 'destroyAvatar'])->name('profile.avatar.destroy');
-// });
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile/avatar', [ProfileController::class, 'destroyAvatar'])->name('profile.avatar.destroy');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/onboarding', [OnboardingController::class, 'index'])->name('onboarding');

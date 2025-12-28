@@ -21,6 +21,10 @@ class Article extends Model
         'views'
     ];
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -44,6 +48,11 @@ class Article extends Model
     public function blocks()
     {
         return $this->hasMany(ArticleBlock::class)->orderBy('position');
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
     }
 
     public function scopeFilter($query, array $filters)
