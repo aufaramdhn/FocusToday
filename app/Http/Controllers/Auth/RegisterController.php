@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -21,10 +20,8 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
             'name'      => 'required|string|max:255',
             'email'     => 'required|email|unique:users,email',
-
             'password'  => 'required|min:8|confirmed',
         ], [
-
             'name.required'     => 'Nama lengkap wajib diisi.',
             'name.max'          => 'Nama tidak boleh lebih dari 255 karakter.',
             'email.required'    => 'Alamat email wajib diisi.',
@@ -32,7 +29,7 @@ class RegisterController extends Controller
             'email.unique'      => 'Email ini sudah terdaftar, silakan login.',
             'password.required' => 'Password wajib diisi.',
             'password.min'      => 'Password minimal harus 8 karakter.',
-            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'password.confirmed'=> 'Konfirmasi password tidak cocok.',
         ]);
 
         if ($validator->fails()) {
@@ -41,15 +38,18 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
-        $validasi = $validator->validasi();
+        $validasi = $validator->validated();
 
         User::create([
-            'name'     => $validasi['name'],
-            'email'    => $validasi['email'],
-            'password' => Hash::make($validasi['password']),
-            'role'     => 'user',
+            'name'      => $validasi['name'],
+            'email'     => $validasi['email'],
+            'password'  => Hash::make($validasi['password']),
+            'role'      => 'user',
+            'google_id' => null,
         ]);
 
-        return redirect('/auth/login')->with('success', 'Akun berhasil dibuat! Silakan login.');
+        
+
+        return redirect('/login')->with('success', 'Akun berhasil dibuat! Silakan login.');
     }
 }

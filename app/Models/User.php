@@ -16,6 +16,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'status',
+        'avatar',
+        'is_banned',
     ];
 
     protected $hidden = [
@@ -70,5 +73,19 @@ class User extends Authenticatable
                     return $query->oldest();
             }
         });
+
+        
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        if ($this->avatar) {
+            if (str_starts_with($this->avatar, 'http')) {
+                return $this->avatar;
+            }
+            return asset('storage/' . $this->avatar);
+        }
+
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
     }
 }

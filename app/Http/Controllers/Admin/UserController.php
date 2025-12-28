@@ -67,4 +67,21 @@ class UserController extends Controller
         $users = User::filter($request->all())->get();
         return view('admin.user.pdf-reporting', compact('users'));
     }
+
+    public function toggleBan(User $user)
+    {
+        if (Auth::id() == $user->id) {
+            return back()->with('error', 'anda tidak bisa memblokir diri sendiri!');
+        }
+
+        if ($user->role === 'admin') {
+            return back()->with('error', 'Anda tidak bisa memblokir Admin lain!');
+        }
+
+        $user->is_banned = !$user->is_banned;
+        $user->save();
+
+        $status = $user->is_banned ? 'diblokir' : 'diaktifkan kembali';
+        return back()->with('success', "User berhasil $status.");
+    }
 }

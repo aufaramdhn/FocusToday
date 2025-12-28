@@ -54,7 +54,8 @@ class ArticleController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
+        
         $request->validate([
             'title'             => 'required|string|max:255',
             'category_id'       => 'required|exists:categories,id',

@@ -14,14 +14,14 @@
                     <button class="bg-blue-500 text-white rounded-md px-3 py-1">Search</button>
                 </div>
 
-                <a href=""
+                <a href="/login"
                     class="text-gray-700 font-medium text-sm bg-gray-300 hover:bg-gray-400 hover:text-white px-3 py-1 rounded transition">
                     Masuk
                 </a>
 
                 <div class="h-7 w-[2px] bg-gray-600 mx-4 md:mx-1"></div>
 
-                <a href="" class="text-gray-700 font-medium text-sm hover:text-gray-400 transition">
+                <a href="/register" class="text-gray-700 font-medium text-sm hover:text-gray-400 transition">
                     Daftar
                 </a>
 
