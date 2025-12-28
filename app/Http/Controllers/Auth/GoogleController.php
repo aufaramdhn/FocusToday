@@ -46,7 +46,7 @@ class GoogleController extends Controller
             return redirect('/');
 
         } catch (\Exception $e) {
-            return redirect('/auth/login')->with('error', 'Gagal Login Google: ' . $e->getMessage());
+            return redirect('/login')->with('error', 'Gagal Login Google: ' . $e->getMessage());
         }
     }
 }
