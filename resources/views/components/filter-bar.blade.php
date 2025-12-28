@@ -26,7 +26,7 @@
             {{ $slot }}
 
             @if ($showDate)
-                <div class="flex flex-wrap items-center gap-2">
+                <div class="flex flex-wrap items-center gap-2 text-sm">
                     <input type="date" name="start_date" value="{{ request('start_date') }}"
                         onchange="this.form.submit()" class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1">
                     <span>—</span>
@@ -37,7 +37,7 @@
 
             @if ($showRole)
                 <select name="role" onchange="this.form.submit()"
-                    class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1">
+                    class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1 text-sm">
                     <option value="">Select Role</option>
                     <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                     <option value="editor" {{ request('role') == 'editor' ? 'selected' : '' }}>Editor</option>
@@ -47,7 +47,7 @@
 
             @if ($showSort)
                 <select name="sort" onchange="this.form.submit()"
-                    class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1">
+                    class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1 text-sm">
                     <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Sort By</option>
                     <option value="nama_asc" {{ request('sort') == 'nama_asc' ? 'selected' : '' }}>Name (A-Z)</option>
                     <option value="nama_desc" {{ request('sort') == 'nama_desc' ? 'selected' : '' }}>Name (Z-A)

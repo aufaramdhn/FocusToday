@@ -4,11 +4,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+
+use App\Http\Controllers\Landing\UserArticleController;
 
 
 Route::get('/', function () {
@@ -19,16 +22,41 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::post('/login', [LoginController::class, 'authenticate'])->name('auth.authenticate');
+
 Route::get('/detail-kategori', function () {
     return view('pages.detail-kategori');
 });
 
 Route::get('/detail-artikel', function () {
-    return view('pages.detail');
+    return view('pages.detail-artikel');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+Route::get('/profile', function () {
+    return view('pages.profile._profile');
+})->name('profile.index');
 
+Route::get('/profile/security', function () {
+    return view('pages.profile._security');
+})->name('profile.security');
+
+Route::get('/profile/artikel', [UserArticleController::class, 'index'])->name('profile.artikel.index');
+Route::get('/profile/artikel', [UserArticleController::class, 'index'])->name('profile.artikel.index');
+Route::get('/profile/artikel/tambah', [UserArticleController::class, 'create'])->name('profile.artikel.create');
+Route::post('/profile/artikel/tambah', [UserArticleController::class, 'store'])->name('profile.artikel.store');
+Route::get('/profile/artikel/edit/{article}', [UserArticleController::class, 'edit'])->name('profile.artikel.edit');
+Route::put('/profile/artikel/edit/{article}', [UserArticleController::class, 'update'])->name('profile.artikel.update');
+Route::delete('/profile/artikel/hapus/{article}', [UserArticleController::class, 'destroy'])->name('profile.artikel.destroy');
+Route::get('/profile/artikel/{article:slug}', [UserArticleController::class, 'show'])->name('profile.artikel.show');
+Route::patch('/profile/artikel/{article}/archive', [UserArticleController::class, 'archive'])->name('profile.artikel.archive');
+Route::patch('/profile/artikel/{article}/restore', [UserArticleController::class, 'restore'])->name('profile.artikel.restore');
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.index');
 Route::get('/dashboard/artikel', [ArticleController::class, 'index'])->name('admin.artikel.index');
 Route::get('/dashboard/artikel/tambah', [ArticleController::class, 'create'])->name('admin.artikel.create');
 Route::post('/dashboard/artikel/tambah', [ArticleController::class, 'store'])->name('admin.artikel.store');
