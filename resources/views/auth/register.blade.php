@@ -2,8 +2,25 @@
     <x-slot:title>Register - FokusToday</x-slot:title>
 
     <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-        <div
-            class="bg-white w-full max-w-[360px] md:max-w-[420px] rounded-xl shadow-lg px-6 md:px-8 py-6 md:py-8 text-center">
+            @if (session('success'))
+                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition.duration.500ms
+                    class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6"
+                    role="alert">
+                    <strong class="font-bold">Success!</strong>
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition.duration.500ms
+                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6"
+                    role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
+
+        <div class="bg-white w-full max-w-[360px] md:max-w-[420px] rounded-xl shadow-lg px-6 md:px-8 py-6 md:py-8 text-center">
 
             <h1 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">
                 FokusToday
@@ -17,19 +34,30 @@
                 Daftar ke FokusToday untuk melihat berita yang menarik
             </p>
 
-            <form class="space-y-3 text-left">
-
-                <input type="text" placeholder="Nama"
+            <form class="space-y-3 text-left" action="{{ route('register.submit') }}" method="POST">
+              @csrf
+                <input type="text" name="name" placeholder="Nama"
                     class="w-full h-11 px-4 rounded-xl border border-gray-400 text-sm focus:outline-none focus:border-gray-600">
 
-                <input type="email" placeholder="Email"
+                <input type="email" name="email" placeholder="Email"
                     class="w-full h-11 px-4 rounded-xl border border-gray-400 text-sm focus:outline-none focus:border-gray-600">
 
                 <div class="relative">
-                    <input id="password" type="password" placeholder="Password"
+                    <input id="password" type="password" name="password" placeholder="Password"
                         class="w-full h-11 px-4 pr-12 rounded-xl border border-gray-400 text-sm focus:outline-none focus:border-gray-600">
 
                     <button type="button" onclick="togglePassword()"
+                        class="absolute inset-y-0 right-4 flex items-center text-gray-600">
+
+                        <x-ri-eye-line class="w-6 h-6" />
+                    </button>
+                </div>
+
+                <div class="relative">
+                    <input id="password_confirmation" type="password" name="password_confirmation" placeholder="Konfirmasi Password"
+                        class="w-full h-11 px-4 pr-12 rounded-xl border border-gray-400 text-sm focus:outline-none focus:border-gray-600">
+
+                    <button type="button" onclick="togglePasswordConfirmation()"
                         class="absolute inset-y-0 right-4 flex items-center text-gray-600">
 
                         <x-ri-eye-line class="w-6 h-6" />
@@ -49,7 +77,7 @@
                 <div class="flex-1 h-px bg-gray-400"></div>
             </div>
 
-            <a href="{{ route('auth.google') }}">
+            <a href="{{ route('google.redirect') }}">
                 <button
                     class="w-full h-11 rounded-xl border border-gray-400 bg-white flex items-center justify-center gap-2 text-sm text-black hover:bg-gray-50
          focus:outline-none focus:border-gray-600">
@@ -72,6 +100,11 @@
     <script>
         function togglePassword() {
             const password = document.getElementById('password');
+            password.type = password.type === 'password' ? 'text' : 'password';
+        }
+
+        function togglePasswordConfirmation() {
+            const password = document.getElementById('password_confirmation');
             password.type = password.type === 'password' ? 'text' : 'password';
         }
     </script>

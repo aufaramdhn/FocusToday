@@ -113,12 +113,19 @@
                     </li>
                 </ul>
             </nav>
-            <a href="#"
+            <button @click="confirmAction(
+                    '{{ route('logout') }}', 
+                    'POST', 
+                    'Yakin ingin keluar?', 
+                    'Sesi Anda akan diakhiri dan Anda harus login ulang.', 
+                    'warning', 
+                    'Ya, Keluar'
+                )"
                 class="flex pl-6 py-3 items-center rounded-xl mb-6 mx-3
                            bg-red-500 hover:bg-red-500/85 text-white transition text-sm mt-auto">
                 <x-ri-logout-box-line class="w-4 h-4 inline-block mr-2" />
                 Sign Out
-            </a>
+            </button>
         </aside>
 
         <section class="ml-0 md:ml-60 w-full p-6 bg-[#f9fbfc]
@@ -145,5 +152,6 @@
             {{ $slot }}
 
         </section>
+        <x-confirm-modal />
     </main>
 </x-layout-base>
