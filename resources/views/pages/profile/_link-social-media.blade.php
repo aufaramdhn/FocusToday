@@ -36,7 +36,7 @@
             </div>
 
             @if (Auth::user()->google_id)
-                <form action="#" method="POST">
+                <form action="{{ route('google.disconnect') }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit"
@@ -45,7 +45,7 @@
                     </button>
                 </form>
             @else
-                <a href="#"
+                <a href="{{ route('google.connect') }}"
                     class="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50 transition">
                     Hubungkan
                 </a>
