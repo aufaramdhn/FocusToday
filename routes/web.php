@@ -34,6 +34,13 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |--------------------------------------------------------------------------
 */
 
+Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
+Route::delete('/auth/google/disconnect', [GoogleController::class, 'disconnect'])->name('google.disconnect');
+Route::get('/auth/google/connect', [GoogleController::class, 'connect'])->name('google.connect');
+
+
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/baca/{article:slug}', [HomeController::class, 'show'])->name('articles.show');
 
@@ -65,8 +72,6 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'login'])->name('auth.authenticate');
 
     // Google Auth
-    Route::get('/auth/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');
-    Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 });
 
 /*

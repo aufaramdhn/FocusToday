@@ -8,11 +8,6 @@
         Profil Saya - FocusToday
     </x-slot:title>
 
-    <x-breadcrumbs :links="[
-        ['label' => 'Home', 'url' => route('home')],
-        ['label' => 'Profil Saya', 'url' => route('profile.show')],
-    ]" />
-
     <div
         class="container mx-auto px-4 md:grid md:grid-cols-[1.2fr_1.8fr] lg:grid-cols-[0.8fr_2.2fr] gap-8 md:gap-12 bg-white p-6 rounded-lg shadow-md">
         <div class="w-full mb-8 md:mb-0 h-full ">
