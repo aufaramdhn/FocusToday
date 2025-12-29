@@ -18,8 +18,8 @@ class ArticleFactory extends Factory
         $title = fake()->unique()->sentence(rand(4, 8));
 
         return [
-            'user_id' => 1,
-            'category_id' => 1,
+            'user_id' => rand(1, 6),
+            'category_id' => rand(1, 20),
             'title' => $title,
             'slug' => Str::slug($title),
             'thumbnail' => 'https://placehold.co/800x400?text=News+Thumbnail',

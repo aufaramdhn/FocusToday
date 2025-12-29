@@ -23,6 +23,18 @@
                         </option>
                     @endforeach
                 </select>
+                <select name="status" onchange="this.form.submit()"
+                    class="border rounded-md border-gray-300/90 shadow-xs px-2 py-1 text-sm">
+                    <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>
+                        All Status
+                    </option>
+                    <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>
+                        Published
+                    </option>
+                    <option value="archived" {{ request('status') == 'archived' ? 'selected' : '' }}>
+                        Archived
+                    </option>
+                </select>
             </x-slot:filters>
             <div class="flex flex-wrap md:grid md:grid-cols-2 gap-4 p-6 border-b-2 border-gray-300">
                 @foreach ($articles as $article)

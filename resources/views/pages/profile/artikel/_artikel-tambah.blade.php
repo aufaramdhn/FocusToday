@@ -7,7 +7,7 @@
     </x-slot:headerProfile>
 
     <div class="bg-white rounded-lg shadow-md w-full p-6 mt-6">
-        <form class="flex flex-col gap-4" method="POST" action="{{ route('admin.artikel.store') }}"
+        <form class="flex flex-col gap-4" method="POST" action="{{ route('profile.artikel.store') }}"
             enctype="multipart/form-data" x-data="articleBlocks()">
             @csrf
             <div class="flex flex-col gap-2">

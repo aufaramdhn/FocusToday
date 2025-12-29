@@ -9,11 +9,12 @@
             </h1>
             <div class="flex items-center gap-4">
                 <span class="text-gray-700 font-medium hidden md:inline-block">
-                    Welcome, <strong>Aufa Ramadhan</strong>
+                    Welcome, <strong>{{ Auth::user()->name }}</strong>
                 </span>
 
                 <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
-                    <span class="text-sm font-bold">AR</span>
+                    <img class="text-sm font-bold rounded-full" src="{{ Auth::user()->avatar_url }}"
+                        alt="{{ Auth::user()->name }}" />
                 </div>
 
                 <button @click="sidebarOpen = !sidebarOpen" aria-expanded="true" aria-haspopup="true"
@@ -113,19 +114,36 @@
                     </li>
                 </ul>
             </nav>
-            <button @click="confirmAction(
-                    '{{ route('logout') }}', 
-                    'POST', 
-                    'Yakin ingin keluar?', 
-                    'Sesi Anda akan diakhiri dan Anda harus login ulang.', 
-                    'warning', 
-                    'Ya, Keluar'
-                )"
-                class="flex pl-6 py-3 items-center rounded-xl mb-6 mx-3
-                           bg-red-500 hover:bg-red-500/85 text-white transition text-sm mt-auto">
-                <x-ri-logout-box-line class="w-4 h-4 inline-block mr-2" />
-                Sign Out
-            </button>
+            <div class="flex flex-col justify-end h-full px-3 py-4">
+                <div class="flex-1">
+                    <a href="/"
+                        class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors
+                  bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900">
+                        <x-ri-home-2-line class="w-5 h-5" />
+                        Home
+                    </a>
+                </div>
+
+                <div class="mt-auto">
+                    <button
+                        @click="confirmAction(
+                        '{{ route('logout') }}', 
+                        'POST', 
+                        'Yakin ingin keluar?', 
+                        'Sesi Anda akan diakhiri dan Anda harus login ulang.', 
+                        'warning', 
+                        'Ya, Keluar'
+                    )"
+                        class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-colors shadow-sm
+                   bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-1">
+
+                        <x-ri-logout-box-line class="w-5 h-5" />
+
+                        <span>Sign Out</span>
+                    </button>
+                </div>
+
+            </div>
         </aside>
 
         <section class="ml-0 md:ml-60 w-full p-6 bg-[#f9fbfc]

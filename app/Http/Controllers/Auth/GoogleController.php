@@ -42,9 +42,8 @@ class GoogleController extends Controller
             if ($user->role === 'admin') {
                 return redirect('/dashboard');
             }
-            
-            return redirect('/');
 
+            return redirect('/');
         } catch (\Exception $e) {
             return redirect('/login')->with('error', 'Gagal Login Google: ' . $e->getMessage());
         }

@@ -10,6 +10,10 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     protected $fillable = [
         'user_id',
         'category_id',
@@ -19,10 +23,6 @@ class Article extends Model
         'thumbnail',
         'published_at',
         'views'
-    ];
-
-    protected $casts = [
-        'published_at' => 'datetime',
     ];
 
     public function author()
@@ -67,6 +67,10 @@ class Article extends Model
             $query->whereHas('category', function ($q) use ($categorySlug) {
                 $q->where('slug', $categorySlug);
             });
+        });
+
+        $query->when($filters['status'] ?? false, function ($query, $status) {
+            return $query->where('status', $status);
         });
 
         $query->when($filters['start_date'] ?? false, function ($query, $date) {
