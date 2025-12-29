@@ -33,7 +33,9 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        $remember = $request->boolean('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
             $user = Auth::user();
@@ -42,7 +44,7 @@ class LoginController extends Controller
                 return redirect()->intended('dashboard');
             }
 
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('success', 'Login berhasil. Selamat datang kembali, ' . $user->name . '!');
         }
 
         return back()->withErrors([
@@ -56,7 +58,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Anda telah berhasil logout.');
     }
 
     public function showLoginForm()

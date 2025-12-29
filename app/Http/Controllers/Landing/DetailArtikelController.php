@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Landing;
 
+use App\Models\Tag;
+use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
+class DetailArtikelController extends Controller
 {
     public function store(Request $request, Comment $comment)
     {
@@ -21,6 +24,10 @@ class CommentController extends Controller
                 'content.max' => 'Komentar maksimal 1000 karakter.',
             ]
         );
+
+        if (!Auth::check()) {
+            return back()->with('error', 'Anda harus login untuk menambahkan komentar.');
+        }
 
         Comment::create([
             'article_id' => $request->article_id,

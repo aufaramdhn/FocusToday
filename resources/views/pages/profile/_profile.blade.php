@@ -6,42 +6,108 @@
         Profil Saya
     </x-slot:headerProfile>
 
-    <div class="">
-        <form action="#" method="POST" class="flex flex-col gap-4" enctype="multipart/form-data">
+    <div x-data="{
+        isEditing: false,
+        toggleEdit() {
+            this.isEditing = !this.isEditing;
+        },
+        cancelEdit() {
+            this.isEditing = false;
+        }
+    }" class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+
+        <div class="flex flex-col gap-2 mb-4">
+            <label class="font-medium">Status Email</label>
+            @if (Auth::user()->hasVerifiedEmail())
+                <span class="text-green-600 text-sm font-bold flex items-center gap-1">
+                    ✅ Terverifikasi
+                </span>
+            @else
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-600 text-sm font-bold">⚠️ Belum Verifikasi</span>
+
+                    <form method="POST" action="{{ route('verification.resend') }}">
+                        @csrf
+                        <button type="submit" class="text-blue-600 text-sm hover:underline">
+                            Kirim Ulang Link
+                        </button>
+                    </form>
+                </div>
+            @endif
+        </div>
+
+        <p class="italic mb-4">Ganti role menjadi editor jika ingin mengunggah artikel dengan catatan harus sudah
+            verifikasi email terlebih dahulu.</p>
+
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-gray-800">Edit Profil</h2>
+
+            <button x-show="!isEditing" @click="toggleEdit()" type="button"
+                class="flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                Edit Profile
+            </button>
+        </div>
+
+        <form id="profile-form" action="{{ route('profile.update') }}" method="POST" class="flex flex-col gap-4"
+            enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
+
             <div class="flex flex-col gap-2">
-                <label for="name" class="font-medium">Full Name</label>
-                <input type="text" id="name" name="name"
-                    class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2" placeholder="Enter full name">
+                <label for="name" class="font-medium text-gray-700">Nama Lengkap</label>
+                <input type="text" id="name" name="name" value="{{ old('name', Auth::user()->name) }}"
+                    :disabled="!isEditing"
+                    class="border rounded-md border-gray-300 shadow-sm px-3 py-2 disabled:bg-gray-100 disabled:text-gray-500 disabled:border-gray-200 transition-colors"
+                    placeholder="Masukkan nama lengkap">
+                @error('name')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
             </div>
+
             <div class="flex flex-col gap-2">
-                <label for="email" class="font-medium">Email</label>
-                <input type="email" id="email" name="email"
-                    class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2" placeholder="Enter email address">
+                <label for="email" class="font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" value="{{ old('email', Auth::user()->email) }}"
+                    :disabled="!isEditing"
+                    class="border rounded-md border-gray-300 shadow-sm px-3 py-2 disabled:bg-gray-100 disabled:text-gray-500 disabled:border-gray-200 transition-colors"
+                    placeholder="Masukkan alamat email">
+                @error('email')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
             </div>
+
             <div class="flex flex-col gap-2">
-                <label for="role" class="font-medium">Role</label>
-                <select id="role" name="role" class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2">
-                    <option value="">Select Role</option>
-                    <option value="admin">Admin</option>
-                    <option value="editor">Editor</option>
-                    <option value="user">Viewer</option>
+                <label for="role" class="font-medium text-gray-700">Role</label>
+                <select id="role" name="role" :disabled="!isEditing"
+                    class="border rounded-md border-gray-300 shadow-sm px-3 py-2 disabled:bg-gray-100 disabled:text-gray-500 disabled:border-gray-200 transition-colors">
+                    <option value="">Pilih Role</option>
+                    <option value="admin" {{ old('role', Auth::user()->role) == 'admin' ? 'selected' : '' }}>Admin
+                    </option>
+                    <option value="editor" {{ old('role', Auth::user()->role) == 'editor' ? 'selected' : '' }}>Editor
+                    </option>
+                    <option value="user" {{ old('role', Auth::user()->role) == 'user' ? 'selected' : '' }}>Viewer
+                    </option>
                 </select>
+                @error('role')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
             </div>
-            @error('role')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-            <div class="flex flex-col gap-2" x-data="avatarPreview('{{ isset($user) && $user->avatar ? asset('storage/' . $user->avatar) : '' }}')">
-                <label class="font-medium">Foto Profil (Avatar)</label>
+
+            <div class="flex flex-col gap-2" x-data="avatarPreview('{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : '' }}')">
+                <label class="font-medium text-gray-700">Foto Profil</label>
 
                 <div x-show="previewUrl" class="relative w-fit group">
                     <img :src="previewUrl"
                         class="h-48 w-auto object-cover rounded-md border border-gray-300 shadow-sm"
-                        alt="Avatar Preview">
+                        :class="!isEditing ? 'opacity-80' : ''" alt="Avatar Preview">
 
-                    <button type="button" @click="removePreview()"
+                    <button type="button" @click="removePreview()" x-show="isEditing"
                         class="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition shadow-md hover:bg-red-600"
-                        title="Hapus Avatar">
+                        title="Hapus Preview">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -50,39 +116,31 @@
                     </button>
                 </div>
 
-                <input type="file" name="avatar" accept="image/*" id="avatar-input" @change="updatePreview($event)"
-                    class="file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-blue-100 cursor-pointer border rounded-md border-gray-300 w-full text-sm text-gray-500">
+                <div x-show="isEditing" x-transition>
+                    <input type="file" name="avatar" accept="image/*" id="avatar-input"
+                        @change="updatePreview($event)"
+                        class="border border-gray-300 rounded-md mt-2 block w-full text-sm text-gray-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-md file:border
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100 cursor-pointer">
+                    <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG, GIF (Max. 2MB)</p>
+                </div>
+                @error('avatar')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
 
-            </div>
-            @error('avatar')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-            <div class="flex flex-col gap-2">
-                <label for="password" class="font-medium">Password</label>
-                <input type="password" id="password" name="password"
-                    class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2" placeholder="Masukkan password">
-            </div>
-            @error('password')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-            <div class="flex flex-col gap-2">
-                <label for="password_confirmation" class="font-medium">Confirm Password</label>
-                <input type="password" id="password_confirmation" name="password_confirmation"
-                    class="border rounded-md border-gray-300/90 shadow-xs px-3 py-2"
-                    placeholder="Enter password confirmation">
-            </div>
-            @error('password_confirmation')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-            <div class="flex justify-end mt-4">
-                <a href="/dashboard/user"
-                    class="mr-4 bg-red-500 text-white rounded-md px-6 py-2 hover:bg-red-600 transition duration-300 text-sm">Cancel</a>
+            <div class="flex justify-end mt-4 pt-4 border-t border-gray-100" x-show="isEditing" x-transition>
+                <button type="button" @click="cancelEdit()"
+                    class="mr-4 bg-white text-gray-700 border border-gray-300 rounded-md px-6 py-2 hover:bg-gray-50 transition duration-300 text-sm font-medium">
+                    Batal
+                </button>
                 <button type="submit"
-                    class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300 text-sm">Save</button>
+                    class="bg-blue-600 text-white rounded-md px-6 py-2 hover:bg-blue-700 transition duration-300 text-sm font-medium shadow-sm">
+                    Simpan
+                </button>
             </div>
         </form>
     </div>

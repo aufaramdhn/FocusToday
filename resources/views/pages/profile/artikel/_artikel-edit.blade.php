@@ -7,7 +7,7 @@
     </x-slot:headerProfile>
 
     <div class="w-full mt-6">
-        <form class="flex flex-col gap-4" method="POST" action="{{ route('admin.artikel.update', $article->id) }}"
+        <form class="flex flex-col gap-4" method="POST" action="{{ route('profile.artikel.update', $article->id) }}"
             enctype="multipart/form-data" x-data="articleBlocks({{ $article->blocks->map(function ($block) {
                 return [
                     'type' => $block->type,

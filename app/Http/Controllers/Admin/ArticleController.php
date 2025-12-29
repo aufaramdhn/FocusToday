@@ -54,8 +54,8 @@ class ArticleController extends Controller
     }
 
     public function store(Request $request)
-    {   
-        
+    {
+
         $request->validate([
             'title'             => 'required|string|max:255',
             'category_id'       => 'required|exists:categories,id',
@@ -79,7 +79,7 @@ class ArticleController extends Controller
             }
 
             $article = Article::create([
-                'user_id'      => 1,
+                'user_id'      => Auth::id(),
                 'category_id'  => $request->category_id,
                 'title'        => $request->title,
                 'slug'         => Str::slug($request->title) . '-' . Str::random(5),
@@ -158,7 +158,7 @@ class ArticleController extends Controller
 
             $article->update([
                 'category_id'  => $request->category_id,
-                'user_id'      =>  1,
+                'user_id'      => Auth::id(),
                 'title'        => $request->title,
                 'slug'         => $newSlug != $article->slug ? $newSlug . '-' . Str::random(5) : $article->slug,
                 'thumbnail'    => $thumbnailPath,

@@ -27,7 +27,7 @@ class ArticleSeeder extends Seeder
         Article::factory(80)
             ->make()
             ->each(function ($article) use ($userIds, $categoryIds, $tagIds) {
-                $article->user_id = $userIds->random(10)->first();
+                $article->user_id = $userIds->random(6)->first();
                 $article->category_id = $categoryIds->random();
                 $randomNum = rand(1, 10000);
                 $article->thumbnail = "https://loremflickr.com/800/400/technology,business,city?random={$randomNum}";

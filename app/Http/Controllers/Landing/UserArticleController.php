@@ -18,7 +18,9 @@ class UserArticleController extends Controller
     {
         $status = request('status', 'all');
 
-        $query = Article::with(['category', 'author'])->latest();
+        $query = Article::with(['category', 'author'])
+            ->where('user_id', Auth::id())
+            ->latest();
 
         if ($status !== 'all') {
             $query->where('status', $status);
@@ -78,7 +80,7 @@ class UserArticleController extends Controller
             }
 
             $article = Article::create([
-                'user_id'      => 1,
+                'user_id'      => Auth::id(),
                 'category_id'  => $request->category_id,
                 'title'        => $request->title,
                 'slug'         => Str::slug($request->title) . '-' . Str::random(5),
@@ -157,7 +159,7 @@ class UserArticleController extends Controller
 
             $article->update([
                 'category_id'  => $request->category_id,
-                'user_id'      =>  1,
+                'user_id'      => Auth::id(),
                 'title'        => $request->title,
                 'slug'         => $newSlug != $article->slug ? $newSlug . '-' . Str::random(5) : $article->slug,
                 'thumbnail'    => $thumbnailPath,

@@ -1,10 +1,4 @@
-@props([
-    'action', // URL Route (Wajib)
-    'showSearch' => true, // Default: Tampil
-    'showDate' => false, // Default: Sembunyi
-    'showRole' => false, // Default: Sembunyi
-    'showSort' => true, // Default: Tampil
-])
+@props(['action', 'showSearch' => true, 'showDate' => false, 'showRole' => false, 'showSort' => true])
 
 <form action="{{ $action }}" method="GET" class="p-4 border-b-2 border-gray-300">
     <div class="flex items-center justify-between gap-4 flex-wrap">
