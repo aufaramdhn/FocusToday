@@ -43,6 +43,40 @@
         </div>
         </div>
 
+        <div class="flex gap-4">
+        <img
+            src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1"
+            class="w-[200px] h-[130px] object-cover rounded"
+            alt="Kota">
+
+        <div class="flex-1">
+            <h3 class="text-base font-semibold mb-2">
+            City Travel: Menjelajah Kota Bersejarah
+            </h3>
+            <p class="text-sm text-gray-700">
+            Jelajahi kota dengan nilai sejarah tinggi, arsitektur klasik,
+            serta kuliner khas yang memikat wisatawan.
+            </p>
+        </div>
+        </div>
+
+        <div class="flex gap-4">
+        <img
+            src="https://images.unsplash.com/photo-1491553895911-0055eca6402d"
+            class="w-[200px] h-[130px] object-cover rounded"
+            alt="Backpacker">
+
+        <div class="flex-1">
+            <h3 class="text-base font-semibold mb-2">
+            Tips Backpacker Hemat dan Nyaman
+            </h3>
+            <p class="text-sm text-gray-700">
+            Panduan traveling hemat untuk backpacker pemula agar perjalanan
+            tetap nyaman tanpa menguras anggaran.
+            </p>
+        </div>
+        </div>
+
     </div>
 
 </x-layout>
