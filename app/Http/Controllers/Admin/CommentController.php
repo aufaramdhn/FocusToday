@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\Comment;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
+class CommentController extends Controller
+{
+    public function store(Request $request, Comment $comment)
+    {
+        $request->validate(
+            [
+                'content' => 'required|string|max:1000',
+                'article_id' => 'required|exists:articles,id',
+            ],
+            [
+                'content.required' => 'Komentar tidak boleh kosong.',
+                'content.max' => 'Komentar maksimal 1000 karakter.',
+            ]
+        );
+
+        Comment::create([
+            'article_id' => $request->article_id,
+            'user_id' => Auth::id(),
+            'content' => $request->content,
+            'status' => 'approved',
+        ]);
+
+        return back()->with('success', 'Komentar berhasil ditambahkan.');
+    }
+
+    public function update(Request $request, Comment $comment)
+    {
+        if (Auth::id() !== $comment->user_id) {
+            return back()->with('error', 'Anda tidak berhak mengedit komentar ini.');
+        }
+
+        $request->validate([
+            'content' => 'required|string|max:1000',
+        ]);
+
+        $comment->update([
+            'content' => $request->content
+        ]);
+
+        return back()->with('success', 'Komentar berhasil diperbarui.');
+    }
+
+    public function destroy(Comment $comment)
+    {
+        if (Auth::id() !== $comment->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $comment->delete();
+
+        return back()->with('success', 'Komentar berhasil dihapus.');
+    }
+}

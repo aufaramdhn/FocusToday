@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -32,16 +33,15 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        $remember = $request->boolean('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
             $user = Auth::user();
 
-            if ($user->role === 'admin') {
-                return redirect()->intended('admin/dashboard');
-            }
-
-            return redirect()->intended('/');
+            return redirect()->intended(route('profile.index'))
+                ->with('success', 'Selamat datang kembali, ' . $user->name . '!');
         }
 
         return back()->withErrors([
@@ -55,6 +55,16 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('home')->with('success', 'Anda telah berhasil logout.');
+    }
+
+    public function showLoginForm()
+    {
+        return $this->index();
+    }
+
+    public function login(Request $request)
+    {
+        return $this->authenticate($request);
     }
 }

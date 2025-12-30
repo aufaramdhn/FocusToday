@@ -6,135 +6,60 @@
     <div class="">
         <div class="flex justify-between items-center mb-6">
             <div class="">
-                <h1 class="text-3xl font-bold mb-3">Daftar Kategori</h1>
+                <h1 class="text-3xl font-bold mb-3">Categories List</h1>
                 <x-breadcrumb :items="[
                     ['label' => 'Dashboard', 'url' => '/dashboard'],
-                    ['label' => 'Kategori', 'url' => '/dashboard/kategori'],
+                    ['label' => 'Categories', 'url' => '/dashboard/kategori'],
                 ]" />
             </div>
             <a href="/dashboard/kategori/tambah"
-                class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300 text-sm">Tambah
-                Kategori</a>
+                class="bg-blue-500 text-white rounded-md px-6 py-2 hover:bg-blue-600 transition duration-300 text-sm">Add
+                Category</a>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md w-full overflow-x-scroll md:overflow-x-hidden">
-            <form action="" class="p-4 border-b-2 border-gray-300">
-                <div class="flex items-center justify-between gap-4 flex-wrap">
-                    <div class="flex flex-row-reverse items-center gap-2 md:w-[500px] w-full">
-                        <input type="text" placeholder="Cari kategori..."
-                            class="w-full focus:outline-none rounded-md px-3">
-                        <button type="submit" class=""><x-ri-search-line
-                                class="w-6 h-6 cursor-pointer" /></button>
-                    </div>
-                    <div class="flex items-center gap-4 flex-wrap">
-                        <div class="flex items-center gap-2">
-                            <input type="date" class="border rounded-md border-gray-300/90 shadow-xs">
-                            <span>—</span>
-                            <input type="date" class="border rounded-md border-gray-300/90 shadow-xs">
-                        </div>
-                        <select class="border rounded-md border-gray-300/90 shadow-xs" name="" id="">
-                            <option value="">Pilih Peran</option>
-                            <option value="admin">Admin</option>
-                            <option value="editor">Editor</option>
-                            <option value="user">User</option>
-                        </select>
-                        <select class="border rounded-md border-gray-300/90 shadow-xs" name="" id="">
-                            <option value="">Urutkan Berdasarkan</option>
-                            <option value="nama_asc">Nama (A-Z)</option>
-                            <option value="nama_desc">Nama (Z-A)</option>
-                            <option value="tanggal_asc">Tanggal Bergabung (Terlama)</option>
-                            <option value="tanggal_desc">Tanggal Bergabung (Terbaru)</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-            <table class="w-full table-auto">
+        <x-card :action="route('admin.categories.index')" :data="$categories" :paginator="$categories->appends(request()->query())">
+            <table class="w-full table-auto table-responsive overflow-x-scroll">
                 <thead class="bg-slate-200">
                     <tr class="text-left border-b-2 border-gray-300 ">
                         <th class="py-2 px-6">ID</th>
-                        <th class="py-2 px-6">Nama</th>
-                        <th class="py-2 px-6">Email</th>
-                        <th class="py-2 px-6">Peran</th>
-                        <th class="py-2 px-6">Aksi</th>
+                        <th class="py-2 px-6">Category Name</th>
+                        <th class="py-2 px-6">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="">
-                    <tr class="border-b-2 hover:bg-gray-200/40 hover:shadow-xs border-gray-300 transition duration-500">
-                        <td class="py-2 px-6">1</td>
-                        <td class="py-2 px-6">Aufa Ramadhan</td>
-                        <td class="py-2 px-6">aufa@example.com</td>
-                        <td class="py-2 px-6">Admin</td>
-                        <td class="py-2 px-6">
-                            <a href="/dashboard/kategori/edit" class="">Edit</a>
-                            <button class="">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr class="border-b-2 hover:bg-gray-200/40 hover:shadow-xs border-gray-300 transition duration-500">
-                        <td class="py-2 px-6">1</td>
-                        <td class="py-2 px-6">Aufa Ramadhan</td>
-                        <td class="py-2 px-6">aufa@example.com</td>
-                        <td class="py-2 px-6">Admin</td>
-                        <td class="py-2 px-6">
-                            <button class="">Edit</button>
-                            <button class="">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr class="border-b-2 hover:bg-gray-200/40 hover:shadow-xs border-gray-300 transition duration-500">
-                        <td class="py-2 px-6">1</td>
-                        <td class="py-2 px-6">Aufa Ramadhan</td>
-                        <td class="py-2 px-6">aufa@example.com</td>
-                        <td class="py-2 px-6">Admin</td>
-                        <td class="py-2 px-6">
-                            <button class="">Edit</button>
-                            <button class="">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr class="border-b-2 hover:bg-gray-200/40 hover:shadow-xs border-gray-300 transition duration-500">
-                        <td class="py-2 px-6">1</td>
-                        <td class="py-2 px-6">Aufa Ramadhan</td>
-                        <td class="py-2 px-6">aufa@example.com</td>
-                        <td class="py-2 px-6">Admin</td>
-                        <td class="py-2 px-6">
-                            <button class="">Edit</button>
-                            <button class="">Hapus</button>
-                        </td>
-                    </tr>
+                    @if ($categories->isEmpty())
+                        <tr
+                            class="border-b-2 hover:bg-gray-200/40 hover:shadow-xs border-gray-300 transition duration-500 text-sm">
+                            <td colspan="3" class="text-center py-4">No categories found.</td>
+                        </tr>
+                    @endif
+                    @foreach ($categories as $category)
+                        <tr
+                            class="border-b-2 hover:bg-gray-200/40 hover:shadow-xs border-gray-300 transition duration-500 text-sm">
+                            <td class="py-2 px-6">{{ $category->id }}</td>
+                            <td class="py-2 px-6">{{ $category->name }}</td>
+                            <td class="py-2 px-6 whitespace-nowrap items-center">
+                                <x-table-action>
+                                    <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-left">Edit</a>
+                                    <button
+                                        @click="open = false; confirmAction(
+                                            '{{ route('admin.categories.destroy', $category->id) }}',
+                                            'DELETE',
+                                            'Delete Category',
+                                            'Are you sure you want to delete the category \'{{ $category->name }}\'? This action cannot be undone.',
+                                            'danger',
+                                            'Yes, Delete'
+                                        )"
+                                        class="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 hover:text-red-700 transition cursor-pointer">
+                                        Delete
+                                    </button>
+                                </x-table-action>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
-            <div class="border-gray-300 flex flex-col md:flex-row justify-between items-center px-6 py-4 text-sm gap-4">
-                <div class="">
-                    <p class="">Showing 1 to 10 of 50 results</p>
-                </div>
-                <div class="">
-                    <nav>
-                        <ul class="inline-flex flex-wrap items-center gap-2">
-                            <li>
-                                <button
-                                    class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">Previous</button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 cursor-pointer">1</button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">...</button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">2</button>
-                            <li>
-                                <button
-                                    class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">3</button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 cursor-pointer">Next</button>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        </x-card>
     </div>
 </x-layout-admin>
