@@ -18,48 +18,49 @@ class ArticleSeeder extends Seeder
         $tagIds = Tag::pluck('id');
 
         if ($userIds->isEmpty() || $categoryIds->isEmpty()) {
-            $this->command->error('User atau Category kosong! Jalankan UserSeeder & CategorySeeder dulu.');
+            $this->command->error('❌ User atau Category kosong! Jalankan UserSeeder & CategorySeeder dulu.');
             return;
         }
 
-        $this->command->info('Sedang membuat 80 artikel dengan gambar random...');
+        $this->command->info('🚀 Membuat 80 artikel dengan struktur konten yang rapi...');
 
-        Article::factory(80)
-            ->make()
-            ->each(function ($article) use ($userIds, $categoryIds, $tagIds) {
-                $article->user_id = $userIds->random();
-                $article->category_id = $categoryIds->random();
-                $randomNum = rand(1, 10000);
-                $article->thumbnail = "https://loremflickr.com/800/400/technology,business,city?random={$randomNum}";
-                $article->save();
+        Article::factory(80)->make()->each(function ($article) use ($userIds, $categoryIds, $tagIds) {
 
-                ArticleBlock::create([
-                    'article_id' => $article->id,
-                    'type' => 'text',
-                    'content' => fake()->paragraph(rand(5, 10)),
-                    'position' => 1,
-                ]);
+            $article->user_id = $userIds->random();
+            $article->category_id = $categoryIds->random();
 
-                $randomNum2 = rand(1, 10000);
-                ArticleBlock::create([
-                    'article_id' => $article->id,
-                    'type' => 'image',
-                    'media_path' => "https://loremflickr.com/600/400/computer,work?random={$randomNum2}",
-                    'position' => 2,
-                ]);
+            $rand = rand(1, 99999);
+            $article->thumbnail = "https://picsum.photos/seed/{$rand}/800/400";
 
-                ArticleBlock::create([
-                    'article_id' => $article->id,
-                    'type' => 'text',
-                    'content' => fake()->paragraph(rand(4, 8)),
-                    'position' => 3,
-                ]);
+            $article->save();
 
-                if ($tagIds->isNotEmpty()) {
-                    $article->tags()->attach($tagIds->random(rand(2, 5)));
-                }
-            });
+            ArticleBlock::create([
+                'article_id' => $article->id,
+                'type' => 'text',
+                'content' => fake()->realText(500),
+                'position' => 1,
+            ]);
 
-        $this->command->info('Selesai! 80 Artikel berhasil dibuat.');
+            $randImg = rand(1, 99999);
+            ArticleBlock::create([
+                'article_id' => $article->id,
+                'type' => 'image',
+                'media_path' => "https://picsum.photos/seed/{$randImg}/600/400",
+                'position' => 2,
+            ]);
+
+            ArticleBlock::create([
+                'article_id' => $article->id,
+                'type' => 'text',
+                'content' => fake()->realText(300),
+                'position' => 3,
+            ]);
+
+            if ($tagIds->isNotEmpty()) {
+                $article->tags()->attach($tagIds->random(rand(2, 4)));
+            }
+        });
+
+        $this->command->info('✅ Selesai! 80 Artikel dengan konten real berhasil dibuat.');
     }
 }
