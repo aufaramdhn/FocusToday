@@ -217,7 +217,8 @@ class ArticleController extends Controller
     public function archive(Article $article)
     {
         $article->update([
-            'status' => 'archived'
+            'status' => 'archived',
+            'published_at' => null,
         ]);
 
         return back()->with('success', 'Artikel berhasil diarsipkan.');

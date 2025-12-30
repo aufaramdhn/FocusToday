@@ -9,12 +9,12 @@
     </x-slot:title>
 
     <div
-        class="container mx-auto px-4 md:grid md:grid-cols-[1.2fr_1.8fr] lg:grid-cols-[0.8fr_2.2fr] gap-8 md:gap-12 bg-white p-6 rounded-lg shadow-md">
+        class="mx-auto px-4 md:grid md:grid-cols-[1.2fr_1.8fr] lg:grid-cols-[0.8fr_2.2fr] gap-8 bg-white p-6 rounded-lg shadow-md">
         <div class="w-full mb-8 md:mb-0 h-full ">
             <div class="flex flex-col">
                 <img src="{{ Auth::user()->avatar_url }}" alt="User Avatar"
                     class="object-cover border-4 border-white shadow-md w-full h-[320px] md:h-[280px]" />
-                <div class="flex flex-col md:gap-2 mt-2">
+                <div class="flex flex-col gap-1 md:gap-2 mt-2">
                     <a href="/profile"
                         class="md:text-base text-gray-600 text-lg hover:text-white transition text-center hover:bg-blue-700 rounded-md py-2 {{ request()->is('profile') ? 'bg-blue-600 text-white' : '' }}">Profil</a>
 
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="">
+        <div class="w-full">
             <div class="flex justify-between items-center">
                 <h1 class="text-2xl font-bold mb-4 text-black">
                     {{ $headerProfile }}
@@ -53,8 +53,16 @@
                 {{ $headerProfileButton }}
             </div>
 
+
             {{ $slot }}
 
         </div>
     </div>
+
+    <script>
+        function showNotification() {
+            console.log("Fungsi dipanggil!"); // Cek ini dulu di Inspect Element > Console
+            toast.success("Berhasil!");
+        }
+    </script>
 </x-layout-user>

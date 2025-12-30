@@ -7,8 +7,8 @@
                     <span class="inline-block px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full mb-4">
                         {{ $article->category->name }}
                     </span>
-                    <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">Transformasi Digital
-                        Indonesia</h1>
+                    <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">{{ $article->title }}
+                    </h1>
 
                     <div class="flex items-center gap-4 text-sm text-gray-600">
                         <div class="flex items-center gap-2">
@@ -173,32 +173,33 @@
                                                     </p>
                                                 </div>
 
-                                                {{-- @if (auth()->id() === $comment->user_id || auth()->user()->role === 'admin') --}}
-                                                <div class="relative">
-                                                    <button @click="openDropdown = !openDropdown"
-                                                        class="text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-100 transition">
-                                                        <x-ri-more-fill class="w-5 h-5" />
-                                                    </button>
-
-                                                    <div x-show="openDropdown" @click.outside="openDropdown = false"
-                                                        x-transition:enter="transition ease-out duration-100"
-                                                        x-transition:enter-start="transform opacity-0 scale-95"
-                                                        x-transition:enter-end="transform opacity-100 scale-100"
-                                                        x-transition:leave="transition ease-in duration-75"
-                                                        class="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg border border-gray-100 z-10 py-1"
-                                                        style="display: none;">
-
-                                                        {{-- @if (auth()->id() === $comment->user_id) --}}
-                                                        <button type="button"
-                                                            @click="isEditing = true; openDropdown = false"
-                                                            class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                                                            <x-ri-pencil-line class="w-3.5 h-3.5 text-yellow-500" />
-                                                            Edit
+                                                @if (auth()->check() && (auth()->id() === $comment->user_id || auth()->user()->role === 'admin'))
+                                                    <div class="relative">
+                                                        <button @click="openDropdown = !openDropdown"
+                                                            class="text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-100 transition">
+                                                            <x-ri-more-fill class="w-5 h-5" />
                                                         </button>
-                                                        {{-- @endif --}}
 
-                                                        <button
-                                                            @click="open = false; confirmAction(
+                                                        <div x-show="openDropdown" @click.outside="openDropdown = false"
+                                                            x-transition:enter="transition ease-out duration-100"
+                                                            x-transition:enter-start="transform opacity-0 scale-95"
+                                                            x-transition:enter-end="transform opacity-100 scale-100"
+                                                            x-transition:leave="transition ease-in duration-75"
+                                                            class="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg border border-gray-100 z-10 py-1"
+                                                            style="display: none;">
+
+                                                            @if (auth()->id() === $comment->user_id)
+                                                                <button type="button"
+                                                                    @click="isEditing = true; openDropdown = false"
+                                                                    class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                                    <x-ri-pencil-line
+                                                                        class="w-3.5 h-3.5 text-yellow-500" />
+                                                                    Edit
+                                                                </button>
+                                                            @endif
+
+                                                            <button
+                                                                @click="open = false; confirmAction(
                                                             '{{ route('artikel.comment.destroy', $comment->id) }}',
                                                             'DELETE',
                                                             'Delete Comment',
@@ -206,13 +207,14 @@
                                                             'danger',
                                                             'Yes, Delete'
                                                         )"
-                                                            class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                                                            <x-ri-delete-bin-6-line class="w-3.5 h-3.5 text-red-500" />
-                                                            Delete
-                                                        </button>
+                                                                class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                                <x-ri-delete-bin-6-line
+                                                                    class="w-3.5 h-3.5 text-red-500" />
+                                                                Delete
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                {{-- @endif --}}
+                                                @endif
                                             </div>
 
                                             <div x-show="!isEditing" class="mt-2">

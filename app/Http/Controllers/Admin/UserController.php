@@ -28,18 +28,24 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name'      => 'required|string|max:255',
             'email'     => 'required|email|unique:users,email',
-            'password'  => 'required|min:8|confirmed|',
-            'password_confirmation' => 'required|min:8|same:password',
+            'password'  => 'required|min:8|confirmed',
             'role'      => 'required|in:admin,editor,user',
+            'avatar'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
-            'email.unique' => 'Email ini sudah dipakai user lain.',
-            'role.in'      => 'Pilihan role tidak valid.',
+            'email.unique'       => 'Email ini sudah dipakai user lain.',
+            'role.in'            => 'Pilihan role tidak valid.',
             'password.confirmed' => 'Konfirmasi password tidak sesuai.',
-            'password_confirmation.same' => 'Konfirmasi password tidak sesuai.',
+            'avatar.image'       => 'File yang diupload harus berupa gambar.',
+            'avatar.max'         => 'Ukuran gambar maksimal 2MB.',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
+        }
+
+        $avatarPath = null;
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('avatars', 'public');
         }
 
         User::create([
@@ -47,6 +53,7 @@ class UserController extends Controller
             'email'    => $request->email,
             'password' => Hash::make($request->password),
             'role'     => $request->role,
+            'avatar'   => $avatarPath, // 
         ]);
 
         return redirect()->route('admin.user.index')->with('success', 'User baru berhasil ditambahkan.');
@@ -83,5 +90,16 @@ class UserController extends Controller
 
         $status = $user->is_banned ? 'diblokir' : 'diaktifkan kembali';
         return back()->with('success', "User berhasil $status.");
+    }
+
+    public function resendVerification(User $user)
+    {
+        if ($user->hasVerifiedEmail()) {
+            return back()->with('error', 'Email user ini sudah terverifikasi sebelumnya.');
+        }
+
+        $user->sendEmailVerificationNotification();
+
+        return back()->with('success', 'Link verifikasi telah dikirim ulang ke ' . $user->email);
     }
 }

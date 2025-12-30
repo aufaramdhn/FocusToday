@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -29,7 +30,7 @@ class RegisterController extends Controller
             'email.unique'      => 'Email ini sudah terdaftar, silakan login.',
             'password.required' => 'Password wajib diisi.',
             'password.min'      => 'Password minimal harus 8 karakter.',
-            'password.confirmed'=> 'Konfirmasi password tidak cocok.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ]);
 
         if ($validator->fails()) {
@@ -40,7 +41,7 @@ class RegisterController extends Controller
 
         $validasi = $validator->validated();
 
-        User::create([
+        $user = User::create([
             'name'      => $validasi['name'],
             'email'     => $validasi['email'],
             'password'  => Hash::make($validasi['password']),
@@ -48,7 +49,7 @@ class RegisterController extends Controller
             'google_id' => null,
         ]);
 
-        
+        event(new Registered($user));
 
         return redirect('/login')->with('success', 'Akun berhasil dibuat! Silakan login.');
     }

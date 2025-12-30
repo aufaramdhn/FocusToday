@@ -35,11 +35,11 @@ class HomeController extends Controller
 
         $bottomCategories = Category::whereHas('articles', function ($query) {
             $query->published();
-        }, '>=', 1)
+        }, '>=', 4)
             ->with(['articles' => function ($query) {
                 $query->published()
                     ->latest('published_at')
-                    ->take(5);
+                    ->take(4);
             }])
             ->inRandomOrder()
             ->take(4)
@@ -56,28 +56,38 @@ class HomeController extends Controller
             ->get();
 
 
-        $youtubeVideos = Cache::remember('youtube_feed', 3600, function () {
+        $youtubeVideos = Cache::remember('youtube_feed_mixed_home', 3600, function () {
             $apiKey = env('YOUTUBE_API_KEY');
-            $channelId = env('YOUTUBE_CHANNEL_ID');
+            $channels = [
+                env('YOUTUBE_CHANNEL_MALAKA'),
+                env('YOUTUBE_CHANNEL_NARASI'),
+            ];
 
-            $response = Http::get("https://www.googleapis.com/youtube/v3/search", [
-                'part' => 'snippet',
-                'channelId' => $channelId,
-                'maxResults' => 5,
-                'order' => 'date',
-                'type' => 'video',
-                'key' => $apiKey
-            ]);
+            $allVideos = collect();
 
-            if ($response->successful()) {
-                return $response->json()['items'];
+            foreach ($channels as $channelId) {
+                if (!$channelId) continue;
+
+                $response = Http::get("https://www.googleapis.com/youtube/v3/search", [
+                    'part' => 'snippet',
+                    'channelId' => $channelId,
+                    'maxResults' => 5,
+                    'order' => 'date',
+                    'type' => 'video',
+                    'key' => $apiKey
+                ]);
+
+                if ($response->successful()) {
+                    $allVideos = $allVideos->merge($response->json()['items']);
+                }
             }
 
-            return [];
+            return $allVideos->sortByDesc(function ($video) {
+                return $video['snippet']['publishedAt'];
+            })->values()->take(10)->all();
         });
 
         $mainVideo = $youtubeVideos[0] ?? null;
-
         $sideVideos = !empty($youtubeVideos) ? array_slice($youtubeVideos, 1, 4) : [];
 
         return view('pages.home', compact(
@@ -128,6 +138,33 @@ class HomeController extends Controller
             'related_articles',
             'comments'
         ));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
+
+        if (!$keyword) {
+            return redirect()->route('home');
+        }
+
+        $articles = Article::where('status', 'published')
+            ->where(function ($query) use ($keyword) {
+                $query->where('title', 'like', "%{$keyword}%")
+                    ->orWhere('content', 'like', "%{$keyword}%")
+                    ->orWhereHas('category', function ($q) use ($keyword) {
+                        $q->where('name', 'like', "%{$keyword}%");
+                    })
+                    ->orWhereHas('tags', function ($q) use ($keyword) {
+                        $q->where('name', 'like', "%{$keyword}%");
+                    });
+            })
+            ->with(['category', 'author'])
+            ->latest()
+            ->paginate(9)
+            ->withQueryString();
+
+        return view('pages.search-result', compact('articles', 'keyword'));
     }
 
     private function getArticlesByCategory($slug)

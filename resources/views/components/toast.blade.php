@@ -1,13 +1,13 @@
 <div x-data="{
     toasts: [],
-    add(event) {
+    add(message, type = 'success') {
         const id = Date.now();
         const duration = 3000;
 
         this.toasts.push({
             id: id,
-            message: event.detail.message,
-            type: event.detail.type || 'success',
+            message: message,
+            type: type || 'success',
             show: true,
             percent: 100
         });
@@ -24,9 +24,26 @@
                 this.toasts = this.toasts.filter(t => t.id !== id);
             }, 300);
         }
+    },
+    initToast() {
+        @if(session('success'))
+        this.add('{{ session('success') }}', 'success');
+        @endif
+
+        @if(session('error'))
+        this.add('{{ session('error') }}', 'error');
+        @endif
+
+        @if(session('status'))
+        this.add('{{ session('status') }}', 'info');
+        @endif
+
+        @if(isset($errors) && $errors->any())
+        this.add('{{ $errors->first() }}', 'error');
+        @endif
     }
-}" @notify.window="add($event)"
-    class="fixed top-4 right-0 md:right-4 z-50 flex flex-col gap-2 w-full md:w-[400px] px-4 md:px-0 pointer-events-none">
+}" x-init="initToast()" @notify.window="add($event.detail.message, $event.detail.type)"
+    class="fixed top-4 right-0 md:right-4 z-[10001] flex flex-col gap-2 w-full md:w-[400px] px-4 md:px-0 pointer-events-none">
 
     <template x-for="toast in toasts" :key="toast.id">
         <div x-show="toast.show" x-transition:enter="transition ease-out duration-300"
@@ -44,16 +61,22 @@
             <div class="p-4 flex items-start gap-3">
                 <div class="flex-shrink-0">
                     <template x-if="toast.type === 'success'">
-                        <x-ri-checkbox-circle-fill class="w-6 h-6 text-green-500" />
+                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
                     </template>
                     <template x-if="toast.type === 'error'">
-                        <x-ri-error-warning-fill class="w-6 h-6 text-red-500" />
+                        <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </template>
                     <template x-if="toast.type === 'info'">
-                        <x-ri-information-fill class="w-6 h-6 text-blue-500" />
-                    </template>
-                    <template x-if="toast.type === 'warning'">
-                        <x-ri-alert-fill class="w-6 h-6 text-yellow-500" />
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
                     </template>
                 </div>
 
@@ -62,7 +85,10 @@
                 </div>
 
                 <button @click="remove(toast.id)" class="text-gray-400 hover:text-gray-600 transition">
-                    <x-ri-close-line class="w-5 h-5" />
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
             </div>
 

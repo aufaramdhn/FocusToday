@@ -7,7 +7,7 @@
                     <div>
                         <a href="{{ route('articles.show', $heroArticle->slug) }}">
                             <img src="{{ $heroArticle->thumbnail_url }}" alt="{{ $heroArticle->title }}"
-                                class="w-full h-[620px] object-cover rounded hover:opacity-90 transition">
+                                class="w-full h-[300px] md:h-[620px] object-cover rounded hover:opacity-90 transition">
                         </a>
                         <div class="mt-4">
                             <a href="{{ route('articles.show', $heroArticle->slug) }}">
@@ -37,11 +37,11 @@
                 <div>
                     <h3 class="mb-3 font-bold text-lg">Latest</h3>
                     <div>
-                        <div class="hidden lg:flex flex-col gap-3">
+                        <div class="flex flex-col gap-3">
                             @foreach ($latestArticles->take(3) as $article)
-                                <div class="flex gap-3">
+                                <div class="flex flex-col md:flex-row gap-3">
                                     <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}"
-                                        class="h-[140px] w-[240px] object-cover rounded flex-shrink-0">
+                                        class="h-[250px] md:h-[140px] w-full md:w-[240px] object-cover rounded flex-shrink-0">
                                     <div>
                                         <a href="{{ route('articles.show', $article->slug) }}">
                                             <h4 class="font-semibold text-sm hover:text-blue-600 leading-snug">
@@ -68,11 +68,11 @@
                 <div>
                     <h3 class="mb-3 font-bold text-lg">Populer</h3>
                     <div>
-                        <div class="hidden lg:flex flex-col gap-3">
+                        <div class="lg:flex flex-col gap-3">
                             @foreach ($popularArticles->take(3) as $article)
-                                <div class="flex gap-3">
+                                <div class="flex flex-col md:flex-row gap-3">
                                     <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}"
-                                        class="h-[140px] w-[240px] object-cover rounded flex-shrink-0">
+                                        class="h-[250px] md:h-[140px] w-full md:w-[240px] object-cover rounded flex-shrink-0">
                                     <div>
                                         <a href="{{ route('articles.show', $article->slug) }}">
                                             <h4 class="font-semibold text-sm hover:text-blue-600 leading-snug">
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="hidden lg:flex flex-col gap-6">
+            <div class="lg:flex flex-col gap-6">
 
                 <div class="flex flex-col gap-3">
 
@@ -163,8 +163,7 @@
                                 (data_get($mainVideo, 'snippet.thumbnails.high.url') ??
                                     data_get($mainVideo, 'snippet.thumbnails.medium.url'));
                         @endphp
-                        <a href="https://www.youtube.com/watch?v={{ $videoId }}" target="_blank"
-                            class="group block">
+                        <a href="{{ route('video.show', $videoId) }}" class="group block">
                             <div class="relative">
                                 <img src="{{ $thumb ?? 'https://via.placeholder.com/640x360?text=No+Thumbnail' }}"
                                     class="h-[260px] w-full object-cover rounded mb-2 group-hover:opacity-90 transition"
@@ -199,8 +198,7 @@
                                     data_get($video, 'snippet.thumbnails.default.url');
                             @endphp
 
-                            <a href="https://www.youtube.com/watch?v={{ $sideId }}" target="_blank"
-                                class="flex gap-3 group">
+                            <a href="{{ route('video.show', $sideId) }}" class="flex gap-3 group">
 
                                 <div class="w-[230px] flex-shrink-0 relative">
                                     <img src="{{ $sideThumb ?? 'https://via.placeholder.com/120x90' }}"
@@ -240,26 +238,14 @@
                         </a>
                     </h4>
 
-                    <div class="flex flex-col gap-3 lg:hidden">
-                        @foreach ($category->articles->take(2) as $article)
-                            <div class="h-[140px]">
-                                <a href="{{ route('articles.show', $article->slug) }}">
-                                    <h4 class="font-semibold text-sm line-clamp-2">{{ $article->title }}</h4>
-                                    <p class="text-xs text-gray-500">{{ $article->published_at->diffForHumans() }}</p>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <div class="hidden lg:block space-y-3">
+                    <div class="lg:block space-y-3">
                         @foreach ($category->articles->take(4) as $article)
                             <a href="{{ route('articles.show', $article->slug) }}" class="block group">
-                                {{-- Thumbnail --}}
                                 <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}"
                                     class="h-[180px] w-full object-cover rounded mb-2 group-hover:opacity-90 transition">
 
                                 <h4 class="font-semibold text-sm group-hover:text-blue-600 line-clamp-2">
-                                    {{ $article->title }}
+                                    {{ Str::limit($article->title, 25) }}
                                 </h4>
                             </a>
                         @endforeach

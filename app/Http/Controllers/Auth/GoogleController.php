@@ -11,30 +11,27 @@ use Illuminate\Support\Str;
 
 class GoogleController extends Controller
 {
-   public function redirect()
+    public function redirect()
     {
         session(['auth_source' => 'login']);
-        
+
         return Socialite::driver('google')->redirect();
     }
-    
+
     public function connect()
     {
-        session(['auth_source' => 'profile']); 
-        
+        session(['auth_source' => 'profile']);
+
         return Socialite::driver('google')->redirect();
     }
 
     public function callback()
     {
         try {
-            // Gunakan stateless agar session tidak crash
             $googleUser = Socialite::driver('google')->stateless()->user();
 
-            // Cek User berdasarkan Email
             $userByEmail = User::where('email', $googleUser->getEmail())->first();
 
-            // Cek User yang sedang login (Session)
             $currentUser = Auth::user();
 
             if (!Auth::check() && $userByEmail) {
@@ -45,35 +42,32 @@ class GoogleController extends Controller
             if ($currentUser) {
 
                 $existingUser = User::where('google_id', $googleUser->getId())->first();
-                
-                // Cek Validasi Kepemilikan Akun
+
                 if ($existingUser && $existingUser->id !== $currentUser->id) {
                     return redirect()->route('profile.social-media.index')
                         ->with('error', 'Akun Google ini milik user lain!');
                 }
 
-                // Update Data
                 $currentUser->update([
                     'google_id' => $googleUser->getId()
                 ]);
 
-                // --- LOGIKA DINAMIS (THE FIX) ---
-                
-                // Cek jejak: Dari mana user berasal?
-                $source = session('auth_source'); 
-                
-                // Hapus jejak biar bersih
+
+                $source = session('auth_source');
                 session()->forget('auth_source');
 
-                // Jika asalnya dari 'profile', balikin ke profile. Selain itu ke home.
                 if ($source === 'profile') {
                     return redirect()->route('profile.social-media.index')
                         ->with('success', 'Akun berhasil terhubung!');
                 }
 
-                // Default (Login biasa)
-                return redirect()->route('home')
-                    ->with('success', 'Login Berhasil!');
+                if ($currentUser->hasVerifiedEmail()) {
+                    return redirect()->route('home')
+                        ->with('success', 'Login melalui Google berhasil!');
+                }
+
+                return redirect()->route('profile.index')
+                    ->with('success', 'Login berhasil! Silakan verifikasi email Anda.');
             }
 
             if ($userByEmail) {
@@ -90,7 +84,7 @@ class GoogleController extends Controller
             }
 
             Auth::login($user);
-            return redirect('/');
+            return redirect('/profile')->with('success', 'Login Berhasil melalui Google!');
         } catch (\Exception $e) {
             return redirect('/login')->with('error', 'Error: ' . $e->getMessage());
         }

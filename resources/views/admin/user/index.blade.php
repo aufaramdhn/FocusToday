@@ -29,6 +29,7 @@
                         <th class="py-2 px-6">ID</th>
                         <th class="py-2 px-6">Name</th>
                         <th class="py-2 px-6">Email</th>
+                        <th class="py-2 px-6">Email Status</th>
                         <th class="py-2 px-6">Role</th>
                         <th class="py-2 px-6">Status</th>
                         <th class="py-2 px-6">Actions</th>
@@ -47,35 +48,62 @@
                             <td class="py-2 px-6">{{ $user->id }}</td>
                             <td class="py-2 px-6">{{ $user->name }}</td>
                             <td class="py-2 px-6">{{ $user->email }}</td>
-                            
+                            <td class="py-2 px-6">
+                                @if ($user->hasVerifiedEmail())
+                                    <span
+                                        class="py-0.5 px-3 bg-green-100 text-green-600 rounded-full font-bold text-xs">Verified</span>
+                                @else
+                                    <span
+                                        class="py-0.5 px-3 bg-yellow-100 text-yellow-600 rounded-full font-bold text-xs">Unverified</span>
+                                @endif
+                            </td>
+
                             @if ($user->role == 'admin')
                                 <td class="py-2 px-6">
-                                    <span class="py-0.5 px-3 border-2 border-green-500 rounded-full text-green-500">Admin</span>
+                                    <span
+                                        class="py-0.5 px-3 border-2 border-green-500 rounded-full text-green-500">Admin</span>
                                 </td>
                             @elseif ($user->role == 'editor')
                                 <td class="py-2 px-6">
-                                    <span class="py-0.5 px-3 border-2 border-yellow-500 rounded-full text-yellow-500">Editor</span>
+                                    <span
+                                        class="py-0.5 px-3 border-2 border-yellow-500 rounded-full text-yellow-500">Editor</span>
                                 </td>
                             @else
                                 <td class="py-2 px-6">
-                                    <span class="py-0.5 px-3 border-2 border-gray-500 rounded-full text-gray-500">Viewer</span>
+                                    <span
+                                        class="py-0.5 px-3 border-2 border-gray-500 rounded-full text-gray-500">Viewer</span>
                                 </td>
                             @endif
 
                             <td class="py-2 px-6">
-                                @if($user->is_banned)
-                                    <span class="py-0.5 px-3 bg-red-100 text-red-600 rounded-full font-bold text-xs">Banned</span>
+                                @if ($user->is_banned)
+                                    <span
+                                        class="py-0.5 px-3 bg-red-100 text-red-600 rounded-full font-bold text-xs">Banned</span>
                                 @else
-                                    <span class="py-0.5 px-3 bg-green-100 text-green-600 rounded-full font-bold text-xs">Active</span>
+                                    <span
+                                        class="py-0.5 px-3 bg-green-100 text-green-600 rounded-full font-bold text-xs">Active</span>
                                 @endif
                             </td>
 
                             <td class="py-2 px-6 whitespace-nowrap items-center">
                                 <x-table-action>
-                                    <a href=""
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-left">Edit</a>
-                                    
-                                    @if($user->is_banned)
+
+                                    @if (!$user->hasVerifiedEmail())
+                                        <button
+                                            @click="open = false; confirmAction(
+                                                '{{ route('admin.user.resend-verification', $user->id) }}',
+                                                'POST',
+                                                'Verify Email',
+                                                'Are you sure you want to verify the email of user \'{{ $user->name }}\'?',
+                                                'success',
+                                                'Yes, Verify'
+                                            )"
+                                            class="block w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition cursor-pointer font-semibold">
+                                            Verify Email
+                                        </button>
+                                    @endif
+
+                                    @if ($user->is_banned)
                                         <button
                                             @click="open = false; confirmAction(
                                                 '{{ route('admin.user.ban', $user->id) }}',

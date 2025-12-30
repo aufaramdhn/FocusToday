@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'google_id',
         'is_banned',
+        'is_onboarded',
     ];
 
     protected $hidden = [
@@ -31,6 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_banned' => 'boolean',
+        'is_onboarded' => 'boolean',
     ];
 
     public function isAdmin()
