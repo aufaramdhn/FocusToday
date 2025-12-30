@@ -15,19 +15,17 @@ class ArticleFactory extends Factory
 {
     public function definition(): array
     {
-        $title = fake()->unique()->sentence(rand(4, 8));
+        $title = rtrim(fake()->realText(rand(30, 60)), '.');
 
         return [
-            'user_id' => User::inRandomOrder()->first()->id ?? 1,
-            'category_id' => Category::inRandomOrder()->first()->id ?? 1,
+            'user_id' => 1,
+            'category_id' => 1,
             'title' => $title,
             'slug' => Str::slug($title),
-            'thumbnail' => 'https://placehold.co/800x400?text=News+Thumbnail',
+            'thumbnail' => 'https://placehold.co/800x400?text=No+Image',
             'status' => fake()->randomElement(['published', 'draft']),
             'views' => fake()->numberBetween(10, 5000),
             'published_at' => fake()->dateTimeBetween('-1 year', 'now'),
-            'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }
