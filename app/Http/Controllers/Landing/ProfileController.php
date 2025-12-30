@@ -108,4 +108,16 @@ class ProfileController extends Controller
 
         return back()->with('success', 'Password berhasil diubah!');
     }
+
+    public function resendVerificationProfile(Request $request)
+    {
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->intended('/profile')
+                ->with('status', 'Email Anda sudah terverifikasi sebelumnya.');
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('success', 'Link verifikasi baru telah dikirim ke email Anda!');
+    }
 }

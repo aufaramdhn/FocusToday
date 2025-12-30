@@ -27,17 +27,19 @@ class ArticleSeeder extends Seeder
         Article::factory(80)
             ->make()
             ->each(function ($article) use ($userIds, $categoryIds, $tagIds) {
-                $article->user_id = $userIds->random(6)->first();
+                $article->user_id = $userIds->random();
                 $article->category_id = $categoryIds->random();
                 $randomNum = rand(1, 10000);
                 $article->thumbnail = "https://loremflickr.com/800/400/technology,business,city?random={$randomNum}";
                 $article->save();
+
                 ArticleBlock::create([
                     'article_id' => $article->id,
                     'type' => 'text',
                     'content' => fake()->paragraph(rand(5, 10)),
                     'position' => 1,
                 ]);
+
                 $randomNum2 = rand(1, 10000);
                 ArticleBlock::create([
                     'article_id' => $article->id,
@@ -45,12 +47,14 @@ class ArticleSeeder extends Seeder
                     'media_path' => "https://loremflickr.com/600/400/computer,work?random={$randomNum2}",
                     'position' => 2,
                 ]);
+
                 ArticleBlock::create([
                     'article_id' => $article->id,
                     'type' => 'text',
                     'content' => fake()->paragraph(rand(4, 8)),
                     'position' => 3,
                 ]);
+
                 if ($tagIds->isNotEmpty()) {
                     $article->tags()->attach($tagIds->random(rand(2, 5)));
                 }

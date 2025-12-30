@@ -40,11 +40,8 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            if ($user->role === 'admin') {
-                return redirect()->intended('dashboard');
-            }
-
-            return redirect()->intended('/')->with('success', 'Login berhasil. Selamat datang kembali, ' . $user->name . '!');
+            return redirect()->intended(route('profile.index'))
+                ->with('success', 'Selamat datang kembali, ' . $user->name . '!');
         }
 
         return back()->withErrors([
@@ -58,7 +55,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('success', 'Anda telah berhasil logout.');
+        return redirect()->route('home')->with('success', 'Anda telah berhasil logout.');
     }
 
     public function showLoginForm()

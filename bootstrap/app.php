@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'banned' => \App\Http\Middleware\CheckBanned::class,
             'admin'  => \App\Http\Middleware\IsAdmin::class,
+            'onboarded' => \App\Http\Middleware\EnsureUserIsOnboarded::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

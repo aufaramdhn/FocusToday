@@ -37,10 +37,17 @@
             <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
         @enderror
 
-        <div class="flex items-center gap-2 text-[11px] text-black">
-            <input type="checkbox" name="remember" class="w-4 h-4" id="remember_me"
-                {{ old('remember') ? 'checked' : '' }}>
-            <label for="remember_me">Biarkan saya tetap masuk</label>
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 text-[11px] text-black">
+                <input type="checkbox" name="remember" class="w-4 h-4" id="remember_me"
+                    {{ old('remember') ? 'checked' : '' }}>
+                <label for="remember_me">Biarkan saya tetap masuk</label>
+            </div>
+            <div class="">
+                <a href="{{ route('password.request') }}" class="text-blue-500 font-medium text-sm hover:underline">
+                    Lupa Password?
+                </a>
+            </div>
         </div>
 
         <button type="submit"

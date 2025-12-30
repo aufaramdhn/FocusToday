@@ -2,7 +2,8 @@
     <div x-show="showModal" style="display: none" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
         x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 bg-black/50 z-[77777] flex items-center justify-center p-4">
 
         <div @click.outside="showModal = false" x-show="showModal" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"

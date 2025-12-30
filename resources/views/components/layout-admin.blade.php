@@ -12,10 +12,8 @@
                     Welcome, <strong>{{ Auth::user()->name }}</strong>
                 </span>
 
-                <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
-                    <img class="text-sm font-bold rounded-full" src="{{ Auth::user()->avatar_url }}"
-                        alt="{{ Auth::user()->name }}" />
-                </div>
+                <img class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center"
+                    src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" />
 
                 <button @click="sidebarOpen = !sidebarOpen" aria-expanded="true" aria-haspopup="true"
                     class="w-5 h-5 text-gray-600 md:hidden">
@@ -148,24 +146,6 @@
 
         <section class="ml-0 md:ml-60 w-full p-6 bg-[#f9fbfc]
                    overflow-y-auto overflow-x-hidden">
-
-            @if (session('success'))
-                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition.duration.500ms
-                    class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6"
-                    role="alert">
-                    <strong class="font-bold">Success!</strong>
-                    <span class="block sm:inline">{{ session('success') }}</span>
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition.duration.500ms
-                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6"
-                    role="alert">
-                    <strong class="font-bold">Error!</strong>
-                    <span class="block sm:inline">{{ session('error') }}</span>
-                </div>
-            @endif
 
             {{ $slot }}
 

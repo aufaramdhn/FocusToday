@@ -3,45 +3,46 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class OnboardingController extends Controller
 {
+
     public function index()
     {
         $user = Auth::user();
 
-        if ($user->image) {
+        if ($user->is_onboarded) {
             return redirect()->route('home');
         }
 
-        return view('auth.onboarding');
+        return view('onboarding.setup');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
         $user = Auth::user();
 
-        if ($request->hasFile('image')) {
+        $request->validate([
+            'role' => 'required|in:editor,viewer',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-            $path = $request->file('image')->store('avatars', 'public');
+        $dataToUpdate = [
+            'role' => $request->role,
+            'is_onboarded' => true,
+        ];
 
-            $user->update([
-                'image' => $path
-            ]);
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $dataToUpdate['avatar'] = $path;
         }
 
-        return redirect()->route('home')->with('success', 'Profil Anda sudah siap!');
-    }
+        $user->update($dataToUpdate);
 
-    public function skip()
-    {
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Profil berhasil diatur! Selamat datang.');
     }
 }

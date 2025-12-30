@@ -36,7 +36,7 @@
                     </option>
                 </select>
             </x-slot:filters>
-            <div class="flex flex-wrap md:grid md:grid-cols-2 gap-4 p-6 border-b-2 border-gray-300">
+            <div class="flex flex-wrap lg:grid lg:grid-cols-2 gap-4 p-6 border-b-2 border-gray-300">
                 @foreach ($articles as $article)
                     <div
                         class="rounded-lg border border-gray-300 p-4 flex flex-col gap-4 hover:shadow-md transition duration-300">

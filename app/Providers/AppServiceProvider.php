@@ -22,14 +22,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
-
             $allCategories = Category::all();
+            $priority_categories = $allCategories->take(8);
+            $other_categories = $allCategories->skip(8);
 
-            $priority_categories = $allCategories->take(5);
-            $other_categories = $allCategories->skip(5);
+            $footer_categories = Category::whereHas('articles')
+                ->inRandomOrder()
+                ->take(3)
+                ->get();
 
+            // 3. Kirim semua variable ke View
             $view->with('priority_categories', $priority_categories);
             $view->with('other_categories', $other_categories);
+            $view->with('footer_categories', $footer_categories);
         });
     }
 }
