@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -22,11 +23,20 @@ class EmailVerificationController extends Controller
         return view('auth.verify-email');
     }
 
-    public function verify(EmailVerificationRequest $request)
+    public function verify(Request $request, $id)
     {
-        $request->fulfill();
-
-        return redirect()->route('onboarding.index');
+        $user = User::findOrFail($id);
+    
+        if (! hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
+            abort(403, 'Link tidak valid.');
+        }
+    
+        if (! $user->hasVerifiedEmail()) {
+            $user->markEmailAsVerified();
+            event(new Verified($user));
+        }
+    
+        return view('auth.verify-success');
     }
 
     public function send(Request $request)
