@@ -23,7 +23,7 @@
         </div>
     </header>
 
-    <main class="block md:flex pt-20 h-screen overflow-auto md:overflow-hidden">
+    <main class="block md:flex pt-20 min-h-screen md:h-screen md:overflow-hidden">
         <aside x-show="sidebarOpen || isDesktop" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-x-0"
@@ -144,8 +144,9 @@
             </div>
         </aside>
 
-        <section class="ml-0 md:ml-60 w-full p-6 bg-[#f9fbfc]
-                   overflow-y-auto overflow-x-hidden">
+        <section
+            class="ml-0 md:ml-60 w-full p-6 bg-[#f9fbfc]
+                   md:overflow-y-auto md:overflow-x-hidden h-full">
 
             {{ $slot }}
 

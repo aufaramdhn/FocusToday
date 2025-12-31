@@ -107,30 +107,49 @@
 
             <div class="flex flex-col gap-2">
                 <label for="role" class="font-medium text-gray-700">Role</label>
-                <select id="role" name="role" :disabled="!isEditing"
+
+                <select id="role" name="role"
+                    :disabled="{{ Auth::user()->role === 'admin' ? 'true' : '!isEditing' }}"
                     class="border rounded-md border-gray-300 shadow-sm px-3 py-2 disabled:bg-gray-100 disabled:text-gray-500 disabled:border-gray-200 transition-colors">
+
                     <option value="">Pilih Role</option>
+
+                    @if (Auth::user()->role === 'admin')
+                        <option value="admin" {{ old('role', Auth::user()->role) == 'admin' ? 'selected' : '' }}>Admin
+                        </option>
+                    @endif
+
                     <option value="editor" {{ old('role', Auth::user()->role) == 'editor' ? 'selected' : '' }}>Editor
                     </option>
                     <option value="user" {{ old('role', Auth::user()->role) == 'user' ? 'selected' : '' }}>Viewer
                     </option>
                 </select>
+
+                @if (Auth::user()->role === 'admin')
+                    <input type="hidden" name="role" value="admin">
+                @endif
+
                 @error('role')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
 
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2" x-data="avatarPreview(
+                '{{ Auth::user()->avatar_url }}',
+                'https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&color=7F9CF5&background=EBF4FF'
+            )">
+
+                <input type="hidden" name="delete_avatar" :value="isDelete ? 1 : 0">
+
                 <label class="font-medium text-gray-700">Foto Profil</label>
 
                 <div class="relative w-fit group">
                     <img :src="previewUrl"
-                        class="h-48 w-48 object-cover rounded-md border border-gray-300 shadow-sm"
-                        :class="!isEditing ? 'opacity-80' : ''" alt="Avatar Preview">
+                        class="h-48 w-48 object-cover rounded-md border border-gray-300 shadow-sm" alt="Avatar Preview">
 
-                    <button type="button" @click="removePreview()" x-show="isEditing"
+                    <button type="button" @click="removePreview()" x-show="hasImage()"
                         class="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition shadow-md hover:bg-red-600"
-                        title="Hapus Preview">
+                        title="Hapus Foto Profil">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -139,17 +158,18 @@
                     </button>
                 </div>
 
-                <div x-show="isEditing" x-transition>
-                    <input type="file" name="avatar" accept="image/*" id="avatar-input"
+                <div>
+                    <input type="file" name="avatar" accept="image/*" id="avatar-input" :disabled="!isEditing"
                         @change="updatePreview($event)"
                         class="border border-gray-300 rounded-md mt-2 block w-full text-sm text-gray-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-md file:border
-                                file:text-sm file:font-semibold
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100 cursor-pointer">
+                   file:mr-4 file:py-2 file:px-4
+                   file:rounded-md file:border
+                   file:text-sm file:font-semibold
+                   file:bg-blue-50 file:text-blue-700
+                   hover:file:bg-blue-100 cursor-pointer">
                     <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG, GIF (Max. 2MB)</p>
                 </div>
+
                 @error('avatar')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

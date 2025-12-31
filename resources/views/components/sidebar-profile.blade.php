@@ -61,7 +61,7 @@
 
     <script>
         function showNotification() {
-            console.log("Fungsi dipanggil!"); // Cek ini dulu di Inspect Element > Console
+            console.log("Fungsi dipanggil!");
             toast.success("Berhasil!");
         }
     </script>

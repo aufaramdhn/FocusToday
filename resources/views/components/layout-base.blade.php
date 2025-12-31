@@ -92,30 +92,33 @@
             }
         }
 
-        window.avatarPreview = function(existingUrl = '') {
+        window.avatarPreview = function(existingUrl, defaultUrl) {
             return {
                 previewUrl: existingUrl,
+                defaultUrl: defaultUrl,
+                isDelete: false,
 
                 updatePreview(event) {
                     const file = event.target.files[0];
                     if (file) {
-                        if (file.size > 2 * 1024 * 1024) {
-                            alert('Ukuran foto profil terlalu besar! Maksimal 2MB.');
-                            event.target.value = '';
-                            return;
-                        }
                         const reader = new FileReader();
                         reader.onload = (e) => {
                             this.previewUrl = e.target.result;
+                            this.isDelete = false;
                         };
                         reader.readAsDataURL(file);
                     }
                 },
 
                 removePreview() {
-                    this.previewUrl = '';
+                    this.previewUrl = this.defaultUrl;
+                    this.isDelete = true;
                     const input = document.getElementById('avatar-input');
                     if (input) input.value = '';
+                },
+
+                hasImage() {
+                    return this.previewUrl !== this.defaultUrl;
                 }
             }
         }
