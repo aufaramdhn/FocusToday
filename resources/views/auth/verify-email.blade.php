@@ -45,24 +45,18 @@
     </p>
 
     <script>
-        \
-        setInterval(function() {
-
-            fetch('/check-verification-status')
-                .then(response => response.json())
-                .then(data => {
-
-                    if (data.verified) {
-
-                        if (!data.onboarded) {
-                            window.location.href = "{{ route('onboarding.index') }}";
-                        } else {
-                            window.location.href = "{{ route('home') }}";
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(function() {
+                fetch('/check-verification-status')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Status:', data);
+                        if (data.verified === true) {
+                            window.location.href = data.onboarded ? '/home' : '/onboarding';
                         }
-                    }
-                })
-                .catch(error => console.error('Error checking status:', error));
-
-        }, 3000);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }, 2000);
+        });
     </script>
 </x-layout-auth>
