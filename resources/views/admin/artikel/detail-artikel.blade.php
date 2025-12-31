@@ -94,8 +94,8 @@
                                                 </p>
                                             </div>
 
-                                            @if (auth()->id() === $comment->user_id || auth()->user()->role === 'admin')
-                                                <div class="relative">
+                                            @if (auth()->check() && (auth()->id() == $comment->user_id || auth()->user()->role == 'admin'))
+                                                <div class="relative" x-data="{ openDropdown: false, isEditing: false }">
                                                     <button @click="openDropdown = !openDropdown"
                                                         class="text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-100 transition">
                                                         <x-ri-more-fill class="w-5 h-5" />
@@ -109,7 +109,7 @@
                                                         class="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg border border-gray-100 z-10 py-1"
                                                         style="display: none;">
 
-                                                        @if (auth()->id() === $comment->user_id)
+                                                        @if (auth()->id() == $comment->user_id)
                                                             <button type="button"
                                                                 @click="isEditing = true; openDropdown = false"
                                                                 class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2">

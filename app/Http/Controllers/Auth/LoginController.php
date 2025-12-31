@@ -32,7 +32,6 @@ class LoginController extends Controller
         }
 
         $credentials = $request->only('email', 'password');
-
         $remember = $request->boolean('remember');
 
         if (Auth::attempt($credentials, $remember)) {
@@ -40,7 +39,13 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            return redirect()->intended(route('profile.index'))
+            if ($user->is_onboarded) {
+                $tujuan = route('home');
+            } else {
+                $tujuan = route('profile.index');
+            }
+
+            return redirect()->intended($tujuan)
                 ->with('success', 'Selamat datang kembali, ' . $user->name . '!');
         }
 

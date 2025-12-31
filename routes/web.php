@@ -82,11 +82,15 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/auth/google/disconnect', [GoogleController::class, 'disconnect'])->name('google.disconnect');
     Route::get('/auth/google/connect', [GoogleController::class, 'connect'])->name('google.connect');
 
-    Route::get('/email/check-status', function () {
+    Route::get('/check-verification-status', function () {
+        $isVerified = Auth::user()?->hasVerifiedEmail();
+        $isOnboarded = Auth::user()?->is_onboarded;
+
         return response()->json([
-            'verified' => Auth::user()->hasVerifiedEmail()
+            'verified' => $isVerified,
+            'onboarded' => $isOnboarded
         ]);
-    })->name('verification.check');
+    })->middleware('auth');
 
     // 2. Verifikasi Email (SATPAM LEVEL 1)
     // User yang belum verifikasi akan tertahan di sini
@@ -129,6 +133,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/profile/security/change-password', [ProfileController::class, 'changePassword'])->name('profile.security.change-password');
             Route::get('/profile/link-social-media', [ProfileController::class, 'socialMediaIndex'])->name('profile.social-media.index');
             Route::post('/profile/link-social-media/update', [ProfileController::class, 'updateSocialMedia'])->name('profile.social-media.update');
+            Route::delete('/profile/avatar/delete', [ProfileController::class, 'destroyAvatar'])->name('profile.avatar.delete');
 
             Route::post('/profile/resend-verification', [ProfileController::class, 'resendVerificationProfile'])->middleware(['throttle:6,1'])->name('user.verification.send');
 
