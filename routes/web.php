@@ -83,12 +83,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/auth/google/connect', [GoogleController::class, 'connect'])->name('google.connect');
 
     Route::get('/check-verification-status', function () {
-        $isVerified = Auth::user()?->hasVerifiedEmail();
-        $isOnboarded = Auth::user()?->is_onboarded;
+        $user = Auth::user()->fresh();
 
         return response()->json([
-            'verified' => $isVerified,
-            'onboarded' => $isOnboarded
+            'verified' => $user->hasVerifiedEmail(),
+            'onboarded' => $user->is_onboarded
         ]);
     })->middleware('auth');
 
