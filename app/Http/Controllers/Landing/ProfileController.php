@@ -57,8 +57,14 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        if ($request->hasFile('avatar')) {
+        if ($request->boolean('delete_avatar')) {
+            if ($user->avatar && !str_starts_with($user->avatar, 'http')) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $user->avatar = null;
+        }
 
+        if ($request->hasFile('avatar')) {
             if ($user->avatar && !str_starts_with($user->avatar, 'http')) {
                 Storage::disk('public')->delete($user->avatar);
             }

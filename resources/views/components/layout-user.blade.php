@@ -151,10 +151,13 @@
             <div class="px-6 flex flex-col gap-6 min-h-full">
 
                 <div class="flex gap-2">
-                    <input type="text"
-                        class="bg-gray-800 text-white w-full rounded-md px-4 py-3 border border-gray-700 focus:outline-none focus:border-blue-500"
-                        placeholder="Cari berita...">
-                    <button class="bg-blue-600 text-white rounded-md px-4 py-3 font-semibold">Cari</button>
+                    <form action="{{ route('home.search') }}" method="GET" class="flex items-center gap-2">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            class="bg-gray-800 text-white w-full rounded-md px-4 py-3 border border-gray-700 focus:outline-none focus:border-blue-500"
+                            placeholder="Cari berita...">
+                        <button type="submit"
+                            class="bg-blue-600 text-white rounded-md px-4 py-3 font-semibold">Cari</button>
+                    </form>
                 </div>
 
                 <div class="flex flex-col gap-4 text-lg">
