@@ -14,7 +14,7 @@
     <a href="#-fitur-unggulan">Fitur</a> •
     <a href="#-tech-stack">Tech Stack</a> •
     <a href="#-instalasi-lokal">Instalasi</a> •
-    <a href="#-tim-pengembang-(Cybernauts)">Tim</a>
+    <a href="#-tim-pengembang-cybernauts">Tim</a>
   </p>
 
 </div>
