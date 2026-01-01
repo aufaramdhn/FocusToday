@@ -68,7 +68,7 @@ Project ini dikembangkan sebagai **Tugas Besar Praktikum Pemrograman Web 2025** 
 Ikuti langkah berikut untuk menjalankan proyek di komputer lokal:
 
 ### 1. Clone Repository
-```bash
+```
 git clone https://github.com/aufaramdhn/FocusToday.git
 ```
 Lalu: 
@@ -98,7 +98,7 @@ Or
 copy .env.example .env
 ```
 Setup OAuth untuk google login:
-```
+```evn
 GOOGLE_CLIENT_ID=your_client_id
 GOOGLE_CLIENT_SECRET=your_client_secret
 GOOGLE_REDIRECT_URL=[http://127.0.0.1:8000/auth/google/callback](http://127.0.0.1:8000/auth/google/callback)
@@ -117,12 +117,14 @@ Sisipkan ini di bawah bagian konfigurasi Google Login:
 ```text
 KONFIGURASI EMAIL (RESEND)
 Daftar akun di https://resend.com, lalu tambahkan konfigurasi ini di file .env:
-
+```
+```env
 MAIL_MAILER=resend
 RESEND_API_KEY=isi_api_key_resend_anda
 MAIL_FROM_ADDRESS="onboarding@resend.dev"
 MAIL_FROM_NAME="${APP_NAME}"
-
+```
+```
 Catatan: Gunakan "onboarding@resend.dev" jika Anda belum memverifikasi domain sendiri.
 ```
 
@@ -139,7 +141,7 @@ php artisan vendor:publish --tag=resend-config
 - #### konfigurasi lainnya 
 
 YOUTUBE DATA API
-```
+```env
 YOUTUBE_API_KEY=isi_api_key_youtube_kamu
 YOUTUBE_CHANNEL_ID_MALAKA=UCxxxxxx  <-- Isi ID Channel Malaka Project
 YOUTUBE_CHANNEL_ID_NARASI=UCxxxxxx  <-- Isi ID Channel Narasi
