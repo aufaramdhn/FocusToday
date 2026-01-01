@@ -1,105 +1,184 @@
-# FocusToday 📰
+<div align="center">
 
-**FocusToday** adalah website berita dan artikel yang menyajikan informasi **terkini, cepat, dan terpercaya** dari berbagai kategori seperti politik, olahraga, teknologi, ekonomi, dan hiburan.
+  <h1>FocusToday 📰</h1>
+  <p><strong>Portal Berita Digital: Terkini, Cepat, & Terpercaya</strong></p>
 
-Website ini bertujuan memberikan pengalaman membaca berita yang **fokus, mudah diakses**, serta didukung oleh tampilan **modern dan responsif** agar nyaman digunakan di berbagai perangkat.
+  <p>
+    <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel" alt="Laravel"></a>
+    <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css" alt="Tailwind"></a>
+    <a href="https://alpinejs.dev"><img src="https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?style=for-the-badge&logo=alpine.js" alt="Alpine"></a>
+    <a href="https://php.net"><img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php" alt="PHP"></a>
+  </p>
 
----
+  <p>
+    <a href="#-fitur-unggulan">Fitur</a> •
+    <a href="#-tech-stack">Tech Stack</a> •
+    <a href="#-instalasi-lokal">Instalasi</a> •
+    <a href="#-catatan-deployment">Deployment</a> •
+    <a href="#-tim-pengembang">Tim</a>
+  </p>
 
-## 🎯 Tujuan Website
-- Menyediakan berita dan artikel yang up-to-date
-- Mengelompokkan konten ke dalam kategori yang jelas
-- Memberikan tampilan yang sederhana, cepat, dan responsif
-- Memudahkan pengguna dalam mengakses informasi penting
-
----
-
-## 🗂️ Kategori Konten
-- SOON
-
----
-
-## 🛠️ Tech Stack
-
-### Backend
-- **Laravel** Framework PHP untuk pengelolaan backend, routing, database.
-
-### Frontend
-- **Tailwind CSS** Digunakan untuk membangun tampilan yang modern dan responsif.
-- **Alpine.js** Digunakan jika diperlukan untuk interaksi frontend yang ringan dan reaktif.
+</div>
 
 ---
 
-## 💻 Panduan Instalasi (Installation Guide)
+## 📖 Tentang Project
 
-Ikuti langkah-langkah berikut untuk menjalankan proyek ini di local computer kamu.
+**FocusToday** adalah platform portal berita modern yang dirancang untuk memberikan pengalaman membaca yang fokus dan bebas gangguan. Terinspirasi oleh desain minimalis *Quartz (qz.com)* dan fungsionalitas multimedia *Narasi TV*, website ini menyajikan informasi dari berbagai kategori seperti Politik, Teknologi, Olahraga, dan Hiburan dengan antarmuka yang responsif.
 
-### 1. Persiapan & Clone Repository
-- Buka folder tujuan di mana saja (misal: di Desktop).
-- Buka Terminal atau Git Bash di folder tersebut.
-- Salin link repository, lalu ketik perintah clone di terminal:
-  ```bash
-  git clone [https://github.com/aufaramdhn/FocusToday.git](https://github.com/aufaramdhn/FocusToday.git)
-  ```
-- Jika sudah selesai, buka folder project tersebut di **VS Code**.
-
-### 2. Install Dependencies & Setup Environment
-Buka terminal di dalam project VS Code kalian, lalu jalankan perintah berikut satu per satu:
-
-- Install library yang dibutuhkan:
-  ```bash
-  npm install
-  composer install
-  ```
-- Build asset frontend:
-  ```bash
-  npm run build
-  ```
-- Setup file environment:
-  ```bash
-  copy .env.example .env
-  ```
-    (Catatan: Sesuaikan perintah copy jika menggunakan OS berbeda, intinya duplikat file .env.example dan ubah namanya jadi .env)
-- Generate Application Key:
-  ```bash
-  php artisan key:generate
-  ```
-### 3. Setup Database (SQLite)
-- Cek di dalam folder `database`, pastikan ada file bernama `database.sqlite`.
-- **Penting:** Jika belum ada, buat file baru kosong dengan nama `database.sqlite` di dalam folder `database` tersebut.
-- Setelah file ada, jalankan migrasi:
-  ```bash
-  php artisan migrate:fresh
-  ```
-### 4. Menjalankan Project
-Kamu bisa menjalankan project menggunakan salah satu cara di bawah ini:
-
-**Opsi 1: Menggunakan Script Composer (Jika tersedia)**
-  ```bash
-  composer run dev
-  ```
-**Opsi 2: Manual (Terminal Terpisah)**
-Jalanin perintah ini di dua terminal berbeda di VS Code:
-
-- Terminal 1 (Backend):
-  ```bash
-  php artisan serve
-  ```
-- Terminal 2 (Frontend):
-  ```bash
-  npm run dev
-  ```
-**Catatan:** Jika menggunakan Laravel Herd, cukup jalankan `npm run dev` untuk frontend-nya.
+Project ini dikembangkan sebagai **Tugas Besar Praktikum Pemrograman Web 2025** oleh kelompok **Cybernauts**, dengan fokus pada implementasi fitur *backend* yang robust dan *frontend* yang interaktif.
 
 ---
 
-## 👥 Tim & Role
-| Nama   | Role               |
-|--------|--------------------|
-| Aufa   | Project Manager (PM)|
-| Ariska | Frontend Developer |
-| Fauzi  | Frontend Developer |
-| Galang | Backend Developer  |
+## 🚀 Fitur Unggulan
+
+### 🔐 Autentikasi & Keamanan Lanjutan
+- **Google OAuth Integration**: Login dan Register instan menggunakan akun Google.
+- **Secure Email Verification**: Sistem verifikasi email dengan halaman *Custom Success View* yang interaktif.
+- **Role-Based Access Control**: Pemisahan hak akses antara User dan Admin.
+- **Password Management**: Fitur Lupa Password dan Ubah Password.
+
+### 📝 Manajemen Konten & Interaksi
+- **Artikel CRUD**: Pembuatan artikel dengan dukungan *Rich Text* dan *Thumbnail*.
+- **Live Search**: Pencarian berita real-time tanpa reload halaman.
+- **Interactive Comments**: Sistem komentar dengan validasi kepemilikan (User bisa edit/hapus komentarnya sendiri, Admin bisa moderasi semua).
+- **Advanced Filtering**: Filter berita berdasarkan Kategori, Tag, Rentang Tanggal, dan Penulis.
+
+### 📊 Administrasi & Pelaporan
+- **Dashboard Admin**: Ringkasan statistik (Total User, Artikel, View, Komentar).
+- **PDF Reporting**: Ekspor data laporan pengguna ke format PDF.
+- **User Management**: Fitur *Banned/Unbanned* pengguna yang melanggar aturan.
+- **Maintenance Mode**: Halaman maintenance khusus dengan akses *bypass* untuk developer.
+
+---
+
+## 🛠 Tech Stack
+
+| Komponen | Teknologi | Deskripsi |
+| :--- | :--- | :--- |
+| **Backend** | Laravel 12 | Framework utama untuk routing, logic, dan keamanan. |
+| **Frontend** | Blade & Tailwind CSS | Templating engine dengan styling utility-first. |
+| **Interactivity** | Alpine.js | Micro-framework untuk interaksi UI (Dropdown, Modal). |
+| **Database** | MySQL / SQLite | Penyimpanan data relasional. |
+| **Asset Build** | Vite | Build tool untuk kompilasi aset frontend yang cepat. |
+
+---
+
+## 💻 Instalasi Lokal
+
+Ikuti langkah berikut untuk menjalankan proyek di komputer lokal:
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/aufaramdhn/FocusToday.git
+```
+Lalu: 
+```
+cd FocusToday
+```
+
+### 2. Install Depedencies
+
+Install paket PHP
+```
+composer install
+```
+Install paket Node.js (Frontend)
+```
+npm install
+```
+
+### 3. Konfigurasi Environment
+
+Duplikat file .env.example menjadi .env:
+```
+cp .env.example .env
+```
+Or
+```
+copy .env.example .env
+```
+Setup OAuth untuk google login:
+```
+GOOGLE_CLIENT_ID=your_client_id
+GOOGLE_CLIENT_SECRET=your_client_secret
+GOOGLE_REDIRECT_URL=[http://127.0.0.1:8000/auth/google/callback](http://127.0.0.1:8000/auth/google/callback)
+```
+Konfigurasi Email (Resend)
+Agar fitur Verifikasi Email & Lupa Password berjalan, daftar di [Resend.com](https://resend.com), lalu tambahkan API Key ke file `.env`:
+```env
+MAIL_MAILER=resend
+RESEND_API_KEY=re_123456789_your_api_key
+MAIL_FROM_ADDRESS="onboarding@resend.dev"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+- #### **Tambahan untuk README.txt (Plain Text)**
+Sisipkan ini di bawah bagian konfigurasi Google Login:
+
+```text
+KONFIGURASI EMAIL (RESEND)
+Daftar akun di https://resend.com, lalu tambahkan konfigurasi ini di file .env:
+
+MAIL_MAILER=resend
+RESEND_API_KEY=isi_api_key_resend_anda
+MAIL_FROM_ADDRESS="onboarding@resend.dev"
+MAIL_FROM_NAME="${APP_NAME}"
+
+Catatan: Gunakan "onboarding@resend.dev" jika Anda belum memverifikasi domain sendiri.
+```
+
+- #### Penting untuk diingat (Tips Teknis):
+Install Package: Pastikan tim kamu sudah menjalankan perintah ini (biasanya sudah ada di composer.json, tapi untuk jaga-jaga):
+```
+composer require resend/resend-laravel
+```
+- #### Publish Config: 
+Jika perlu kustomisasi, jalankan:
+```
+php artisan vendor:publish --tag=resend-config
+```
+- #### konfigurasi lainnya 
+
+YOUTUBE DATA API
+```
+YOUTUBE_API_KEY=isi_api_key_youtube_kamu
+YOUTUBE_CHANNEL_ID_MALAKA=UCxxxxxx  <-- Isi ID Channel Malaka Project
+YOUTUBE_CHANNEL_ID_NARASI=UCxxxxxx  <-- Isi ID Channel Narasi
+```
+
+### 4. Setup Database & Key
+
+Generate App Key
+```
+php artisan key:generate
+```
+Migrasi Database (Pastikan file database.sqlite sudah ada jika pakai SQLite)
+```
+php artisan migrate:fresh --seed
+```
+
+### 5. Jalankan Aplikasi
+
+Buka dua terminal terpisah:
+- #### Terminal 1: Menjalankan Server Laravel
+```
+php artisan serve
+```
+- #### Terminal 2: Menjalankan Vite (Hot Reload)
+```
+npm run dev
+```
+Akses website di: http://127.0.0.1:8000
+
+---
+
+## 👥 Tim Pengembang (Cybernauts)
+|NPM      | Nama                  | Role               | Github Profile |
+|---------|-----------------------|--------------------|----------------|
+|233040028| Aufa Ramadhan         | Project Manager    |<a href="https://github.com/aufaramdhn">Link</a>|
+|233040041| Ariska Putri          | Frontend Developer |<a href="https://github.com/AriskaPutri04">Link</a>|
+|233040019| Fauzi  Ahmad Ramdani  | Frontend Developer |<a href="https://github.com/Zayyzz">Link</a>|
+|233040024| Dhaffa Galang Fahriza | Backend Developer  |<a href="https://github.com/GalangDhaffa">Link</a>|
 
 ---
 
