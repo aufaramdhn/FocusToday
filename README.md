@@ -98,7 +98,7 @@ Or
 copy .env.example .env
 ```
 Setup OAuth untuk google login:
-```evn
+```env
 GOOGLE_CLIENT_ID=your_client_id
 GOOGLE_CLIENT_SECRET=your_client_secret
 GOOGLE_REDIRECT_URL=[http://127.0.0.1:8000/auth/google/callback](http://127.0.0.1:8000/auth/google/callback)
