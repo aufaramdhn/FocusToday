@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Str;
 
 class GoogleController extends Controller
 {
@@ -81,9 +82,15 @@ class GoogleController extends Controller
                     'password' => Hash::make(Str::random(16)),
                     'role' => 'user'
                 ]);
+                event(new Registered($user));
             }
 
             Auth::login($user);
+
+            if (!$user->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice')
+                    ->with('success', 'Akun berhasil dibuat! Silakan cek email untuk verifikasi.');
+            }
             return redirect('/profile')->with('success', 'Login Berhasil melalui Google!');
         } catch (\Exception $e) {
             return redirect('/login')->with('error', 'Error: ' . $e->getMessage());

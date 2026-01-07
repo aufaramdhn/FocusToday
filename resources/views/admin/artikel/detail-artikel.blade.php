@@ -73,9 +73,8 @@
                                 x-data="{
                                     isEditing: false,
                                     openDropdown: false,
-                                    content: '{{ $comment->content }}',
-                                    originalContent: '{{ $comment->content }}'
-                                
+                                    content: '{{ addslashes($comment->content) }}',
+                                    originalContent: '{{ addslashes($comment->content) }}'
                                 }">
 
                                 <div class="flex items-start gap-3">
@@ -90,12 +89,11 @@
                                                 <h5 class="text-sm font-bold text-gray-900">{{ $comment->user->name }}
                                                 </h5>
                                                 <p class="text-xs text-gray-500">
-                                                    {{ $comment->created_at->diffForHumans() }}
-                                                </p>
+                                                    {{ $comment->created_at->diffForHumans() }}</p>
                                             </div>
 
                                             @if (auth()->check() && (auth()->id() == $comment->user_id || auth()->user()->role == 'admin'))
-                                                <div class="relative" x-data="{ openDropdown: false, isEditing: false }">
+                                                <div class="relative">
                                                     <button @click="openDropdown = !openDropdown"
                                                         class="text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-100 transition">
                                                         <x-ri-more-fill class="w-5 h-5" />
@@ -103,9 +101,6 @@
 
                                                     <div x-show="openDropdown" @click.outside="openDropdown = false"
                                                         x-transition:enter="transition ease-out duration-100"
-                                                        x-transition:enter-start="transform opacity-0 scale-95"
-                                                        x-transition:enter-end="transform opacity-100 scale-100"
-                                                        x-transition:leave="transition ease-in duration-75"
                                                         class="absolute right-0 mt-1 w-32 bg-white rounded-md shadow-lg border border-gray-100 z-10 py-1"
                                                         style="display: none;">
 
@@ -118,18 +113,18 @@
                                                             </button>
                                                         @endif
 
-                                                        <button
-                                                            @click="open = false; confirmAction(
-                                                            '{{ route('admin.comments.destroy', $comment->id) }}',
-                                                            'DELETE',
-                                                            'Delete Comment',
-                                                            'Are you sure you want to delete this comment? This action cannot be undone.',
-                                                            'danger',
-                                                            'Yes, Delete'
-                                                        )"
-                                                            class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                        <button type="button"
+                                                            @click="openDropdown = false; confirmAction(
+                                                                '{{ route('artikel.comment.destroy', $comment->id) }}',
+                                                                'DELETE',
+                                                                'Hapus Komentar',
+                                                                'Apakah Anda yakin ingin menghapus komentar ini?',
+                                                                'danger',
+                                                                'Ya, Hapus'
+                                                            )"
+                                                                class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                                                             <x-ri-delete-bin-6-line class="w-3.5 h-3.5 text-red-500" />
-                                                            Delete
+                                                            Hapus
                                                         </button>
                                                     </div>
                                                 </div>
@@ -141,11 +136,10 @@
                                         </div>
 
                                         <div x-show="isEditing" style="display: none;" class="mt-3">
-                                            <form action="{{ route('admin.comments.update', $comment->id) }}"
+                                            <form action="{{ route('artikel.comment.update', $comment->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('PUT')
-
                                                 <textarea name="content" x-model="content"
                                                     class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2"
                                                     rows="3"></textarea>
