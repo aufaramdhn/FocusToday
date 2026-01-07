@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // $this->app->usePublicPath(base_path('../public_html'));
     }
 
     /**
@@ -31,7 +31,6 @@ class AppServiceProvider extends ServiceProvider
                 ->take(3)
                 ->get();
 
-            // 3. Kirim semua variable ke View
             $view->with('priority_categories', $priority_categories);
             $view->with('other_categories', $other_categories);
             $view->with('footer_categories', $footer_categories);

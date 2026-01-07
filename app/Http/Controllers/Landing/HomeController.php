@@ -151,7 +151,10 @@ class HomeController extends Controller
         $articles = Article::where('status', 'published')
             ->where(function ($query) use ($keyword) {
                 $query->where('title', 'like', "%{$keyword}%")
-                    ->orWhere('content', 'like', "%{$keyword}%")
+                    ->orWhereHas('blocks', function ($q) use ($keyword) {
+                        $q->where('content', 'like', "%{$keyword}%");
+                    })
+
                     ->orWhereHas('category', function ($q) use ($keyword) {
                         $q->where('name', 'like', "%{$keyword}%");
                     })
