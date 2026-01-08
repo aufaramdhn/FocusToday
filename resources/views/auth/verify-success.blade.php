@@ -21,9 +21,9 @@
         Terima kasih telah memverifikasi email kamu. Akun FokusToday kamu sekarang sudah aktif sepenuhnya.
     </p>
 
-    <a href="{{ route('home') }}"
+    <a href="{{ route('profile.index') }}"
         class="flex items-center justify-center w-full h-10 rounded-xl bg-gray-800 text-white text-sm font-medium hover:bg-gray-700 transition shadow-lg shadow-gray-200">
-        Lanjut ke homepage
+        Halaman Selanjutnya
     </a>
 
     <div class="mt-6">

@@ -35,14 +35,14 @@ class HomeController extends Controller
 
         $bottomCategories = Category::whereHas('articles', function ($query) {
             $query->published();
-        }, '>=', 4)
+        }, '>=', 3)
             ->with(['articles' => function ($query) {
                 $query->published()
                     ->latest('published_at')
-                    ->take(4);
+                    ->take(3);
             }])
             ->inRandomOrder()
-            ->take(4)
+            ->take(3)
             ->get();
 
         $sidebarCategories = Category::whereHas('articles', function ($query) {
