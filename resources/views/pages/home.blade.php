@@ -45,7 +45,7 @@
                                     <div>
                                         <a href="{{ route('articles.show', $lArticle->slug) }}">
                                             <h4 class="font-semibold text-sm hover:text-blue-600 leading-snug">
-                                                {{ $article->title }}
+                                                {{ $lArticle->title }}
                                             </h4>
                                         </a>
                                         @php
