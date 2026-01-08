@@ -252,7 +252,7 @@
                     </h3>
                     <div class="flex flex-col gap-4">
                         @forelse($related_articles as $related)
-                            <a href="{{ route('profile.artikel.show', $related->slug) }}" class="group flex gap-3">
+                            <a href="{{ route('articles.show', $related->slug) }}" class="group flex gap-3">
                                 <img src="{{ $related->thumbnail_url }}"
                                     class="w-24 h-20 object-cover rounded-lg flex-shrink-0 bg-gray-100"
                                     alt="{{ $related->title }}">

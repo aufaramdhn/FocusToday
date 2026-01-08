@@ -83,7 +83,7 @@
                                 @endif
                             </ul>
                             <div class="flex justify-end mt-4 gap-1 flex-wrap">
-                                <a href="/dashboard/artikel/{{ $article->slug }}"
+                                <a href="{{ route('articles.show', $article->slug) }}"
                                     class="bg-gray-500 text-xs text-white rounded-md px-2 py-1 hover:bg-gray-600 transition duration-300 flex items-center">
                                     Preview
                                 </a>
