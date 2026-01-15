@@ -1,5 +1,5 @@
 <x-layout-user>
-    <x-slot:title>Home - FokusToday</x-slot:title>
+    <x-slot:title>Home - FocusToday</x-slot:title>
     <div class="px-4 lg:px-0">
         <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
             <div class="flex flex-col gap-6">
@@ -38,25 +38,25 @@
                     <h3 class="mb-3 font-bold text-lg">Latest</h3>
                     <div>
                         <div class="flex flex-col gap-3">
-                            @foreach ($latestArticles->take(3) as $article)
+                            @foreach ($latestArticles->take(3) as $lArticle)
                                 <div class="flex flex-col md:flex-row gap-3">
-                                    <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}"
+                                    <img src="{{ $lArticle->thumbnail_url }}" alt="{{ $lArticle->title }}"
                                         class="h-[250px] md:h-[140px] w-full md:w-[240px] object-cover rounded flex-shrink-0">
                                     <div>
-                                        <a href="{{ route('articles.show', $article->slug) }}">
+                                        <a href="{{ route('articles.show', $lArticle->slug) }}">
                                             <h4 class="font-semibold text-sm hover:text-blue-600 leading-snug">
-                                                {{ $article->title }}
+                                                {{ $lArticle->title }}
                                             </h4>
                                         </a>
                                         @php
-                                            $firstTextBlock = $heroArticle->blocks->firstWhere('type', 'text');
+                                            $latestTextBlock = $lArticle->blocks->firstWhere('type', 'text');
                                         @endphp
-                                        @if ($firstTextBlock)
-                                            <p class="text-sm text-gray-700 mb-2">
-                                                {{ Str::limit(strip_tags($firstTextBlock->content), 300, '...') }}
+                                        @if ($latestTextBlock)
+                                            <p class="text-xs text-gray-600 line-clamp-2">
+                                                {{ Str::limit(strip_tags($latestTextBlock->content), 100, '...') }}
                                             </p>
                                         @else
-                                            <p class="text-sm text-gray-500 mb-2">Tidak ada ringkasan.</p>
+                                            <p class="text-xs text-gray-400">Tidak ada ringkasan.</p>
                                         @endif
                                     </div>
                                 </div>
@@ -69,18 +69,18 @@
                     <h3 class="mb-3 font-bold text-lg">Populer</h3>
                     <div>
                         <div class="lg:flex flex-col gap-3">
-                            @foreach ($popularArticles->take(3) as $article)
+                            @foreach ($popularArticles->take(3) as $pArticle)
                                 <div class="flex flex-col md:flex-row gap-3">
-                                    <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}"
+                                    <img src="{{ $pArticle->thumbnail_url }}" alt="{{ $pArticle->title }}"
                                         class="h-[250px] md:h-[140px] w-full md:w-[240px] object-cover rounded flex-shrink-0">
                                     <div>
-                                        <a href="{{ route('articles.show', $article->slug) }}">
+                                        <a href="{{ route('articles.show', $pArticle->slug) }}">
                                             <h4 class="font-semibold text-sm hover:text-blue-600 leading-snug">
-                                                {{ $article->title }}
+                                                {{ $pArticle->title }}
                                             </h4>
                                         </a>
                                         @php
-                                            $firstTextBlock = $heroArticle->blocks->firstWhere('type', 'text');
+                                            $firstTextBlock = $pArticle->blocks->firstWhere('type', 'text');
                                         @endphp
                                         @if ($firstTextBlock)
                                             <p class="text-sm text-gray-700 mb-2">

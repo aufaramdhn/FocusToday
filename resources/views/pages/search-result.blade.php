@@ -61,7 +61,7 @@
             @endforeach
         </div>
 
-        <div class="mt-10">
+        <div class="mt-10 ">
             {{ $articles->links() }}
         </div>
     @else

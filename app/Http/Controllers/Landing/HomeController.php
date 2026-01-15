@@ -35,14 +35,14 @@ class HomeController extends Controller
 
         $bottomCategories = Category::whereHas('articles', function ($query) {
             $query->published();
-        }, '>=', 4)
+        }, '>=', 3)
             ->with(['articles' => function ($query) {
                 $query->published()
                     ->latest('published_at')
-                    ->take(4);
+                    ->take(3);
             }])
             ->inRandomOrder()
-            ->take(4)
+            ->take(3)
             ->get();
 
         $sidebarCategories = Category::whereHas('articles', function ($query) {
@@ -151,7 +151,10 @@ class HomeController extends Controller
         $articles = Article::where('status', 'published')
             ->where(function ($query) use ($keyword) {
                 $query->where('title', 'like', "%{$keyword}%")
-                    ->orWhere('content', 'like', "%{$keyword}%")
+                    ->orWhereHas('blocks', function ($q) use ($keyword) {
+                        $q->where('content', 'like', "%{$keyword}%");
+                    })
+
                     ->orWhereHas('category', function ($q) use ($keyword) {
                         $q->where('name', 'like', "%{$keyword}%");
                     })

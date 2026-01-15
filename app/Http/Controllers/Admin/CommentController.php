@@ -34,7 +34,7 @@ class CommentController extends Controller
 
     public function update(Request $request, Comment $comment)
     {
-        if (Auth::id() !== $comment->user_id) {
+        if (! Auth::user()->is($comment->user)) {
             return back()->with('error', 'Anda tidak berhak mengedit komentar ini.');
         }
 
@@ -51,7 +51,7 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment)
     {
-        if (Auth::id() !== $comment->user_id) {
+        if (Auth::id() != $comment->user_id && Auth::user()->role != 'admin') {
             abort(403, 'Unauthorized action.');
         }
 
